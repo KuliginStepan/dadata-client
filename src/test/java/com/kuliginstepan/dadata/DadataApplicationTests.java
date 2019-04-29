@@ -1,10 +1,14 @@
 package com.kuliginstepan.dadata;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.kuliginstepan.dadata.domain.Address;
-import com.kuliginstepan.dadata.exception.DadataException;
-import com.kuliginstepan.dadata.domain.DadataResponse.Suggestion;
-import org.junit.Assert;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.kuliginstepan.dadata.domain.Suggestion;
+import com.kuliginstepan.dadata.domain.address.AddressDadataRequestBuilder;
+import com.kuliginstepan.dadata.domain.bank.BankDadataRequestBuilder;
+import com.kuliginstepan.dadata.domain.fio.FioPart;
+import com.kuliginstepan.dadata.domain.organization.Organization;
+import java.io.IOException;
 import org.junit.Test;
 
 public class DadataApplicationTests {
@@ -13,22 +17,84 @@ public class DadataApplicationTests {
 
     @Test
     public void name() {
-        Suggestion<Address> address = client.findAddress("москва хабар").block();
-        Assert.assertEquals("г Москва, ул Хабаровская", address.getValue());
-        Assert.assertEquals("0c5b2444-70a0-4932-980c-b4dc0d3f02b5", address.getData().getCityFiasId());
-        Assert.assertEquals("77000000000713400", address.getData().getKladrId());
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.enable(SerializationFeature.INDENT_OUTPUT);
+        client.suggestAddress(
+            AddressDadataRequestBuilder.create("юбилейная").location("city", "Кострома").restrictValue().build()).toStream()
+            .forEach(it -> {
+                try {
+                    System.out.println(mapper.writeValueAsString(it));
+                } catch (JsonProcessingException e) {
+                    e.printStackTrace();
+                }
+            });
     }
-
-    @Test(expected = DadataException.class)
-    public void name2() {
-        DadataClient client = new DadataClient("123456");
-        client.findAddress("москва хабар").block();
-    }
-
-
 
     @Test
-    public void name1() throws JsonProcessingException {
-        Suggestion<Address> addressSuggestion = client.findAddressById("32fcb102-2a50-44c9-a00e-806420f448ea").block();
+    public void name5() throws IOException {
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.enable(SerializationFeature.INDENT_OUTPUT);
+        client.suggestOrganization("сбербанк").toStream()
+            .forEach(it -> {
+                    System.out.println(it);
+            });
     }
+
+    @Test
+    public void name6() throws IOException {
+        Suggestion<Organization> organization = client.findOrganizationById("7707083893").block();
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.enable(SerializationFeature.INDENT_OUTPUT);
+        System.out.println(organization);
+    }
+
+    @Test
+    public void name7() throws IOException {
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.enable(SerializationFeature.INDENT_OUTPUT);
+        client.suggestBank(BankDadataRequestBuilder.create("сбербанк").location("44").build()).toStream()
+            .forEach(it -> {
+                    System.out.println(it);
+            });
+    }
+
+    @Test
+    public void name8() throws IOException {
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.enable(SerializationFeature.INDENT_OUTPUT);
+        client.suggestFio("Викто", FioPart.NAME, FioPart.PATRONYMIC).toStream()
+            .forEach(it -> {
+                try {
+                    System.out.println(mapper.writeValueAsString(it));
+                } catch (JsonProcessingException e) {
+                    e.printStackTrace();
+                }
+            });
+    }
+
+    @Test
+    public void name9() throws IOException {
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.enable(SerializationFeature.INDENT_OUTPUT);
+        client.suggestEmail("stepan@mail").toStream()
+            .forEach(it -> {
+                try {
+                    System.out.println(mapper.writeValueAsString(it));
+                } catch (JsonProcessingException e) {
+                    e.printStackTrace();
+                }
+            });
+    }
+//
+//    @Test(expected = DadataException.class)
+//    public void name2() {
+//        DadataClient client = new DadataClient("123456");
+//        client.findAddress("москва хабар").block();
+//    }
+//
+//    @Test(expected = ReadTimeoutException.class)
+//    public void name4() {
+//        DadataClient client = new DadataClient("123456", Duration.of(1, ChronoUnit.MILLIS));
+//        client.findAddress("москва хабар").block();
+//    }
 }

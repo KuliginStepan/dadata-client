@@ -1,4 +1,4 @@
-package com.kuliginstepan.dadata.domain;
+package com.kuliginstepan.dadata.domain.address;
 
 import com.fasterxml.jackson.annotation.JsonAlias;
 import java.time.ZoneId;
@@ -133,7 +133,7 @@ public class Address {
     @JsonAlias("geo_lon")
     private Double geoLon;
     @JsonAlias("beltway_hit")
-    private Boolean beltwayHit;
+    private String beltwayHit;
     @JsonAlias("beltway_distance")
     private Double beltwayDistance;
     private List<Metro> metro;

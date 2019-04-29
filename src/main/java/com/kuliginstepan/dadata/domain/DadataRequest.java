@@ -1,16 +1,20 @@
 package com.kuliginstepan.dadata.domain;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
-@Data
-@NoArgsConstructor
-public class DadataRequest {
+public abstract class DadataRequest {
 
     private String query;
-    private int count = 1;
 
-    public DadataRequest(String query) {
+    protected DadataRequest(String query) {
         this.query = query;
+    }
+
+    public String getQuery() {
+        return query;
+    }
+
+    ;
+
+    public int getCount() {
+        return 10;
     }
 }
