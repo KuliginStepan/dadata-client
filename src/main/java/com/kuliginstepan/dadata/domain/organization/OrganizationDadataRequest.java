@@ -1,4 +1,4 @@
-package com.kuliginstepan.dadata.domain.bank;
+package com.kuliginstepan.dadata.domain.organization;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.kuliginstepan.dadata.domain.DadataRequest;
@@ -9,23 +9,26 @@ import java.util.Set;
 import lombok.Getter;
 
 @Getter
-public class BankDadataRequest extends DadataRequest {
+public class OrganizationDadataRequest extends DadataRequest {
 
     @JsonProperty("locations_boost")
     private List<Map<String, String>> locationsBoost;
     private List<Map<String, String>> locations;
     @JsonProperty("status")
     private Set<OrganizationStatus> statuses;
-    @JsonProperty("type")
-    private Set<BankType> types;
+    private OrganizationType type;
+    @JsonProperty("branch_type")
+    private BranchType branchType;
 
-    public BankDadataRequest(String query, List<Map<String, String>> locationsBoost,
-        List<Map<String, String>> locations,
-        Set<OrganizationStatus> statuses, Set<BankType> types) {
+    public OrganizationDadataRequest(String query,
+        List<Map<String, String>> locationsBoost,
+        List<Map<String, String>> locations, Set<OrganizationStatus> statuses,
+        OrganizationType type, BranchType branchType) {
         super(query);
         this.locationsBoost = locationsBoost;
         this.locations = locations;
         this.statuses = statuses;
-        this.types = types;
+        this.type = type;
+        this.branchType = branchType;
     }
 }

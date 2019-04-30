@@ -7,7 +7,10 @@ import com.kuliginstepan.dadata.domain.Suggestion;
 import com.kuliginstepan.dadata.domain.address.AddressDadataRequestBuilder;
 import com.kuliginstepan.dadata.domain.bank.BankDadataRequestBuilder;
 import com.kuliginstepan.dadata.domain.fio.FioPart;
+import com.kuliginstepan.dadata.domain.organization.BranchType;
 import com.kuliginstepan.dadata.domain.organization.Organization;
+import com.kuliginstepan.dadata.domain.organization.OrganizationDadataRequestBuilder;
+import com.kuliginstepan.dadata.domain.organization.OrganizationType;
 import java.io.IOException;
 import org.junit.Test;
 
@@ -34,7 +37,8 @@ public class DadataApplicationTests {
     public void name5() throws IOException {
         ObjectMapper mapper = new ObjectMapper();
         mapper.enable(SerializationFeature.INDENT_OUTPUT);
-        client.suggestOrganization("сбербанк").toStream()
+        client.suggestOrganization(OrganizationDadataRequestBuilder.create("сбербанк").location("44").branchType(
+            BranchType.BRANCH).organizationType(OrganizationType.LEGAL).build()).toStream()
             .forEach(it -> {
                     System.out.println(it);
             });

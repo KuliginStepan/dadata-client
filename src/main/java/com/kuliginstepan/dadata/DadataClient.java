@@ -18,6 +18,7 @@ import com.kuliginstepan.dadata.domain.fio.FioDadataRequest;
 import com.kuliginstepan.dadata.domain.fio.FioPart;
 import com.kuliginstepan.dadata.domain.fio.FioSuggestion;
 import com.kuliginstepan.dadata.domain.organization.Organization;
+import com.kuliginstepan.dadata.domain.organization.OrganizationDadataRequest;
 import com.kuliginstepan.dadata.domain.organization.OrganizationSuggestion;
 import com.kuliginstepan.dadata.exception.DadataException;
 import com.kuliginstepan.dadata.exception.ErrorDetails;
@@ -68,8 +69,8 @@ public class DadataClient {
         return findById(ORGANIZATION_SUGGESTION, new SimpleDadataRequest(id));
     }
 
-    public Flux<Suggestion<Organization>> suggestOrganization(String query) {
-        return suggest(ORGANIZATION_SUGGESTION, new SimpleDadataRequest(query));
+    public Flux<Suggestion<Organization>> suggestOrganization(OrganizationDadataRequest request) {
+        return suggest(ORGANIZATION_SUGGESTION, request);
     }
 
     public Flux<Suggestion<Address>> suggestAddress(AddressDadataRequest request) {

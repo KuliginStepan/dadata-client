@@ -12,8 +12,6 @@ public abstract class DadataRequest {
         return query;
     }
 
-    ;
-
     public int getCount() {
         return 10;
     }

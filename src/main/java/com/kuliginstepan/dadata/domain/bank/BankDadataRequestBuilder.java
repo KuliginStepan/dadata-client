@@ -2,6 +2,7 @@ package com.kuliginstepan.dadata.domain.bank;
 
 
 import com.kuliginstepan.dadata.domain.DadataRequestBuilder;
+import com.kuliginstepan.dadata.domain.OrganizationStatus;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
@@ -12,7 +13,7 @@ import java.util.Set;
 public class BankDadataRequestBuilder extends DadataRequestBuilder<BankDadataRequest> {
 
     private List<Map<String, String>> locations = new ArrayList<>();
-    private Set<BankStatus> statuses = new HashSet<>();
+    private Set<OrganizationStatus> statuses = new HashSet<>();
     private Set<BankType> types = new HashSet<>();
 
     public static BankDadataRequestBuilder create(String query) {
@@ -28,7 +29,7 @@ public class BankDadataRequestBuilder extends DadataRequestBuilder<BankDadataReq
         return this;
     }
 
-    public BankDadataRequestBuilder status(BankStatus status) {
+    public BankDadataRequestBuilder status(OrganizationStatus status) {
         statuses.add(status);
         return this;
     }
