@@ -5,7 +5,15 @@ jobs:
     - image: circleci/openjdk:8-jdk-browsers
 
     steps:
-    - checkout
-    - run:
-        name: Run build with tests
-        command: ./gradlew build
+      - checkout
+      - run:
+          name: Run build with tests
+          command: ./gradlew build
+      - run:
+          name: Save test results
+          command: |
+                if [ -e ./gradlew ]; then ./gradlew jacocoTestReport;else gradle jacocoTestReport;fi
+                bash <(curl -s https://codecov.io/bash)
+          when: always
+      - store_test_results:
+          path: /build/reports
