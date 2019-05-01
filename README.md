@@ -7,11 +7,11 @@
 
 Dadata Suggestions API client for Spring (Java)
 
-##Overview
+## Overview
 
 Dadata API client based on non-blocking HTTP client of Spring WebClient. Supports all methods of Suggestion API
 
-##Usage
+## Usage
 
 You need to add property `dadata.client.token` with your Dadata API Token.
 You may add property `dadata.client.timeout` to configure dadata client request timeout.
