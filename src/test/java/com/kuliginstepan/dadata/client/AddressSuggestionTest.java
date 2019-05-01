@@ -131,20 +131,6 @@ public class AddressSuggestionTest {
 
     @Test
     public void suggestAddressWithLocationsTest7() {
-        List<Suggestion<Address>> suggestions = CLIENT.suggestAddress(AddressRequestBuilder.create("Ботаническая")
-            .location(FilterProperty.REGION, "москва").build()).collectList().block();
-
-        List<String> cityKladrIds = getDistinctList(it -> it.getData().getCityKladrId(), suggestions);
-
-        assertNotNull(suggestions);
-        assertFalse(suggestions.isEmpty());
-        assertEquals(1, cityKladrIds.size());
-        assertTrue(cityKladrIds.get(0).startsWith("77"));
-        assertEquals(2, suggestions.size());
-    }
-
-    @Test
-    public void suggestAddressWithLocationsTest8() {
         List<Suggestion<Address>> suggestions = CLIENT.suggestAddress(AddressRequestBuilder.create("московское шоссе")
             .location(FilterProperty.CITY_FIAS_ID, "110d6ad9-0b64-47cf-a2ee-7e935228799c").build()).collectList()
             .block();
