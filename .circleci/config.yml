@@ -12,8 +12,12 @@ jobs:
       - run:
           name: Save test results
           command: |
+                mkdir -p tests/junit
+                find build/test-results -name  "*.xml" -exec cp {} tests/junit/ \;
                 if [ -e ./gradlew ]; then ./gradlew jacocoTestReport;else gradle jacocoTestReport;fi
                 bash <(curl -s https://codecov.io/bash)
           when: always
       - store_test_results:
-          path: build/reports
+          path: tests
+      - store_artifacts:
+          path: build/libs
