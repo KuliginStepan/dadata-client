@@ -19,10 +19,10 @@ public class BankDadataRequest extends DadataRequest {
     @JsonProperty("type")
     private Set<BankType> types;
 
-    public BankDadataRequest(String query, List<Map<String, String>> locationsBoost,
+    public BankDadataRequest(String query, Integer count, List<Map<String, String>> locationsBoost,
         List<Map<String, String>> locations,
         Set<OrganizationStatus> statuses, Set<BankType> types) {
-        super(query);
+        super(query, count);
         this.locationsBoost = locationsBoost;
         this.locations = locations;
         this.statuses = statuses;

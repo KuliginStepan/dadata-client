@@ -21,10 +21,11 @@ public class OrganizationDadataRequest extends DadataRequest {
     private BranchType branchType;
 
     public OrganizationDadataRequest(String query,
+        Integer count,
         List<Map<String, String>> locationsBoost,
         List<Map<String, String>> locations, Set<OrganizationStatus> statuses,
         OrganizationType type, BranchType branchType) {
-        super(query);
+        super(query, count);
         this.locationsBoost = locationsBoost;
         this.locations = locations;
         this.statuses = statuses;

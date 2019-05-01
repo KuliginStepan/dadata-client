@@ -8,6 +8,7 @@ import com.kuliginstepan.dadata.domain.SuggestionType;
 import com.kuliginstepan.dadata.domain.address.Address;
 import com.kuliginstepan.dadata.domain.address.AddressDadataRequest;
 import com.kuliginstepan.dadata.domain.address.AddressSuggestion;
+import com.kuliginstepan.dadata.domain.address.GeolocateDadataRequest;
 import com.kuliginstepan.dadata.domain.bank.Bank;
 import com.kuliginstepan.dadata.domain.bank.BankDadataRequest;
 import com.kuliginstepan.dadata.domain.bank.BankSuggestion;
@@ -15,7 +16,6 @@ import com.kuliginstepan.dadata.domain.email.Email;
 import com.kuliginstepan.dadata.domain.email.EmailSuggestion;
 import com.kuliginstepan.dadata.domain.fio.Fio;
 import com.kuliginstepan.dadata.domain.fio.FioDadataRequest;
-import com.kuliginstepan.dadata.domain.fio.FioPart;
 import com.kuliginstepan.dadata.domain.fio.FioSuggestion;
 import com.kuliginstepan.dadata.domain.organization.Organization;
 import com.kuliginstepan.dadata.domain.organization.OrganizationDadataRequest;
@@ -45,6 +45,7 @@ public class DadataClient {
 
     private static final String BASE_API_URL = "https://suggestions.dadata.ru/suggestions/api/4_1/rs";
     private static final String SUGGESTION_PREFIX = "/suggest";
+    private static final String GEOLOCATE_PREFIX = "/geolocate";
     private static final String FIND_BY_ID_PREFIX = "/findById";
     private static final Duration DEFAULT_TIMEOUT = Duration.of(5, ChronoUnit.SECONDS);
     private static final SuggestionType<Organization> ORGANIZATION_SUGGESTION = new OrganizationSuggestion();
@@ -61,14 +62,6 @@ public class DadataClient {
         timeout = DEFAULT_TIMEOUT;
     }
 
-    public Mono<Suggestion<Address>> findAddressById(String id) {
-        return findById(ADDRESS_SUGGESTION, new SimpleDadataRequest(id));
-    }
-
-    public Mono<Suggestion<Organization>> findOrganizationById(String id) {
-        return findById(ORGANIZATION_SUGGESTION, new SimpleDadataRequest(id));
-    }
-
     public Flux<Suggestion<Organization>> suggestOrganization(OrganizationDadataRequest request) {
         return suggest(ORGANIZATION_SUGGESTION, request);
     }
@@ -81,36 +74,38 @@ public class DadataClient {
         return suggest(BANK_SUGGESTION, request);
     }
 
-    public Flux<Suggestion<Fio>> suggestFio(String query, FioPart... parts) {
-        return suggest(FIO_SUGGESTION, new FioDadataRequest(query, parts));
+    public Flux<Suggestion<Fio>> suggestFio(FioDadataRequest request) {
+        return suggest(FIO_SUGGESTION, request);
     }
 
     public Flux<Suggestion<Email>> suggestEmail(String query) {
         return suggest(EMAIL_SUGGESTION, new SimpleDadataRequest(query));
     }
 
-    public <T> Flux<Suggestion<T>> suggest(SuggestionType<T> suggestionType, DadataRequest request) {
+    public Mono<Suggestion<Address>> findAddressById(String id) {
+        return findById(ADDRESS_SUGGESTION, new SimpleDadataRequest(id));
+    }
+
+    public Mono<Suggestion<Organization>> findOrganizationById(String id) {
+        return findById(ORGANIZATION_SUGGESTION, new SimpleDadataRequest(id));
+    }
+
+    public Flux<Suggestion<Address>> geolocate(GeolocateDadataRequest request) {
+        return executeOperation(ADDRESS_SUGGESTION.getResponseClass(), request, GEOLOCATE_PREFIX,
+            ADDRESS_SUGGESTION.getSuggestOperationPrefix());
+    }
+
+    protected <T> Flux<Suggestion<T>> suggest(SuggestionType<T> suggestionType, DadataRequest request) {
         return executeOperation(suggestionType.getResponseClass(), request, SUGGESTION_PREFIX,
             suggestionType.getSuggestOperationPrefix());
     }
 
-    public <T> Mono<Suggestion<T>> findById(SuggestionType<T> suggestionType, DadataRequest request) {
+    protected <T> Mono<Suggestion<T>> findById(SuggestionType<T> suggestionType, DadataRequest request) {
         return suggestionType.getFindByIdOperationPrefix()
             .map(prefix -> executeOperation(suggestionType.getResponseClass(), request, FIND_BY_ID_PREFIX, prefix))
             .map(Flux::next)
             .orElseThrow(() -> new UnsupportedOperationException(
                 "Operation 'findById' not supported for operation type " + suggestionType.getClass()));
-    }
-
-    private <T> Flux<Suggestion<T>> executeOperation(ParameterizedTypeReference<DadataResponse<T>> responseClass,
-        DadataRequest request, String operationPrefix, String suggestionTypePrefix) {
-        return webClientBuilder().build()
-            .post().uri(operationPrefix + suggestionTypePrefix)
-            .body(BodyInserters.fromObject(request))
-            .exchange()
-            .flatMap(clientResponse -> responseToBody(clientResponse, responseClass))
-            .map(DadataResponse::getSuggestions)
-            .flatMapMany(Flux::fromIterable);
     }
 
     private static <T> Mono<T> responseToBody(ClientResponse response, ParameterizedTypeReference<T> type) {
@@ -120,6 +115,17 @@ public class DadataClient {
             return response.bodyToMono(ErrorDetails.class)
                 .flatMap(error -> Mono.error(new DadataException(response.statusCode(), error)));
         }
+    }
+
+    protected <T> Flux<Suggestion<T>> executeOperation(ParameterizedTypeReference<DadataResponse<T>> responseClass,
+        DadataRequest request, String operationPrefix, String suggestionTypePrefix) {
+        return webClientBuilder().build()
+            .post().uri(operationPrefix + suggestionTypePrefix)
+            .body(BodyInserters.fromObject(request))
+            .exchange()
+            .flatMap(clientResponse -> responseToBody(clientResponse, responseClass))
+            .map(DadataResponse::getSuggestions)
+            .flatMapMany(Flux::fromIterable);
     }
 
     private WebClient.Builder webClientBuilder() {

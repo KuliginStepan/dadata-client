@@ -41,6 +41,6 @@ public class BankDadataRequestBuilder extends DadataRequestBuilder<BankDadataReq
 
     @Override
     public BankDadataRequest build() {
-        return new BankDadataRequest(super.query, super.locationsBoost, locations, statuses, types);
+        return new BankDadataRequest(super.query, super.count, super.locationsBoost, locations, statuses, types);
     }
 }

@@ -45,6 +45,7 @@ public class AddressDadataRequestBuilder extends DadataRequestBuilder<AddressDad
 
     @Override
     public AddressDadataRequest build() {
-        return new AddressDadataRequest(super.query, super.locationsBoost, locations, fromBound, toBound, restrictValue);
+        return new AddressDadataRequest(super.query, super.count, super.locationsBoost, locations, fromBound, toBound,
+            restrictValue);
     }
 }

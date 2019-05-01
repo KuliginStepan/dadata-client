@@ -47,6 +47,6 @@ public class OrganizationDadataRequestBuilder extends DadataRequestBuilder<Organ
 
     @Override
     public OrganizationDadataRequest build() {
-        return new OrganizationDadataRequest(super.query, super.locationsBoost, locations, statuses, type, branchType);
+        return new OrganizationDadataRequest(super.query, super.count, super.locationsBoost, locations, statuses, type, branchType);
     }
 }

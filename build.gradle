@@ -1,13 +1,17 @@
 plugins {
-    id 'org.springframework.boot' version '2.1.4.RELEASE'
+    id "io.spring.dependency-management" version "1.0.6.RELEASE"
     id 'java'
 }
-
-apply plugin: 'io.spring.dependency-management'
 
 group = 'com.kuliginstepan'
 version = '0.0.1'
 sourceCompatibility = '1.8'
+
+dependencyManagement {
+    imports {
+        mavenBom 'org.springframework.boot:spring-boot-starter-parent:2.1.4.RELEASE'
+    }
+}
 
 repositories {
     mavenCentral()
