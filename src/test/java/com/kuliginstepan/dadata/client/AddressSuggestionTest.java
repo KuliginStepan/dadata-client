@@ -86,7 +86,7 @@ public class AddressSuggestionTest {
             .location(FilterProperty.CITY, "Тольятти")
             .build()).collectList().block();
 
-        List<String> regions = getDistinctList(it -> it.getData().getRegionType(), suggestions);
+        List<String> regions = getDistinctList(it -> it.getData().getRegion(), suggestions);
 
         assertNotNull(suggestions);
         assertFalse(suggestions.isEmpty());
@@ -106,7 +106,7 @@ public class AddressSuggestionTest {
             .location(FilterProperty.REGION, "ростовская")
             .build()).collectList().block();
 
-        List<String> regions = getDistinctList(it -> it.getData().getRegionType(), suggestions);
+        List<String> regions = getDistinctList(it -> it.getData().getRegion(), suggestions);
 
         assertNotNull(suggestions);
         assertFalse(suggestions.isEmpty());
