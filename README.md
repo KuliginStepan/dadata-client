@@ -4,3 +4,33 @@
 [![codecov](https://codecov.io/gh/KuliginStepan/dadata-client/branch/master/graph/badge.svg)](https://codecov.io/gh/KuliginStepan/dadata-client)
 
 # dadata-client
+
+Dadata Suggestions API client for Spring (Java)
+
+##Overview
+
+Dadata API client based on non-blocking HTTP client of Spring WebClient. Supports all methods of Suggestion API
+
+##Usage
+
+You need to add property `dadata.client.token` with your Dadata API Token.
+You may add property `dadata.client.timeout` to configure dadata client request timeout.
+
+Dadata client provides `DadataClientAutoConfiguration` which configures `DadataClient` bean for you.
+
+Autowire `DadataClient` in your beans and call api methods, for example:
+
+```
+@Service
+public class SomeService {
+    
+    @Autowired
+    private DadataClient client;
+    
+    public Flux<Suggestion<Address>> getSuggestionsForAddress(String query) {
+        return client.suggestAddress(AddressRequestBuilder.create(query).build());
+    }
+}
+```
+
+Request builders allow to filter and rank suggestions. More examples are available in the `test` module 
