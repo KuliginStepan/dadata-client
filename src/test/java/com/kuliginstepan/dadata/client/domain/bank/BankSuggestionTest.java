@@ -1,8 +1,7 @@
 package com.kuliginstepan.dadata.client.domain.bank;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
-import java.util.Optional;
 import org.junit.Test;
 
 public class BankSuggestionTest {
@@ -14,8 +13,8 @@ public class BankSuggestionTest {
         assertEquals("/bank", SUGGESTION.getSuggestOperationPrefix());
     }
 
-    @Test
+    @Test(expected = UnsupportedOperationException.class)
     public void getFindByIdOperationPrefix() {
-        assertEquals(Optional.empty(), SUGGESTION.getFindByIdOperationPrefix());
+        SUGGESTION.getFindByIdOperationPrefix();
     }
 }
