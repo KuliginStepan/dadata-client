@@ -1,26 +1,26 @@
 package com.kuliginstepan.dadata.client;
 
+import com.kuliginstepan.dadata.client.domain.BasicRequest;
+import com.kuliginstepan.dadata.client.domain.DadataResponse;
+import com.kuliginstepan.dadata.client.domain.Suggestion;
+import com.kuliginstepan.dadata.client.domain.SuggestionType;
 import com.kuliginstepan.dadata.client.domain.address.Address;
 import com.kuliginstepan.dadata.client.domain.address.AddressRequest;
 import com.kuliginstepan.dadata.client.domain.address.AddressSuggestion;
 import com.kuliginstepan.dadata.client.domain.address.GeolocateRequest;
+import com.kuliginstepan.dadata.client.domain.bank.Bank;
 import com.kuliginstepan.dadata.client.domain.bank.BankRequest;
+import com.kuliginstepan.dadata.client.domain.bank.BankSuggestion;
 import com.kuliginstepan.dadata.client.domain.email.Email;
 import com.kuliginstepan.dadata.client.domain.email.EmailSuggestion;
+import com.kuliginstepan.dadata.client.domain.fio.Fio;
+import com.kuliginstepan.dadata.client.domain.fio.FioRequest;
+import com.kuliginstepan.dadata.client.domain.fio.FioSuggestion;
 import com.kuliginstepan.dadata.client.domain.organization.Organization;
 import com.kuliginstepan.dadata.client.domain.organization.OrganizationRequest;
 import com.kuliginstepan.dadata.client.domain.organization.OrganizationSuggestion;
 import com.kuliginstepan.dadata.client.exception.DadataException;
 import com.kuliginstepan.dadata.client.exception.ErrorDetails;
-import com.kuliginstepan.dadata.client.domain.BasicRequest;
-import com.kuliginstepan.dadata.client.domain.DadataResponse;
-import com.kuliginstepan.dadata.client.domain.Suggestion;
-import com.kuliginstepan.dadata.client.domain.SuggestionType;
-import com.kuliginstepan.dadata.client.domain.bank.Bank;
-import com.kuliginstepan.dadata.client.domain.bank.BankSuggestion;
-import com.kuliginstepan.dadata.client.domain.fio.Fio;
-import com.kuliginstepan.dadata.client.domain.fio.FioRequest;
-import com.kuliginstepan.dadata.client.domain.fio.FioSuggestion;
 import io.netty.handler.timeout.ReadTimeoutHandler;
 import java.time.Duration;
 import java.time.temporal.ChronoUnit;
@@ -100,11 +100,8 @@ public class DadataClient {
     }
 
     protected <T> Mono<Suggestion<T>> findById(SuggestionType<T> suggestionType, BasicRequest request) {
-        return suggestionType.getFindByIdOperationPrefix()
-            .map(prefix -> executeOperation(suggestionType.getResponseClass(), request, FIND_BY_ID_PREFIX, prefix))
-            .map(Flux::next)
-            .orElseThrow(() -> new UnsupportedOperationException(
-                "Operation 'findById' not supported for operation type " + suggestionType.getClass()));
+        return executeOperation(suggestionType.getResponseClass(), request, FIND_BY_ID_PREFIX,
+            suggestionType.getFindByIdOperationPrefix()).next();
     }
 
     protected <T> Flux<Suggestion<T>> executeOperation(ParameterizedTypeReference<DadataResponse<T>> responseClass,

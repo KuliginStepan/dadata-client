@@ -4,6 +4,11 @@ import com.kuliginstepan.dadata.client.domain.BasicRequest;
 import java.util.Set;
 import lombok.Getter;
 
+/**
+ * @see <a href="https://confluence.hflabs.ru/pages/viewpage.action?pageId=204669115">Dadata fio suggestion docs</a>
+ * @see com.kuliginstepan.dadata.client.domain.fio.FioRequestBuilder
+ */
+
 @Getter
 public class FioRequest extends BasicRequest {
 

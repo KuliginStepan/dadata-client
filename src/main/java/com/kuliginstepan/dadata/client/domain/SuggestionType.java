@@ -1,6 +1,5 @@
 package com.kuliginstepan.dadata.client.domain;
 
-import java.util.Optional;
 import org.springframework.core.ParameterizedTypeReference;
 
 public interface SuggestionType<T> {
@@ -9,7 +8,7 @@ public interface SuggestionType<T> {
 
     String getSuggestOperationPrefix();
 
-    default Optional<String> getFindByIdOperationPrefix() {
-        return Optional.of(getSuggestOperationPrefix());
-    };
+    default String getFindByIdOperationPrefix() {
+        return getSuggestOperationPrefix();
+    }
 }

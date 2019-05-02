@@ -11,6 +11,7 @@ import lombok.Getter;
 
 /**
  * @see <a href="https://confluence.hflabs.ru/pages/viewpage.action?pageId=204669122">Dadata organization suggestion docs</a>
+ * @see com.kuliginstepan.dadata.client.domain.organization.OrganizationRequestBuilder
  */
 
 @Getter

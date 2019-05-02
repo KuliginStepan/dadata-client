@@ -1,8 +1,7 @@
 package com.kuliginstepan.dadata.client.domain.email;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
-import java.util.Optional;
 import org.junit.Test;
 
 public class EmailSuggestionTest {
@@ -14,8 +13,8 @@ public class EmailSuggestionTest {
         assertEquals("/email", SUGGESTION.getSuggestOperationPrefix());
     }
 
-    @Test
+    @Test(expected = UnsupportedOperationException.class)
     public void getFindByIdOperationPrefix() {
-        assertEquals(Optional.empty(), SUGGESTION.getFindByIdOperationPrefix());
+        SUGGESTION.getFindByIdOperationPrefix();
     }
 }

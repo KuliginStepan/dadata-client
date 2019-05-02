@@ -1,8 +1,7 @@
 package com.kuliginstepan.dadata.client.domain.email;
 
-import com.kuliginstepan.dadata.client.domain.SuggestionType;
 import com.kuliginstepan.dadata.client.domain.DadataResponse;
-import java.util.Optional;
+import com.kuliginstepan.dadata.client.domain.SuggestionType;
 import org.springframework.core.ParameterizedTypeReference;
 
 public class EmailSuggestion implements SuggestionType<Email> {
@@ -18,7 +17,7 @@ public class EmailSuggestion implements SuggestionType<Email> {
     }
 
     @Override
-    public Optional<String> getFindByIdOperationPrefix() {
-        return Optional.empty();
+    public String getFindByIdOperationPrefix() {
+        throw new UnsupportedOperationException("Operation 'findById' not supported for Email");
     }
 }
