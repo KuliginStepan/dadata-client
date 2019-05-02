@@ -9,6 +9,11 @@ import java.util.Map;
 import java.util.Set;
 import lombok.Getter;
 
+/**
+ * @see <a href="https://confluence.hflabs.ru/pages/viewpage.action?pageId=204669107">Dadata bank suggestion docs</a>
+ * @see com.kuliginstepan.dadata.client.domain.bank.BankRequestBuilder
+ */
+
 @Getter
 public class BankRequest extends BasicRequest {
 

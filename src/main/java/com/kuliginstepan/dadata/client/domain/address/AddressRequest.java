@@ -7,7 +7,8 @@ import java.util.Map;
 import lombok.Getter;
 
 /**
- * @see <a href="https://confluence.hflabs.ru/pages/viewpage.action?pageId=204669107">Dadata address suggestion docs</a>
+ * @see <a href="https://confluence.hflabs.ru/pages/viewpage.action?pageId=262996078">Dadata address suggestion docs</a>
+ * @see com.kuliginstepan.dadata.client.domain.address.AddressRequestBuilder
  */
 
 @Getter

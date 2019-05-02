@@ -2,7 +2,6 @@ package com.kuliginstepan.dadata.client.domain.bank;
 
 import com.kuliginstepan.dadata.client.domain.DadataResponse;
 import com.kuliginstepan.dadata.client.domain.SuggestionType;
-import java.util.Optional;
 import org.springframework.core.ParameterizedTypeReference;
 
 public class BankSuggestion implements SuggestionType<Bank> {
@@ -18,7 +17,7 @@ public class BankSuggestion implements SuggestionType<Bank> {
     }
 
     @Override
-    public Optional<String> getFindByIdOperationPrefix() {
-        return Optional.empty();
+    public String getFindByIdOperationPrefix() {
+        throw new UnsupportedOperationException("Operation 'findById' not supported for Bank");
     }
 }
