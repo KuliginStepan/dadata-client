@@ -6,12 +6,13 @@ import com.kuliginstepan.dadata.client.domain.organization.Organization.State;
 import com.kuliginstepan.dadata.client.domain.address.Address;
 import java.util.List;
 import lombok.Data;
+import lombok.Value;
 
 /**
  * @see <a href="https://confluence.hflabs.ru/pages/viewpage.action?pageId=262996082">Dadata bank object</a>
  */
 
-@Data
+@Value
 public class Bank {
 
     private Opf opf;

@@ -1,12 +1,12 @@
 package com.kuliginstepan.dadata.client.domain.fio;
 
-import lombok.Data;
+import lombok.Value;
 
 /**
  * @see <a href="https://confluence.hflabs.ru/pages/viewpage.action?pageId=204669113">Dadata fio object</a>
  */
 
-@Data
+@Value
 public class Fio {
 
     private String name;

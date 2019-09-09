@@ -3,6 +3,10 @@ package com.kuliginstepan.dadata.client.domain.fns;
 import com.fasterxml.jackson.annotation.JsonAlias;
 import lombok.Value;
 
+/**
+ * @see <a href="https://dadata.ru/api/suggest/fns_unit/">FNS Unit docs</a>
+ */
+
 @Value
 public class FnsUnit {
 

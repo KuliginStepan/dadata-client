@@ -2,14 +2,16 @@ package com.kuliginstepan.dadata.client.domain.fio;
 
 import com.kuliginstepan.dadata.client.domain.BasicRequest;
 import java.util.Set;
-import lombok.Getter;
+import lombok.EqualsAndHashCode;
+import lombok.Value;
 
 /**
  * @see <a href="https://confluence.hflabs.ru/pages/viewpage.action?pageId=204669115">Dadata fio suggestion docs</a>
  * @see com.kuliginstepan.dadata.client.domain.fio.FioRequestBuilder
  */
 
-@Getter
+@Value
+@EqualsAndHashCode(callSuper = true)
 public class FioRequest extends BasicRequest {
 
     private Set<FioPart> parts;

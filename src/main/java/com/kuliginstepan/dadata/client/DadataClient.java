@@ -11,6 +11,7 @@ import com.kuliginstepan.dadata.client.domain.bank.Bank;
 import com.kuliginstepan.dadata.client.domain.bank.BankRequest;
 import com.kuliginstepan.dadata.client.domain.court.Court;
 import com.kuliginstepan.dadata.client.domain.court.CourtRequest;
+import com.kuliginstepan.dadata.client.domain.delivery.Delivery;
 import com.kuliginstepan.dadata.client.domain.email.Email;
 import com.kuliginstepan.dadata.client.domain.fio.Fio;
 import com.kuliginstepan.dadata.client.domain.fio.FioRequest;
@@ -129,6 +130,13 @@ public class DadataClient {
      */
     public Mono<Suggestion<Court>> findCourtById(String id) {
         return findById(SuggestionTypes.COURT, new BasicRequest(id));
+    }
+
+    /**
+     * @param id City kladr id
+     */
+    public Mono<Suggestion<Delivery>> findDeliveryById(String id) {
+        return findById(SuggestionTypes.DELIVERY, new BasicRequest(id));
     }
 
     public Flux<Suggestion<Address>> geolocate(GeolocateRequest request) {

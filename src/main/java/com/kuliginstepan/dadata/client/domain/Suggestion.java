@@ -2,9 +2,9 @@ package com.kuliginstepan.dadata.client.domain;
 
 
 import com.fasterxml.jackson.annotation.JsonAlias;
-import lombok.Data;
+import lombok.Value;
 
-@Data
+@Value
 public class Suggestion<T> {
 
     private String value;

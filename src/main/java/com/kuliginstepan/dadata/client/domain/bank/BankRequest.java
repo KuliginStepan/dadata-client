@@ -7,14 +7,16 @@ import com.kuliginstepan.dadata.client.domain.address.FilterProperty;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import lombok.Getter;
+import lombok.EqualsAndHashCode;
+import lombok.Value;
 
 /**
  * @see <a href="https://confluence.hflabs.ru/pages/viewpage.action?pageId=204669107">Dadata bank suggestion docs</a>
  * @see com.kuliginstepan.dadata.client.domain.bank.BankRequestBuilder
  */
 
-@Getter
+@Value
+@EqualsAndHashCode(callSuper = true)
 public class BankRequest extends BasicRequest {
 
     @JsonProperty("locations_boost")

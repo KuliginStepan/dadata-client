@@ -4,14 +4,16 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.kuliginstepan.dadata.client.domain.BasicRequest;
 import java.util.List;
 import java.util.Map;
-import lombok.Getter;
+import lombok.EqualsAndHashCode;
+import lombok.Value;
 
 /**
  * @see <a href="https://confluence.hflabs.ru/pages/viewpage.action?pageId=262996078">Dadata address suggestion docs</a>
  * @see com.kuliginstepan.dadata.client.domain.address.AddressRequestBuilder
  */
 
-@Getter
+@Value
+@EqualsAndHashCode(callSuper = true)
 public class AddressRequest extends BasicRequest {
 
     @JsonProperty("locations_boost")

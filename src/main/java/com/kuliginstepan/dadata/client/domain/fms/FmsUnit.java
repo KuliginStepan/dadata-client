@@ -2,9 +2,13 @@ package com.kuliginstepan.dadata.client.domain.fms;
 
 import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import lombok.Data;
+import lombok.Value;
 
-@Data
+/**
+ * @see <a href="https://dadata.ru/api/suggest/fms_unit/">FMS Unit docs</a>
+ */
+
+@Value
 public class FmsUnit {
 
     private String code;

@@ -4,12 +4,13 @@ import com.fasterxml.jackson.annotation.JsonAlias;
 import java.time.ZoneId;
 import java.util.List;
 import lombok.Data;
+import lombok.Value;
 
 /**
  * @see <a href="https://confluence.hflabs.ru/pages/viewpage.action?pageId=204669103">Dadata address object</a>
  */
 
-@Data
+@Value
 public class Address {
 
     @JsonAlias("postal_code")
