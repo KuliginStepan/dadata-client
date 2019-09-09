@@ -16,6 +16,9 @@ import com.kuliginstepan.dadata.client.domain.email.EmailSuggestion;
 import com.kuliginstepan.dadata.client.domain.fio.Fio;
 import com.kuliginstepan.dadata.client.domain.fio.FioRequest;
 import com.kuliginstepan.dadata.client.domain.fio.FioSuggestion;
+import com.kuliginstepan.dadata.client.domain.fms.FmsUnit;
+import com.kuliginstepan.dadata.client.domain.fms.FmsUnitRequest;
+import com.kuliginstepan.dadata.client.domain.fms.FmsUnitSuggestion;
 import com.kuliginstepan.dadata.client.domain.organization.Organization;
 import com.kuliginstepan.dadata.client.domain.organization.OrganizationRequest;
 import com.kuliginstepan.dadata.client.domain.organization.OrganizationSuggestion;
@@ -52,6 +55,7 @@ public class DadataClient {
     private static final SuggestionType<Bank> BANK_SUGGESTION = new BankSuggestion();
     private static final SuggestionType<Fio> FIO_SUGGESTION = new FioSuggestion();
     private static final SuggestionType<Email> EMAIL_SUGGESTION = new EmailSuggestion();
+    private static final SuggestionType<FmsUnit> FMS_SUGGESTION = new FmsUnitSuggestion();
 
     private final String token;
     private final Duration timeout;
@@ -81,12 +85,23 @@ public class DadataClient {
         return suggest(EMAIL_SUGGESTION, request);
     }
 
+    public Flux<Suggestion<FmsUnit>> suggestFmsUnit(FmsUnitRequest request) {
+        return suggest(FMS_SUGGESTION, request);
+    }
+
     public Mono<Suggestion<Address>> findAddressById(String id) {
         return findById(ADDRESS_SUGGESTION, new BasicRequest(id));
     }
 
     public Mono<Suggestion<Organization>> findOrganizationById(String id) {
         return findById(ORGANIZATION_SUGGESTION, new BasicRequest(id));
+    }
+
+    /**
+     * @param id Fms unit code. Format: 'XXX-XXX'
+     */
+    public Mono<Suggestion<FmsUnit>> findFmsUnitById(String id) {
+        return findById(FMS_SUGGESTION, new BasicRequest(id));
     }
 
     public Flux<Suggestion<Address>> geolocate(GeolocateRequest request) {
