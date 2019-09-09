@@ -6,25 +6,20 @@ import com.kuliginstepan.dadata.client.domain.Suggestion;
 import com.kuliginstepan.dadata.client.domain.SuggestionType;
 import com.kuliginstepan.dadata.client.domain.address.Address;
 import com.kuliginstepan.dadata.client.domain.address.AddressRequest;
-import com.kuliginstepan.dadata.client.domain.address.AddressSuggestion;
 import com.kuliginstepan.dadata.client.domain.address.GeolocateRequest;
 import com.kuliginstepan.dadata.client.domain.bank.Bank;
 import com.kuliginstepan.dadata.client.domain.bank.BankRequest;
-import com.kuliginstepan.dadata.client.domain.bank.BankSuggestion;
 import com.kuliginstepan.dadata.client.domain.email.Email;
-import com.kuliginstepan.dadata.client.domain.email.EmailSuggestion;
 import com.kuliginstepan.dadata.client.domain.fio.Fio;
 import com.kuliginstepan.dadata.client.domain.fio.FioRequest;
-import com.kuliginstepan.dadata.client.domain.fio.FioSuggestion;
 import com.kuliginstepan.dadata.client.domain.fms.FmsUnit;
 import com.kuliginstepan.dadata.client.domain.fms.FmsUnitRequest;
-import com.kuliginstepan.dadata.client.domain.fms.FmsUnitSuggestion;
 import com.kuliginstepan.dadata.client.domain.fns.FnsUnit;
 import com.kuliginstepan.dadata.client.domain.fns.FnsUnitRequest;
-import com.kuliginstepan.dadata.client.domain.fns.FnsUnitSuggestion;
 import com.kuliginstepan.dadata.client.domain.organization.Organization;
 import com.kuliginstepan.dadata.client.domain.organization.OrganizationRequest;
-import com.kuliginstepan.dadata.client.domain.organization.OrganizationSuggestion;
+import com.kuliginstepan.dadata.client.domain.postal.PostalOffice;
+import com.kuliginstepan.dadata.client.domain.postal.PostalOfficeRequest;
 import com.kuliginstepan.dadata.client.exception.DadataException;
 import com.kuliginstepan.dadata.client.exception.ErrorDetails;
 import io.netty.handler.timeout.ReadTimeoutHandler;
@@ -53,13 +48,6 @@ public class DadataClient {
     private static final String GEOLOCATE_PREFIX = "/geolocate";
     private static final String FIND_BY_ID_PREFIX = "/findById";
     private static final Duration DEFAULT_TIMEOUT = Duration.of(5, ChronoUnit.SECONDS);
-    private static final SuggestionType<Organization> ORGANIZATION_SUGGESTION = new OrganizationSuggestion();
-    private static final SuggestionType<Address> ADDRESS_SUGGESTION = new AddressSuggestion();
-    private static final SuggestionType<Bank> BANK_SUGGESTION = new BankSuggestion();
-    private static final SuggestionType<Fio> FIO_SUGGESTION = new FioSuggestion();
-    private static final SuggestionType<Email> EMAIL_SUGGESTION = new EmailSuggestion();
-    private static final SuggestionType<FmsUnit> FMS_SUGGESTION = new FmsUnitSuggestion();
-    private static final SuggestionType<FnsUnit> FNS_SUGGESTION = new FnsUnitSuggestion();
 
     private final String token;
     private final Duration timeout;
@@ -70,58 +58,69 @@ public class DadataClient {
     }
 
     public Flux<Suggestion<Organization>> suggestOrganization(OrganizationRequest request) {
-        return suggest(ORGANIZATION_SUGGESTION, request);
+        return suggest(SuggestionTypes.ORGANIZATION, request);
     }
 
     public Flux<Suggestion<Address>> suggestAddress(AddressRequest request) {
-        return suggest(ADDRESS_SUGGESTION, request);
+        return suggest(SuggestionTypes.ADDRESS, request);
     }
 
     public Flux<Suggestion<Bank>> suggestBank(BankRequest request) {
-        return suggest(BANK_SUGGESTION, request);
+        return suggest(SuggestionTypes.BANK, request);
     }
 
     public Flux<Suggestion<Fio>> suggestFio(FioRequest request) {
-        return suggest(FIO_SUGGESTION, request);
+        return suggest(SuggestionTypes.FIO, request);
     }
 
     public Flux<Suggestion<Email>> suggestEmail(BasicRequest request) {
-        return suggest(EMAIL_SUGGESTION, request);
+        return suggest(SuggestionTypes.EMAIL, request);
     }
 
     public Flux<Suggestion<FmsUnit>> suggestFmsUnit(FmsUnitRequest request) {
-        return suggest(FMS_SUGGESTION, request);
+        return suggest(SuggestionTypes.FMS, request);
     }
 
     public Flux<Suggestion<FnsUnit>> suggestFnsUnit(FnsUnitRequest request) {
-        return suggest(FNS_SUGGESTION, request);
+        return suggest(SuggestionTypes.FNS, request);
+    }
+
+    public Flux<Suggestion<PostalOffice>> suggestPostalOffice(PostalOfficeRequest request) {
+        return suggest(SuggestionTypes.POSTAL_OFFICE, request);
     }
 
     public Mono<Suggestion<Address>> findAddressById(String id) {
-        return findById(ADDRESS_SUGGESTION, new BasicRequest(id));
+        return findById(SuggestionTypes.ADDRESS, new BasicRequest(id));
     }
 
     public Mono<Suggestion<Organization>> findOrganizationById(String id) {
-        return findById(ORGANIZATION_SUGGESTION, new BasicRequest(id));
+        return findById(SuggestionTypes.ORGANIZATION, new BasicRequest(id));
     }
 
     /**
      * @param id Fms unit code. Format: 'XXX-XXX'
      */
     public Mono<Suggestion<FmsUnit>> findFmsUnitById(String id) {
-        return findById(FMS_SUGGESTION, new BasicRequest(id));
+        return findById(SuggestionTypes.FMS, new BasicRequest(id));
     }
 
     /**
      * @param id Fns unit code or inn
      */
     public Mono<Suggestion<FnsUnit>> findFnsUnitById(String id) {
-        return findById(FNS_SUGGESTION, new BasicRequest(id));
+        return findById(SuggestionTypes.FNS, new BasicRequest(id));
+    }
+
+    /**
+     * @param index Postal office index
+     */
+    public Mono<Suggestion<PostalOffice>> findPostalOfficeById(String index) {
+        return findById(SuggestionTypes.POSTAL_OFFICE, new BasicRequest(index));
     }
 
     public Flux<Suggestion<Address>> geolocate(GeolocateRequest request) {
-        return executeOperation(ADDRESS_SUGGESTION.getResponseClass(), request, GEOLOCATE_PREFIX,
-            ADDRESS_SUGGESTION.getSuggestOperationPrefix());
+        return executeOperation(SuggestionTypes.ADDRESS.getResponseClass(), request, GEOLOCATE_PREFIX,
+            SuggestionTypes.ADDRESS.getSuggestOperationPrefix());
     }
 
     protected <T> Flux<Suggestion<T>> suggest(SuggestionType<T> suggestionType, BasicRequest request) {
