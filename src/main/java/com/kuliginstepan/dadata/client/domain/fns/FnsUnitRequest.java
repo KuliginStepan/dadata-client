@@ -19,12 +19,8 @@ public class FnsUnitRequest extends BasicRequest {
     @Builder
     public FnsUnitRequest(String query, @Singular List<String> regionCodes) {
         super(query, null);
-        if (regionCodes == null) {
-            filters = null;
-        } else {
-            filters = regionCodes.stream()
-                .map(code -> Collections.singletonMap("region_code", code))
-                .collect(Collectors.toList());
-        }
+        filters = regionCodes.stream()
+            .map(code -> Collections.singletonMap("region_code", code))
+            .collect(Collectors.toList());
     }
 }
