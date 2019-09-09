@@ -15,10 +15,16 @@ public class Address {
     @JsonAlias("postal_code")
     private String postalCode;
     private String country;
+    @JsonAlias("country_iso_code")
+    private String countryIsoCode;
+    @JsonAlias("federal_district")
+    private String federalDistrict;
     @JsonAlias("region_fias_id")
     private String regionFiasId;
     @JsonAlias("region_kladr_id")
     private String regionKladrId;
+    @JsonAlias("region_iso_code")
+    private String regionIsoCode;
     @JsonAlias("region_with_type")
     private String regionWithType;
     @JsonAlias("region_type")

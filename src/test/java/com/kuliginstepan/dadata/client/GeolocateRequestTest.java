@@ -19,6 +19,10 @@ public class GeolocateRequestTest {
 
         assertNotNull(suggestions);
         assertFalse(suggestions.isEmpty());
-        assertEquals("г Москва, пгт Московский, ул Бианки, д 4 к 2", suggestions.get(0).getValue());
+        Address address = suggestions.get(0).getData();
+        assertEquals("Москва", address.getRegion());
+        assertEquals("Бианки", address.getStreet());
+        assertEquals("4", address.getHouse());
+        assertEquals("2", address.getBlock());
     }
 }
