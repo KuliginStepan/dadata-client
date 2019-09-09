@@ -5,6 +5,8 @@ import com.kuliginstepan.dadata.client.domain.address.Address;
 import com.kuliginstepan.dadata.client.domain.address.AddressSuggestion;
 import com.kuliginstepan.dadata.client.domain.bank.Bank;
 import com.kuliginstepan.dadata.client.domain.bank.BankSuggestion;
+import com.kuliginstepan.dadata.client.domain.court.Court;
+import com.kuliginstepan.dadata.client.domain.court.CourtSuggestion;
 import com.kuliginstepan.dadata.client.domain.email.Email;
 import com.kuliginstepan.dadata.client.domain.email.EmailSuggestion;
 import com.kuliginstepan.dadata.client.domain.fio.Fio;
@@ -30,4 +32,5 @@ public class SuggestionTypes {
     public static final SuggestionType<FmsUnit> FMS = new FmsUnitSuggestion();
     public static final SuggestionType<FnsUnit> FNS = new FnsUnitSuggestion();
     public static final SuggestionType<PostalOffice> POSTAL_OFFICE = new PostalOfficeSuggestion();
+    public static final SuggestionType<Court> COURT = new CourtSuggestion();
 }

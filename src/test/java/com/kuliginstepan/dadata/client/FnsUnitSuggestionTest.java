@@ -14,7 +14,7 @@ import org.junit.Test;
 public class FnsUnitSuggestionTest {
 
     @Test
-    public void suggestFmsUnitTest() {
+    public void suggestFnsUnitTest() {
         List<Suggestion<FnsUnit>> suggestions = TestUtils.CLIENT.suggestFnsUnit(
             FnsUnitRequest.builder()
                 .query("ленинск")
@@ -31,7 +31,7 @@ public class FnsUnitSuggestionTest {
     }
 
     @Test
-    public void suggestFmsUnitWithFilterTest() {
+    public void suggestFnsUnitWithFilterTest() {
         List<Suggestion<FnsUnit>> suggestions = TestUtils.CLIENT.suggestFnsUnit(
             FnsUnitRequest.builder()
                 .query("ленинск")
@@ -46,7 +46,7 @@ public class FnsUnitSuggestionTest {
     }
 
     @Test
-    public void findFmsUnitByIdTest() {
+    public void findFnsUnitByIdTest() {
         Suggestion<FnsUnit> suggestion = TestUtils.CLIENT.findFnsUnitById("5836").block();
 
         assertNotNull(suggestion);

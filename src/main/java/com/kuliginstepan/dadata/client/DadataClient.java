@@ -9,6 +9,8 @@ import com.kuliginstepan.dadata.client.domain.address.AddressRequest;
 import com.kuliginstepan.dadata.client.domain.address.GeolocateRequest;
 import com.kuliginstepan.dadata.client.domain.bank.Bank;
 import com.kuliginstepan.dadata.client.domain.bank.BankRequest;
+import com.kuliginstepan.dadata.client.domain.court.Court;
+import com.kuliginstepan.dadata.client.domain.court.CourtRequest;
 import com.kuliginstepan.dadata.client.domain.email.Email;
 import com.kuliginstepan.dadata.client.domain.fio.Fio;
 import com.kuliginstepan.dadata.client.domain.fio.FioRequest;
@@ -89,6 +91,10 @@ public class DadataClient {
         return suggest(SuggestionTypes.POSTAL_OFFICE, request);
     }
 
+    public Flux<Suggestion<Court>> suggestCourt(CourtRequest request) {
+        return suggest(SuggestionTypes.COURT, request);
+    }
+
     public Mono<Suggestion<Address>> findAddressById(String id) {
         return findById(SuggestionTypes.ADDRESS, new BasicRequest(id));
     }
@@ -116,6 +122,13 @@ public class DadataClient {
      */
     public Mono<Suggestion<PostalOffice>> findPostalOfficeById(String index) {
         return findById(SuggestionTypes.POSTAL_OFFICE, new BasicRequest(index));
+    }
+
+    /**
+     * @param id Court code
+     */
+    public Mono<Suggestion<Court>> findCourtById(String id) {
+        return findById(SuggestionTypes.COURT, new BasicRequest(id));
     }
 
     public Flux<Suggestion<Address>> geolocate(GeolocateRequest request) {
