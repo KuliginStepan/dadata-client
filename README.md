@@ -11,6 +11,8 @@ Dadata Suggestions API client for Spring (Java)
 
 Dadata API client based on non-blocking HTTP client of Spring WebClient. Supports all methods of Suggestion API
 
+## [Release notes](ReleaseNotes.md)
+
 ## Add a dependency
 
 Gradle:

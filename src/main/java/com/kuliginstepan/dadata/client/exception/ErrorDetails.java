@@ -1,8 +1,8 @@
 package com.kuliginstepan.dadata.client.exception;
 
-import lombok.Data;
+import lombok.Value;
 
-@Data
+@Value
 public class ErrorDetails {
 
     private String family;

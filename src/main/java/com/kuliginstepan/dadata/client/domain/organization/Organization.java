@@ -3,18 +3,18 @@ package com.kuliginstepan.dadata.client.domain.organization;
 import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.kuliginstepan.dadata.client.domain.OrganizationStatus;
-import com.kuliginstepan.dadata.client.domain.address.Address;
 import com.kuliginstepan.dadata.client.domain.Suggestion;
+import com.kuliginstepan.dadata.client.domain.address.Address;
 import com.kuliginstepan.dadata.client.json.LocalDateDeserializer;
 import java.time.LocalDate;
 import java.util.List;
-import lombok.Data;
+import lombok.Value;
 
 /**
  * @see <a href="https://confluence.hflabs.ru/pages/viewpage.action?pageId=204669126">Dadata organization object</a>
  */
 
-@Data
+@Value
 public class Organization {
 
     private String kpp;
@@ -51,14 +51,14 @@ public class Organization {
     private String okvedType;
 
 
-    @Data
+    @Value
     public static class Management {
 
         private String name;
         private String post;
     }
 
-    @Data
+    @Value
     public static class State {
 
         private OrganizationStatus status;
@@ -73,7 +73,7 @@ public class Organization {
         private LocalDate liquidationDate;
     }
 
-    @Data
+    @Value
     public static class Opf {
 
         private String type;
@@ -84,7 +84,7 @@ public class Organization {
         private String shortName;
     }
 
-    @Data
+    @Value
     public static class Name {
 
         @JsonAlias("full_with_opf")

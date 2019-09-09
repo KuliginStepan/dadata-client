@@ -155,7 +155,6 @@ public class AddressSuggestionTest {
 
         assertNotNull(suggestions);
         assertFalse(suggestions.isEmpty());
-        assertEquals(6, suggestions.size());
     }
 
     @Test
