@@ -26,40 +26,43 @@ import com.kuliginstepan.dadata.client.domain.postal.PostalOffice;
 import com.kuliginstepan.dadata.client.domain.postal.PostalOfficeRequest;
 import com.kuliginstepan.dadata.client.exception.DadataException;
 import com.kuliginstepan.dadata.client.exception.ErrorDetails;
-import io.netty.handler.timeout.ReadTimeoutHandler;
-import lombok.RequiredArgsConstructor;
+import com.kuliginstepan.dadata.client.util.DadataWebClientBuilder;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.ParameterizedTypeReference;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.client.reactive.ReactorClientHttpConnector;
 import org.springframework.web.reactive.function.BodyInserters;
 import org.springframework.web.reactive.function.client.ClientResponse;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
-import reactor.netty.http.client.HttpClient;
-import reactor.netty.tcp.TcpClient;
 
 import java.time.Duration;
-import java.time.temporal.ChronoUnit;
-import java.util.concurrent.TimeUnit;
 
-@RequiredArgsConstructor
+import static com.kuliginstepan.dadata.client.util.DadataWebClientBuilder.buildDadataWebClient;
+
 @Slf4j
 public class DadataClient {
 
-    private static final String BASE_API_URL = "https://suggestions.dadata.ru/suggestions/api/4_1/rs";
     private static final String SUGGESTION_PREFIX = "/suggest";
     private static final String GEOLOCATE_PREFIX = "/geolocate";
     private static final String FIND_BY_ID_PREFIX = "/findById";
-    private static final Duration DEFAULT_TIMEOUT = Duration.of(5, ChronoUnit.SECONDS);
 
-    private final String token;
-    private final Duration timeout;
+    private final WebClient webClient;
 
+    /**
+     * Builds dadata client with supplied web client (just in case you'd like to control webclient manually)
+     * @param webClient preferably, but not necessary, should be built with {@link DadataWebClientBuilder#buildDadataWebClient(String, String, Duration)}
+     */
+    public DadataClient(WebClient webClient) {
+        this.webClient = webClient;
+    }
+
+    /**
+     * Builds default dadata client with default url and timeout
+     * @param token dadata auth token
+     */
     public DadataClient(String token) {
-        this.token = token;
-        timeout = DEFAULT_TIMEOUT;
+        DadataClientProperties defaultProps = new DadataClientProperties();
+        this.webClient = buildDadataWebClient(defaultProps.getBaseUrl(), token, defaultProps.getTimeout());
     }
 
     public Flux<Suggestion<Organization>> suggestOrganization(OrganizationRequest request) {
@@ -162,7 +165,7 @@ public class DadataClient {
 
     protected <T> Flux<Suggestion<T>> executeOperation(ParameterizedTypeReference<DadataResponse<T>> responseClass,
         BasicRequest request, String operationPrefix, String suggestionTypePrefix) {
-        return webClientBuilder().build()
+        return webClient
             .post().uri(operationPrefix + suggestionTypePrefix)
             .body(BodyInserters.fromObject(request))
             .exchange()
@@ -178,15 +181,5 @@ public class DadataClient {
             return response.bodyToMono(ErrorDetails.class)
                 .flatMap(error -> Mono.error(new DadataException(response.statusCode(), error)));
         }
-    }
-
-    private WebClient.Builder webClientBuilder() {
-        TcpClient timeoutClient = TcpClient.create()
-            .doOnConnected(
-                con -> con.addHandlerLast(new ReadTimeoutHandler(timeout.toMillis(), TimeUnit.MILLISECONDS)));
-        return WebClient.builder()
-            .clientConnector(new ReactorClientHttpConnector(HttpClient.from(timeoutClient)))
-            .baseUrl(BASE_API_URL)
-            .defaultHeader(HttpHeaders.AUTHORIZATION, "Token " + token);
     }
 }
