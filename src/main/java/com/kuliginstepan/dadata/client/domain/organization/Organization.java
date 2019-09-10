@@ -2,20 +2,24 @@ package com.kuliginstepan.dadata.client.domain.organization;
 
 import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.kuliginstepan.dadata.client.domain.AdditionalProps;
 import com.kuliginstepan.dadata.client.domain.OrganizationStatus;
 import com.kuliginstepan.dadata.client.domain.Suggestion;
 import com.kuliginstepan.dadata.client.domain.address.Address;
 import com.kuliginstepan.dadata.client.json.LocalDateDeserializer;
+import lombok.EqualsAndHashCode;
+import lombok.Value;
+
 import java.time.LocalDate;
 import java.util.List;
-import lombok.Value;
 
 /**
  * @see <a href="https://confluence.hflabs.ru/pages/viewpage.action?pageId=204669126">Dadata organization object</a>
  */
 
+@EqualsAndHashCode(callSuper = true)
 @Value
-public class Organization {
+public class Organization extends AdditionalProps {
 
     private String kpp;
     private Double capital;
@@ -27,6 +31,8 @@ public class Organization {
     private BranchType branchType;
     @JsonAlias("branch_count")
     private Integer branchCount;
+    @JsonAlias("employee_count")
+    private Integer employeeCount;
     private String source;
     private String qc;
     private String hid;
@@ -37,7 +43,7 @@ public class Organization {
     private String ogrn;
     private String okpo;
     private String okved;
-    private List<String> okveds;
+    private List<Okved> okveds;
     private String authorities;
     private String documents;
     private List<String> licenses;
@@ -49,7 +55,6 @@ public class Organization {
     private LocalDate ogrnDate;
     @JsonAlias("okved_type")
     private String okvedType;
-
 
     @Value
     public static class Management {
@@ -96,5 +101,13 @@ public class Organization {
         private String fullName;
         @JsonAlias("short")
         private String shortName;
+    }
+
+    @Value
+    public static class Okved {
+        private Boolean main;
+        private String type;
+        private String code;
+        private String name;
     }
 }
