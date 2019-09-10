@@ -1,19 +1,22 @@
 package com.kuliginstepan.dadata.client.domain.bank;
 
 import com.fasterxml.jackson.annotation.JsonAlias;
+import com.kuliginstepan.dadata.client.domain.AdditionalProps;
 import com.kuliginstepan.dadata.client.domain.Suggestion;
 import com.kuliginstepan.dadata.client.domain.organization.Organization.State;
 import com.kuliginstepan.dadata.client.domain.address.Address;
 import java.util.List;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.Value;
 
 /**
  * @see <a href="https://confluence.hflabs.ru/pages/viewpage.action?pageId=262996082">Dadata bank object</a>
  */
 
+@EqualsAndHashCode(callSuper = true)
 @Value
-public class Bank {
+public class Bank extends AdditionalProps {
 
     private Opf opf;
     private Name name;
