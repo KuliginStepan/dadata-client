@@ -19,6 +19,7 @@ import com.kuliginstepan.dadata.client.domain.fms.FmsUnit;
 import com.kuliginstepan.dadata.client.domain.fms.FmsUnitRequest;
 import com.kuliginstepan.dadata.client.domain.fns.FnsUnit;
 import com.kuliginstepan.dadata.client.domain.fns.FnsUnitRequest;
+import com.kuliginstepan.dadata.client.domain.organization.FindOrganizationByIdRequest;
 import com.kuliginstepan.dadata.client.domain.organization.Organization;
 import com.kuliginstepan.dadata.client.domain.organization.OrganizationRequest;
 import com.kuliginstepan.dadata.client.domain.postal.PostalOffice;
@@ -26,9 +27,6 @@ import com.kuliginstepan.dadata.client.domain.postal.PostalOfficeRequest;
 import com.kuliginstepan.dadata.client.exception.DadataException;
 import com.kuliginstepan.dadata.client.exception.ErrorDetails;
 import io.netty.handler.timeout.ReadTimeoutHandler;
-import java.time.Duration;
-import java.time.temporal.ChronoUnit;
-import java.util.concurrent.TimeUnit;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.ParameterizedTypeReference;
@@ -41,6 +39,10 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import reactor.netty.http.client.HttpClient;
 import reactor.netty.tcp.TcpClient;
+
+import java.time.Duration;
+import java.time.temporal.ChronoUnit;
+import java.util.concurrent.TimeUnit;
 
 @RequiredArgsConstructor
 @Slf4j
@@ -102,6 +104,10 @@ public class DadataClient {
 
     public Mono<Suggestion<Organization>> findOrganizationById(String id) {
         return findById(SuggestionTypes.ORGANIZATION, new BasicRequest(id));
+    }
+
+    public Mono<Suggestion<Organization>> findOrganizationById(FindOrganizationByIdRequest request) {
+        return findById(SuggestionTypes.ORGANIZATION, request);
     }
 
     /**
