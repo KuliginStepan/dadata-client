@@ -1,12 +1,19 @@
 package com.kuliginstepan.dadata.client;
 
-import java.time.Duration;
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+
+import java.time.Duration;
+import java.time.temporal.ChronoUnit;
 
 @ConfigurationProperties(prefix = "dadata.client")
 @Data
 public class DadataClientProperties {
+
+    /**
+     * Dadata base url
+     */
+    private String baseUrl = "https://suggestions.dadata.ru/suggestions/api/4_1/rs";
 
     /**
      * Dadata API token
@@ -14,7 +21,7 @@ public class DadataClientProperties {
     private String token;
 
     /**
-     * Request timeout
+     * Request timeout. Default - 5 seconds
      */
-    private Duration timeout;
+    private Duration timeout = Duration.of(5, ChronoUnit.SECONDS);
 }
