@@ -12,10 +12,10 @@ public class DadataClientAutoConfiguration {
     @Bean
     @ConditionalOnMissingBean(DadataClient.class)
     public DadataClient dadataClient(DadataClientProperties clientProperties) {
-        if (clientProperties.getTimeout() == null) {
-            return new DadataClient(clientProperties.getToken());
-        } else {
-            return new DadataClient(clientProperties.getToken(), clientProperties.getTimeout());
-        }
+        return new DadataClientBuilder()
+                .token(clientProperties.getToken())
+                .timeout(clientProperties.getTimeout())
+                .baseUrl(clientProperties.getBaseUrl())
+                .build();
     }
 }
