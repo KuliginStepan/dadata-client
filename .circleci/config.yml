@@ -2,7 +2,7 @@ version: 2
 jobs:
   build:
     docker:
-    - image: circleci/openjdk:8-jdk-browsers
+      - image: circleci/openjdk:8-jdk-browsers
 
     steps:
       - checkout
@@ -12,13 +12,13 @@ jobs:
       - run:
           name: Save test results
           command: |
-                mkdir -p tests/junit
-                find build/test-results -name  "*.xml" -exec cp {} tests/junit/ \;
-                if [ -e ./gradlew ]; then ./gradlew jacocoTestReport;else gradle jacocoTestReport;fi
-                bash <(curl -s https://codecov.io/bash)
-                curl -Ls -o codacy-coverage-reporter "$(curl -Ls https://api.github.com/repos/codacy/codacy-coverage-reporter/releases/latest | jq -r '.assets | map({name, browser_download_url} | select(.name | contains("codacy-coverage-reporter-linux"))) | .[0].browser_download_url')"
-                chmod +x codacy-coverage-reporter
-                ./codacy-coverage-reporter report -l Java -r build/reports/jacoco/test/jacocoTestReport.xml
+            mkdir -p tests/junit
+            find build/test-results -name  "*.xml" -exec cp {} tests/junit/ \;
+            if [ -e ./gradlew ]; then ./gradlew jacocoTestReport;else gradle jacocoTestReport;fi
+            bash <(curl -s https://codecov.io/bash)
+            curl -Ls -o codacy-coverage-reporter "$(curl -Ls https://api.github.com/repos/codacy/codacy-coverage-reporter/releases/latest | jq -r '.assets | map({name, browser_download_url} | select(.name | contains("codacy-coverage-reporter-linux"))) | .[0].browser_download_url')"
+            chmod +x codacy-coverage-reporter
+            ./codacy-coverage-reporter report -l Java -r build/reports/jacoco/test/jacocoTestReport.xml
           when: always
       - store_test_results:
           path: tests

@@ -2,7 +2,6 @@ package com.kuliginstepan.dadata.client.domain;
 
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -21,9 +20,7 @@ public class AdditionalProps {
 
     @JsonAnySetter
     private void setAdditionalProperties(String name, Object value) {
-        this.additionalProperties.put(name, value);
+        additionalProperties.put(name, value);
     }
-
-
 
 }

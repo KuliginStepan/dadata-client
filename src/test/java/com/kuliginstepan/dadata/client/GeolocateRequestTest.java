@@ -15,7 +15,8 @@ public class GeolocateRequestTest {
 
     @Test
     public void geolocateTest() {
-        List<Suggestion<Address>> suggestions = CLIENT.geolocate(new GeolocateRequest(55.601983, 37.359486, 50)).collectList().block();
+        List<Suggestion<Address>> suggestions = CLIENT.geolocate(new GeolocateRequest(55.601983, 37.359486, 50))
+            .collectList().block();
 
         assertNotNull(suggestions);
         assertFalse(suggestions.isEmpty());

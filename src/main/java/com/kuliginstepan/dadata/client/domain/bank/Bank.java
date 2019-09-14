@@ -3,8 +3,8 @@ package com.kuliginstepan.dadata.client.domain.bank;
 import com.fasterxml.jackson.annotation.JsonAlias;
 import com.kuliginstepan.dadata.client.domain.AdditionalProps;
 import com.kuliginstepan.dadata.client.domain.Suggestion;
-import com.kuliginstepan.dadata.client.domain.organization.Organization.State;
 import com.kuliginstepan.dadata.client.domain.address.Address;
+import com.kuliginstepan.dadata.client.domain.organization.Organization;
 import java.util.List;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -30,7 +30,7 @@ public class Bank extends AdditionalProps {
     private String rkc;
     private Suggestion<Address> address;
     private List<String> phones;
-    private State state;
+    private Organization.State state;
 
     @Data
     public static class Opf {

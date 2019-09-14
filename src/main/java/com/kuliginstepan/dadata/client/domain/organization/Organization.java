@@ -7,11 +7,10 @@ import com.kuliginstepan.dadata.client.domain.OrganizationStatus;
 import com.kuliginstepan.dadata.client.domain.Suggestion;
 import com.kuliginstepan.dadata.client.domain.address.Address;
 import com.kuliginstepan.dadata.client.json.LocalDateDeserializer;
-import lombok.EqualsAndHashCode;
-import lombok.Value;
-
 import java.time.LocalDate;
 import java.util.List;
+import lombok.EqualsAndHashCode;
+import lombok.Value;
 
 /**
  * @see <a href="https://confluence.hflabs.ru/pages/viewpage.action?pageId=204669126">Dadata organization object</a>
@@ -105,6 +104,7 @@ public class Organization extends AdditionalProps {
 
     @Value
     public static class Okved {
+
         private Boolean main;
         private String type;
         private String code;

@@ -26,6 +26,8 @@ import com.kuliginstepan.dadata.client.domain.postal.PostalOffice;
 import com.kuliginstepan.dadata.client.domain.postal.PostalOfficeRequest;
 import com.kuliginstepan.dadata.client.exception.DadataException;
 import com.kuliginstepan.dadata.client.exception.ErrorDetails;
+import lombok.AccessLevel;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.web.reactive.function.BodyInserters;
@@ -37,6 +39,7 @@ import reactor.core.publisher.Mono;
 /**
  * Should be build using {@link DadataClientBuilder}
  */
+@RequiredArgsConstructor(access = AccessLevel.PROTECTED)
 @Slf4j
 public class DadataClient {
 
@@ -45,10 +48,6 @@ public class DadataClient {
     private static final String FIND_BY_ID_PREFIX = "/findById";
 
     private final WebClient webClient;
-
-    protected DadataClient(WebClient webClient) {
-        this.webClient = webClient;
-    }
 
     public Flux<Suggestion<Organization>> suggestOrganization(OrganizationRequest request) {
         return suggest(SuggestionTypes.ORGANIZATION, request);

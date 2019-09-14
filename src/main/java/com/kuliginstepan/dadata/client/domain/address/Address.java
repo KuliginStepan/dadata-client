@@ -1,10 +1,9 @@
 package com.kuliginstepan.dadata.client.domain.address;
 
 import com.fasterxml.jackson.annotation.JsonAlias;
+import com.kuliginstepan.dadata.client.domain.AdditionalProps;
 import java.time.ZoneId;
 import java.util.List;
-
-import com.kuliginstepan.dadata.client.domain.AdditionalProps;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.Value;

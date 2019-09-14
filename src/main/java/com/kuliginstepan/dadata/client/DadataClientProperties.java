@@ -1,10 +1,9 @@
 package com.kuliginstepan.dadata.client;
 
-import lombok.Data;
-import org.springframework.boot.context.properties.ConfigurationProperties;
-
 import java.time.Duration;
 import java.time.temporal.ChronoUnit;
+import lombok.Data;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 
 @ConfigurationProperties(prefix = "dadata.client")
 @Data

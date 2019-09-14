@@ -1,15 +1,22 @@
 package com.kuliginstepan.dadata.client;
 
-import com.kuliginstepan.dadata.client.domain.OrganizationStatus;
-import com.kuliginstepan.dadata.client.domain.Suggestion;
-import com.kuliginstepan.dadata.client.domain.organization.*;
-import org.junit.Test;
-
-import java.util.List;
-
 import static com.kuliginstepan.dadata.client.TestUtils.CLIENT;
 import static com.kuliginstepan.dadata.client.TestUtils.getDistinctList;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertTrue;
+
+import com.kuliginstepan.dadata.client.domain.OrganizationStatus;
+import com.kuliginstepan.dadata.client.domain.Suggestion;
+import com.kuliginstepan.dadata.client.domain.organization.BranchType;
+import com.kuliginstepan.dadata.client.domain.organization.FindOrganizationByIdRequest;
+import com.kuliginstepan.dadata.client.domain.organization.Organization;
+import com.kuliginstepan.dadata.client.domain.organization.OrganizationRequestBuilder;
+import com.kuliginstepan.dadata.client.domain.organization.OrganizationType;
+import java.util.List;
+import org.junit.Test;
 
 public class OrganizationSuggestionTest {
 
@@ -140,7 +147,9 @@ public class OrganizationSuggestionTest {
 
     @Test
     public void findOrganizationByInnAndKppTest() {
-        Suggestion<Organization> suggestion = CLIENT.findOrganizationById(FindOrganizationByIdRequest.builder().query("7702070139").kpp("526002001").build()).block();
+        Suggestion<Organization> suggestion = CLIENT
+            .findOrganizationById(FindOrganizationByIdRequest.builder().query("7702070139").kpp("526002001").build())
+            .block();
 
         assertEquals("7702070139", suggestion.getData().getInn());
         assertEquals("526002001", suggestion.getData().getKpp());

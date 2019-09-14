@@ -1,16 +1,15 @@
 package com.kuliginstepan.dadata.client;
 
+import static java.util.Optional.ofNullable;
+
 import io.netty.handler.timeout.ReadTimeoutHandler;
+import java.time.Duration;
+import java.util.concurrent.TimeUnit;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.client.reactive.ReactorClientHttpConnector;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.netty.http.client.HttpClient;
 import reactor.netty.tcp.TcpClient;
-
-import java.time.Duration;
-import java.util.concurrent.TimeUnit;
-
-import static java.util.Optional.ofNullable;
 
 public class DadataClientBuilder {
 
@@ -49,13 +48,14 @@ public class DadataClientBuilder {
         }
         DadataClientProperties defaultProps = new DadataClientProperties();
         TcpClient timeoutClient = TcpClient.create()
-                .doOnConnected(
-                        con -> con.addHandlerLast(new ReadTimeoutHandler(ofNullable(this.timeout).orElse(defaultProps.getTimeout()).toMillis(), TimeUnit.MILLISECONDS)));
+            .doOnConnected(con -> con.addHandlerLast(
+                new ReadTimeoutHandler(ofNullable(timeout).orElse(defaultProps.getTimeout()).toMillis(),
+                    TimeUnit.MILLISECONDS)));
         WebClient client = WebClient.builder()
-                .clientConnector(new ReactorClientHttpConnector(HttpClient.from(timeoutClient)))
-                .baseUrl(ofNullable(this.baseUrl).orElse(defaultProps.getBaseUrl()))
-                .defaultHeader(HttpHeaders.AUTHORIZATION, "Token " + token)
-                .build();
+            .clientConnector(new ReactorClientHttpConnector(HttpClient.from(timeoutClient)))
+            .baseUrl(ofNullable(baseUrl).orElse(defaultProps.getBaseUrl()))
+            .defaultHeader(HttpHeaders.AUTHORIZATION, "Token " + token)
+            .build();
         return new DadataClient(client);
     }
 

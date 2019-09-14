@@ -1,6 +1,6 @@
 package com.kuliginstepan.dadata.client.domain.fio;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 

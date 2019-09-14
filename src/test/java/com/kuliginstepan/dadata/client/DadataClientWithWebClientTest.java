@@ -15,6 +15,7 @@ import org.springframework.web.reactive.function.client.WebClient;
 public class DadataClientWithWebClientTest {
 
     public static class TestConfig {
+
         @Bean
         public DadataClient client() {
             return new DadataClientBuilder().webClient(WebClient.builder().build()).build();

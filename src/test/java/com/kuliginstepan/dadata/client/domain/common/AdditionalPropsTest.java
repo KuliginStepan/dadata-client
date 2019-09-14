@@ -1,16 +1,15 @@
 package com.kuliginstepan.dadata.client.domain.common;
 
+import static org.junit.Assert.assertEquals;
+
 import com.kuliginstepan.dadata.client.domain.address.Address;
+import java.io.IOException;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.json.JsonTest;
 import org.springframework.boot.test.json.JacksonTester;
 import org.springframework.test.context.junit4.SpringRunner;
-
-import java.io.IOException;
-
-import static org.junit.Assert.assertEquals;
 
 @JsonTest
 @RunWith(SpringRunner.class)

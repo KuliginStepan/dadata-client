@@ -11,7 +11,8 @@ import lombok.EqualsAndHashCode;
 import lombok.Value;
 
 /**
- * @see <a href="https://confluence.hflabs.ru/pages/viewpage.action?pageId=204669122">Dadata organization suggestion docs</a>
+ * @see <a href="https://confluence.hflabs.ru/pages/viewpage.action?pageId=204669122">Dadata organization suggestion
+ * docs</a>
  * @see com.kuliginstepan.dadata.client.domain.organization.OrganizationRequestBuilder
  */
 

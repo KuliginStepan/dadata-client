@@ -1,10 +1,9 @@
 package com.kuliginstepan.dadata.client.domain;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import lombok.ToString;
 
-@JsonInclude(Include.NON_EMPTY)
+@JsonInclude(JsonInclude.Include.NON_EMPTY)
 @ToString
 public class BasicRequest {
 
@@ -24,7 +23,7 @@ public class BasicRequest {
         return query;
     }
 
-    public int getCount(){
+    public int getCount() {
         return count == null ? 10 : count;
-    };
+    }
 }

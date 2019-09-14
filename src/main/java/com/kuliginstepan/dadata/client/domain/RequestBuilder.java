@@ -16,7 +16,6 @@ public abstract class RequestBuilder<T> {
     protected List<Map<FilterProperty, String>> locationsBoost = new ArrayList<>();
 
     /**
-     *
      * @param kladrId – first 2 digits of region kladr id or full region kladr id
      */
     public RequestBuilder<T> locationBoost(String kladrId) {
@@ -25,7 +24,6 @@ public abstract class RequestBuilder<T> {
     }
 
     /**
-     *
      * @param count – default to 10, max 20
      */
     public RequestBuilder<T> count(int count) {
