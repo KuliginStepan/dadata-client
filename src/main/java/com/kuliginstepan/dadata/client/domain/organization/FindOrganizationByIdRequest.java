@@ -25,8 +25,4 @@ public class FindOrganizationByIdRequest extends BasicRequest {
         this.kpp = kpp;
         this.type = type;
     }
-
-    public static FindOrganizationByIdRequestBuilder create(String query) {
-        return FindOrganizationByIdRequest.builder().query(query);
-    }
 }
