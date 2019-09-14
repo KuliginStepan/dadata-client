@@ -1,9 +1,9 @@
 package com.kuliginstepan.dadata.client.domain.organization;
 
 
-import com.kuliginstepan.dadata.client.domain.address.FilterProperty;
-import com.kuliginstepan.dadata.client.domain.RequestBuilder;
 import com.kuliginstepan.dadata.client.domain.OrganizationStatus;
+import com.kuliginstepan.dadata.client.domain.RequestBuilder;
+import com.kuliginstepan.dadata.client.domain.address.FilterProperty;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.EnumSet;
@@ -31,7 +31,7 @@ public class OrganizationRequestBuilder extends RequestBuilder<OrganizationReque
         return this;
     }
 
-    public OrganizationRequestBuilder status(OrganizationStatus status){
+    public OrganizationRequestBuilder status(OrganizationStatus status) {
         statuses.add(status);
         return this;
     }
@@ -48,6 +48,7 @@ public class OrganizationRequestBuilder extends RequestBuilder<OrganizationReque
 
     @Override
     public OrganizationRequest build() {
-        return new OrganizationRequest(super.query, super.count, super.locationsBoost, locations, statuses, type, branchType);
+        return new OrganizationRequest(super.query, super.count, super.locationsBoost, locations, statuses, type,
+            branchType);
     }
 }

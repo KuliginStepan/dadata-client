@@ -64,7 +64,8 @@ public class BankSuggestionTest {
     @Test
     public void suggestBankWithTypeTest() {
         List<Suggestion<Bank>> suggestions = TestUtils.CLIENT
-            .suggestBank(BankRequestBuilder.create("сбербанк").type(BankType.BANK_BRANCH).type(BankType.BANK).build()).collectList()
+            .suggestBank(BankRequestBuilder.create("сбербанк").type(BankType.BANK_BRANCH).type(BankType.BANK).build())
+            .collectList()
             .block();
         List<BankType> types = getDistinctList(it -> it.getData().getOpf().getType(), suggestions);
         assertNotNull(suggestions);

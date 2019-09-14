@@ -1,14 +1,17 @@
 package com.kuliginstepan.dadata.client.domain.fns;
 
 import com.fasterxml.jackson.annotation.JsonAlias;
+import com.kuliginstepan.dadata.client.domain.AdditionalProps;
+import lombok.EqualsAndHashCode;
 import lombok.Value;
 
 /**
  * @see <a href="https://dadata.ru/api/suggest/fns_unit/">FNS Unit docs</a>
  */
 
+@EqualsAndHashCode(callSuper = true)
 @Value
-public class FnsUnit {
+public class FnsUnit extends AdditionalProps {
 
     private String code;
     private String name;

@@ -1,17 +1,20 @@
 package com.kuliginstepan.dadata.client.domain.address;
 
 import com.fasterxml.jackson.annotation.JsonAlias;
+import com.kuliginstepan.dadata.client.domain.AdditionalProps;
 import java.time.ZoneId;
 import java.util.List;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.Value;
 
 /**
  * @see <a href="https://confluence.hflabs.ru/pages/viewpage.action?pageId=204669103">Dadata address object</a>
  */
 
+@EqualsAndHashCode(callSuper = true)
 @Value
-public class Address {
+public class Address extends AdditionalProps {
 
     @JsonAlias("postal_code")
     private String postalCode;

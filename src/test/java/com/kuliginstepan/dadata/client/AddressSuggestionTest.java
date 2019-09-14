@@ -18,7 +18,6 @@ import org.junit.Test;
 public class AddressSuggestionTest {
 
 
-
     @Test
     public void suggestAddressTest() {
         List<Suggestion<Address>> suggestions = CLIENT

@@ -11,6 +11,7 @@ import static org.junit.Assert.assertTrue;
 import com.kuliginstepan.dadata.client.domain.OrganizationStatus;
 import com.kuliginstepan.dadata.client.domain.Suggestion;
 import com.kuliginstepan.dadata.client.domain.organization.BranchType;
+import com.kuliginstepan.dadata.client.domain.organization.FindOrganizationByIdRequest;
 import com.kuliginstepan.dadata.client.domain.organization.Organization;
 import com.kuliginstepan.dadata.client.domain.organization.OrganizationRequestBuilder;
 import com.kuliginstepan.dadata.client.domain.organization.OrganizationType;
@@ -142,5 +143,15 @@ public class OrganizationSuggestionTest {
         Suggestion<Organization> organization = CLIENT.findOrganizationById("1027739468877").block();
 
         assertEquals("1027739468877", organization.getData().getOgrn());
+    }
+
+    @Test
+    public void findOrganizationByInnAndKppTest() {
+        Suggestion<Organization> suggestion = CLIENT
+            .findOrganizationById(FindOrganizationByIdRequest.builder().query("7702070139").kpp("526002001").build())
+            .block();
+
+        assertEquals("7702070139", suggestion.getData().getInn());
+        assertEquals("526002001", suggestion.getData().getKpp());
     }
 }
