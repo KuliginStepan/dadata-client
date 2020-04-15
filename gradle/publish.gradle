@@ -4,6 +4,31 @@ def nexusPassword = System.getenv("NEXUS_PASSWORD") ?: (project.findProperty("NE
 nexusStaging {
     username = nexusUsername
     password = nexusPassword
+    stagingProfileId = 'b3ecf4c9d80b93'
+}
+
+def pomDefinition = {
+    name = 'Dadata Client'
+    description = 'Dadata Suggestions API client for Spring'
+    url = 'https://github.com/KuliginStepan/dadata-client'
+    developers {
+        developer {
+            id = 'kuliginstepan'
+            name = 'Stepan Kuligin'
+            email = 'kuligin_stepan@mail.ru'
+        }
+    }
+    licenses {
+        license {
+            name = 'The Apache License, Version 2.0'
+            url = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+        }
+    }
+    scm {
+        connection = 'scm:git:git://github.com/KuliginStepan/dadata-client.git'
+        developerConnection = 'scm:git:ssh://github.com/KuliginStepan/dadata-client.git'
+        url = 'https://github.com/KuliginStepan/dadata-client'
+    }
 }
 
 publishing {
@@ -11,56 +36,12 @@ publishing {
         snapshot(MavenPublication) {
             artifactId = project.name
             from components.java
-            pom {
-                name = 'Dadata Client'
-                description = 'Dadata Suggestions API client for Spring'
-                url = 'https://github.com/KuliginStepan/dadata-client'
-                developers {
-                    developer {
-                        id = 'kuliginstepan'
-                        name = 'Stepan Kuligin'
-                        email = 'kuligin_stepan@mail.ru'
-                    }
-                }
-                licenses {
-                    license {
-                        name = 'The Apache License, Version 2.0'
-                        url = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
-                    }
-                }
-                scm {
-                    connection = 'scm:git:git://github.com/KuliginStepan/dadata-client.git'
-                    developerConnection = 'scm:git:ssh://github.com/KuliginStepan/dadata-client.git'
-                    url = 'https://github.com/KuliginStepan/dadata-client'
-                }
-            }
+            pom(pomDefinition)
         }
         release(MavenPublication) {
             artifactId = project.name
             from components.java
-            pom {
-                name = 'Dadata Client'
-                description = 'Dadata Suggestions API client for Spring'
-                url = 'https://github.com/KuliginStepan/dadata-client'
-                developers {
-                    developer {
-                        id = 'kuliginstepan'
-                        name = 'Stepan Kuligin'
-                        email = 'kuligin_stepan@mail.ru'
-                    }
-                }
-                licenses {
-                    license {
-                        name = 'The Apache License, Version 2.0'
-                        url = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
-                    }
-                }
-                scm {
-                    connection = 'scm:git:git://github.com/KuliginStepan/dadata-client.git'
-                    developerConnection = 'scm:git:ssh://github.com/KuliginStepan/dadata-client.git'
-                    url = 'https://github.com/KuliginStepan/dadata-client'
-                }
-            }
+            pom(pomDefinition)
         }
     }
     repositories {

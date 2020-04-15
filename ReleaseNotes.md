@@ -1,3 +1,7 @@
+# 2.2.0
+
+- Добавлен статус `REORGANIZING` для организаций ([#13](https://github.com/KuliginStepan/dadata-client/pull/16))
+
 ## 2.1.0
 
 - Добавлена обработка нераспознанных полей в ответах (PR #10)

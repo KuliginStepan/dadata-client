@@ -8,8 +8,8 @@ plugins {
 
 apply from: 'gradle/publish.gradle'
 
-group = 'com.kuliginstepan'
-version = '2.2.0-SNAPSHOT'
+group = 'com.github.kuliginstepan'
+version = '2.2.0'
 sourceCompatibility = '1.8'
 
 repositories {
