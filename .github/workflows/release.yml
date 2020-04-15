@@ -26,4 +26,4 @@ jobs:
       - name: Publish Release Publication
         run: ./gradlew publishReleasePublicationToStagingRepository
       - name: Close and Release
-        uses: ./gradlew closeAndReleaseRepository
+        run: ./gradlew closeAndReleaseRepository
