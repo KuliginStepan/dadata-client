@@ -4,6 +4,8 @@ env:
   ORG_GRADLE_PROJECT_signingKey: ${{ secrets.signingKey }}
   ORG_GRADLE_PROJECT_signingKeyId: ${{ secrets.signingKeyId }}
   ORG_GRADLE_PROJECT_signingPassword: ${{ secrets.signingPassword }}
+  NEXUS_USERNAME: ${{ secrets.NEXUS_USERNAME }}
+  NEXUS_PASSWORD: ${{ secrets.NEXUS_PASSWORD }}
 
 on:
   release:
