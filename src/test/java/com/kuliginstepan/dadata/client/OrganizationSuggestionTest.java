@@ -2,6 +2,7 @@ package com.kuliginstepan.dadata.client;
 
 import static com.kuliginstepan.dadata.client.TestUtils.CLIENT;
 import static com.kuliginstepan.dadata.client.TestUtils.getDistinctList;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
@@ -48,11 +49,10 @@ public class OrganizationSuggestionTest {
             .suggestOrganization(OrganizationRequestBuilder.create("Коварский Станислав Альбертович").build())
             .collectList().block();
 
-        assertNotNull(suggestions);
-        assertFalse(suggestions.isEmpty());
-        assertEquals(7, suggestions.size());
-        assertEquals("ИП Коварский Станислав Альбертович", suggestions.get(0).getValue());
-        assertEquals("ООО \"ВЕГА\"", suggestions.get(1).getValue());
+        assertThat(suggestions)
+            .hasSize(7)
+            .extracting(Suggestion::getValue)
+            .contains("ИП Коварский Станислав Альбертович", "ООО \"ВЕГА\"");
     }
 
     @Test
