@@ -1,26 +1,29 @@
 plugins {
-    id "io.spring.dependency-management" version "1.0.6.RELEASE"
-    id 'java'
-    id 'nebula.optional-base' version '3.0.3'
+    id 'java-library'
+    id 'jacoco'
+    id 'maven-publish'
+    id 'io.codearte.nexus-staging' version '0.21.2'
+    id 'signing'
 }
 
-apply plugin: 'jacoco'
+apply from: 'gradle/publish.gradle'
 
-group = 'com.kuliginstepan'
-version = '2.1.0'
+group = 'com.github.kuliginstepan'
+version = '2.2.0'
 sourceCompatibility = '1.8'
-
-dependencyManagement {
-    imports {
-        mavenBom 'org.springframework.boot:spring-boot-starter-parent:2.1.4.RELEASE'
-    }
-}
 
 repositories {
     mavenCentral()
 }
 
+java {
+    withSourcesJar()
+    withJavadocJar()
+}
+
 dependencies {
+    implementation platform('org.springframework.boot:spring-boot-starter-parent:2.2.6.RELEASE')
+    annotationProcessor platform('org.springframework.boot:spring-boot-starter-parent:2.2.6.RELEASE')
     implementation 'org.springframework.boot:spring-boot'
     implementation 'org.springframework.boot:spring-boot-autoconfigure'
     implementation 'org.springframework:spring-webflux'
@@ -40,3 +43,5 @@ jacocoTestReport {
         html.enabled false
     }
 }
+
+test.finalizedBy jacocoTestReport

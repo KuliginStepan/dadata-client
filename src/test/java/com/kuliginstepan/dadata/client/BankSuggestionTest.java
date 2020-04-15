@@ -1,6 +1,7 @@
 package com.kuliginstepan.dadata.client;
 
 import static com.kuliginstepan.dadata.client.TestUtils.getDistinctList;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
@@ -22,9 +23,11 @@ public class BankSuggestionTest {
         List<Suggestion<Bank>> suggestions = TestUtils.CLIENT.suggestBank(BankRequestBuilder.create("альфа").build())
             .collectList().block();
 
-        assertNotNull(suggestions);
-        assertFalse(suggestions.isEmpty());
-        assertEquals("АЛЬФА-БАНК", suggestions.get(0).getValue());
+        assertThat(suggestions)
+            .isNotEmpty()
+            .extracting(Suggestion::getValue)
+            .first().asString()
+            .containsIgnoringCase("АЛЬФА-БАНК");
     }
 
     @Test

@@ -2,6 +2,7 @@ package com.kuliginstepan.dadata.client;
 
 import static com.kuliginstepan.dadata.client.TestUtils.CLIENT;
 import static com.kuliginstepan.dadata.client.TestUtils.getDistinctList;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
@@ -59,10 +60,11 @@ public class AddressSuggestionTest {
 
         List<String> regionTypes = getDistinctList(it -> it.getData().getRegionType(), suggestions);
 
-        assertNotNull(suggestions);
-        assertFalse(suggestions.isEmpty());
-        assertEquals(1, regionTypes.size());
-        assertEquals("респ", regionTypes.get(0));
+        assertThat(suggestions).isNotEmpty();
+        assertThat(regionTypes)
+            .isNotEmpty()
+            .first().asString()
+            .isEqualToIgnoringCase("респ");
     }
 
     @Test
