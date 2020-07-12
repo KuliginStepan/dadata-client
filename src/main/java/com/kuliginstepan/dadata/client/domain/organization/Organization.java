@@ -9,6 +9,7 @@ import com.kuliginstepan.dadata.client.domain.address.Address;
 import com.kuliginstepan.dadata.client.json.LocalDateDeserializer;
 import java.time.LocalDate;
 import java.util.List;
+import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Value;
 
@@ -16,98 +17,104 @@ import lombok.Value;
  * @see <a href="https://confluence.hflabs.ru/pages/viewpage.action?pageId=204669126">Dadata organization object</a>
  */
 
-@EqualsAndHashCode(callSuper = true)
 @Value
+@Builder
+@EqualsAndHashCode(callSuper = true)
 public class Organization extends AdditionalProps {
 
-    private String kpp;
-    private Double capital;
-    private Management management;
-    private List<String> founders;
-    private List<String> managers;
-    private OrganizationType type;
+    String kpp;
+    Double capital;
+    Management management;
+    List<String> founders;
+    List<String> managers;
+    OrganizationType type;
     @JsonAlias("branch_type")
-    private BranchType branchType;
+    BranchType branchType;
     @JsonAlias("branch_count")
-    private Integer branchCount;
+    Integer branchCount;
     @JsonAlias("employee_count")
-    private Integer employeeCount;
-    private String source;
-    private String qc;
-    private String hid;
-    private State state;
-    private Opf opf;
-    private Name name;
-    private String inn;
-    private String ogrn;
-    private String okpo;
-    private String okved;
-    private List<Okved> okveds;
-    private String authorities;
-    private String documents;
-    private List<String> licenses;
-    private Suggestion<Address> address;
-    private List<String> phones;
-    private List<String> emails;
+    Integer employeeCount;
+    String source;
+    String qc;
+    String hid;
+    State state;
+    Opf opf;
+    Name name;
+    String inn;
+    String ogrn;
+    String okpo;
+    String okved;
+    List<Okved> okveds;
+    String authorities;
+    String documents;
+    List<String> licenses;
+    Suggestion<Address> address;
+    List<String> phones;
+    List<String> emails;
     @JsonAlias("ogrn_date")
     @JsonDeserialize(using = LocalDateDeserializer.class)
-    private LocalDate ogrnDate;
+    LocalDate ogrnDate;
     @JsonAlias("okved_type")
-    private String okvedType;
+    String okvedType;
 
     @Value
+    @Builder
     public static class Management {
 
-        private String name;
-        private String post;
+        String name;
+        String post;
     }
 
     @Value
+    @Builder
     public static class State {
 
-        private OrganizationStatus status;
+        OrganizationStatus status;
         @JsonAlias("actuality_date")
         @JsonDeserialize(using = LocalDateDeserializer.class)
-        private LocalDate actualityDate;
+        LocalDate actualityDate;
         @JsonAlias("registration_date")
         @JsonDeserialize(using = LocalDateDeserializer.class)
-        private LocalDate registrationDate;
+        LocalDate registrationDate;
         @JsonAlias("liquidation_date")
         @JsonDeserialize(using = LocalDateDeserializer.class)
-        private LocalDate liquidationDate;
+        LocalDate liquidationDate;
     }
 
     @Value
+    @Builder
     public static class Opf {
 
-        private String type;
-        private String code;
+        String type;
+        String code;
         @JsonAlias("full")
-        private String fullName;
+        String fullName;
         @JsonAlias("short")
-        private String shortName;
+        String shortName;
     }
 
     @Value
+    @Builder
     public static class Name {
 
         @JsonAlias("full_with_opf")
-        private String fullWithOpf;
+        String fullWithOpf;
         @JsonAlias("short_with_opf")
-        private String shortWithOpf;
-        private String latin;
+        String shortWithOpf;
+        String latin;
         @JsonAlias("full")
-        private String fullName;
+        String fullName;
         @JsonAlias("short")
-        private String shortName;
+        String shortName;
     }
 
     @Value
+    @Builder
     public static class Okved {
 
-        private Boolean main;
-        private String type;
-        private String code;
-        private String name;
+        Boolean main;
+        String type;
+        String code;
+        String name;
     }
 }

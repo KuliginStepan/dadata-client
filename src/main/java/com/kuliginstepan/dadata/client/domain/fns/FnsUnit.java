@@ -2,6 +2,7 @@ package com.kuliginstepan.dadata.client.domain.fns;
 
 import com.fasterxml.jackson.annotation.JsonAlias;
 import com.kuliginstepan.dadata.client.domain.AdditionalProps;
+import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Value;
 
@@ -9,37 +10,38 @@ import lombok.Value;
  * @see <a href="https://dadata.ru/api/suggest/fns_unit/">FNS Unit docs</a>
  */
 
-@EqualsAndHashCode(callSuper = true)
 @Value
+@Builder
+@EqualsAndHashCode(callSuper = true)
 public class FnsUnit extends AdditionalProps {
 
-    private String code;
-    private String name;
+    String code;
+    String name;
     @JsonAlias("name_short")
-    private String shortName;
-    private String address;
-    private String phone;
-    private String comment;
+    String shortName;
+    String address;
+    String phone;
+    String comment;
     @JsonAlias("payment_name")
-    private String paymentName;
-    private String oktmo;
-    private String inn;
-    private String kpp;
+    String paymentName;
+    String oktmo;
+    String inn;
+    String kpp;
     @JsonAlias("bank_name")
-    private String bankName;
+    String bankName;
     @JsonAlias("bank_bic")
-    private String bankBic;
+    String bankBic;
     @JsonAlias("bank_account")
-    private String bankAccount;
+    String bankAccount;
     @JsonAlias("parent_code")
-    private String parentCode;
+    String parentCode;
     @JsonAlias("parent_name")
-    private String parentName;
+    String parentName;
     @JsonAlias("parent_address")
-    private String parentAddress;
+    String parentAddress;
     @JsonAlias("parent_phone")
-    private String parentPhone;
+    String parentPhone;
     @JsonAlias("parent_comment")
-    private String parentComment;
+    String parentComment;
 
 }

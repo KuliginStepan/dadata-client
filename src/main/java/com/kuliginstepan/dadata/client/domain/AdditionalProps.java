@@ -11,7 +11,7 @@ import java.util.Map;
 @SuppressWarnings("unused")
 public class AdditionalProps {
 
-    private Map<String, Object> additionalProperties = new HashMap<>();
+    private final Map<String, Object> additionalProperties = new HashMap<>();
 
     @JsonAnyGetter
     public Map<String, Object> getAdditionalProperties() {

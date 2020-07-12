@@ -2,6 +2,7 @@ package com.kuliginstepan.dadata.client.domain.delivery;
 
 import com.fasterxml.jackson.annotation.JsonAlias;
 import com.kuliginstepan.dadata.client.domain.AdditionalProps;
+import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Value;
 
@@ -9,18 +10,19 @@ import lombok.Value;
  * @see <a href="https://dadata.ru/api/delivery/">Delivery docs</a>
  */
 
-@EqualsAndHashCode(callSuper = true)
 @Value
+@Builder
+@EqualsAndHashCode(callSuper = true)
 public class Delivery extends AdditionalProps {
 
     @JsonAlias("kladr_id")
-    private String kladrId;
+    String kladrId;
     @JsonAlias("fias_id")
-    private String fiasId;
+    String fiasId;
     @JsonAlias("boxberry_id")
-    private String boxberryId;
+    String boxberryId;
     @JsonAlias("cdek_id")
-    private String cdekId;
+    String cdekId;
     @JsonAlias("dpd_id")
-    private String dpdId;
+    String dpdId;
 }

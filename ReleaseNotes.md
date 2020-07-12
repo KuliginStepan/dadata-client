@@ -1,3 +1,8 @@
+# 2.3.0
+
+- Добавлена аннотация `@Builder` для классов API
+- Добавлен поиск города по IP адресу
+
 # 2.2.0
 
 - Добавлен статус `REORGANIZING` для организаций ([#13](https://github.com/KuliginStepan/dadata-client/pull/16))

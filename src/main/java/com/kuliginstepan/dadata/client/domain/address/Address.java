@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonAlias;
 import com.kuliginstepan.dadata.client.domain.AdditionalProps;
 import java.time.ZoneId;
 import java.util.List;
-import lombok.Data;
+import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Value;
 
@@ -12,163 +12,165 @@ import lombok.Value;
  * @see <a href="https://confluence.hflabs.ru/pages/viewpage.action?pageId=204669103">Dadata address object</a>
  */
 
-@EqualsAndHashCode(callSuper = true)
 @Value
+@Builder
+@EqualsAndHashCode(callSuper = true)
 public class Address extends AdditionalProps {
 
     @JsonAlias("postal_code")
-    private String postalCode;
-    private String country;
+    String postalCode;
+    String country;
     @JsonAlias("country_iso_code")
-    private String countryIsoCode;
+    String countryIsoCode;
     @JsonAlias("federal_district")
-    private String federalDistrict;
+    String federalDistrict;
     @JsonAlias("region_fias_id")
-    private String regionFiasId;
+    String regionFiasId;
     @JsonAlias("region_kladr_id")
-    private String regionKladrId;
+    String regionKladrId;
     @JsonAlias("region_iso_code")
-    private String regionIsoCode;
+    String regionIsoCode;
     @JsonAlias("region_with_type")
-    private String regionWithType;
+    String regionWithType;
     @JsonAlias("region_type")
-    private String regionType;
+    String regionType;
     @JsonAlias("region_type_full")
-    private String regionTypeFull;
-    private String region;
+    String regionTypeFull;
+    String region;
     @JsonAlias("area_fias_id")
-    private String areaFiasId;
+    String areaFiasId;
     @JsonAlias("area_kladr_id")
-    private String areaKladrId;
+    String areaKladrId;
     @JsonAlias("area_with_type")
-    private String areaWithType;
+    String areaWithType;
     @JsonAlias("area_type")
-    private String areaType;
+    String areaType;
     @JsonAlias("area_type_full")
-    private String areaTypeFull;
-    private String area;
+    String areaTypeFull;
+    String area;
     @JsonAlias("city_fias_id")
-    private String cityFiasId;
+    String cityFiasId;
     @JsonAlias("city_kladr_id")
-    private String cityKladrId;
+    String cityKladrId;
     @JsonAlias("city_with_type")
-    private String cityWithType;
+    String cityWithType;
     @JsonAlias("city_type")
-    private String cityType;
+    String cityType;
     @JsonAlias("city_type_full")
-    private String cityTypeFull;
-    private String city;
+    String cityTypeFull;
+    String city;
     @JsonAlias("city_area")
-    private String cityArea;
+    String cityArea;
     @JsonAlias("city_district_fias_id")
-    private String cityDistrictFiasId;
+    String cityDistrictFiasId;
     @JsonAlias("city_district_kladr_id")
-    private String cityDistrictKladrId;
+    String cityDistrictKladrId;
     @JsonAlias("city_district_with_type")
-    private String cityDistrictWithType;
+    String cityDistrictWithType;
     @JsonAlias("city_district_type")
-    private String cityDistrictType;
+    String cityDistrictType;
     @JsonAlias("city_district_type_full")
-    private String cityDistrictTypeFull;
+    String cityDistrictTypeFull;
     @JsonAlias("city_district")
-    private String cityDistrict;
+    String cityDistrict;
     @JsonAlias("settlement_fias_id")
-    private String settlementFiasId;
+    String settlementFiasId;
     @JsonAlias("settlement_kladr_id")
-    private String settlementKladrId;
+    String settlementKladrId;
     @JsonAlias("settlement_with_type")
-    private String settlementWithType;
+    String settlementWithType;
     @JsonAlias("settlement_type")
-    private String settlementType;
+    String settlementType;
     @JsonAlias("settlement_type_full")
-    private String settlementTypeFull;
-    private String settlement;
+    String settlementTypeFull;
+    String settlement;
     @JsonAlias("street_fias_id")
-    private String streetFiasId;
+    String streetFiasId;
     @JsonAlias("street_kladr_id")
-    private String streetKladrId;
+    String streetKladrId;
     @JsonAlias("street_with_type")
-    private String streetWithType;
+    String streetWithType;
     @JsonAlias("street_type")
-    private String streetType;
+    String streetType;
     @JsonAlias("street_type_full")
-    private String streetTypeFull;
-    private String street;
+    String streetTypeFull;
+    String street;
     @JsonAlias("house_fias_id")
-    private String houseFiasId;
+    String houseFiasId;
     @JsonAlias("house_kladr_id")
-    private String houseKladrId;
+    String houseKladrId;
     @JsonAlias("house_type")
-    private String houseType;
+    String houseType;
     @JsonAlias("house_type_full")
-    private String houseTypeFull;
-    private String house;
+    String houseTypeFull;
+    String house;
     @JsonAlias("block_type")
-    private String blockType;
+    String blockType;
     @JsonAlias("block_type_full")
-    private String blockTypeFull;
-    private String block;
+    String blockTypeFull;
+    String block;
     @JsonAlias("flat_type")
-    private String flatType;
+    String flatType;
     @JsonAlias("flat_type_full")
-    private String flatTypeFull;
-    private String flat;
+    String flatTypeFull;
+    String flat;
     @JsonAlias("flat_area")
-    private Double flatArea;
+    Double flatArea;
     @JsonAlias("square_meter_price")
-    private Double squareMeterPrice;
+    Double squareMeterPrice;
     @JsonAlias("flat_price")
-    private Double flatPrice;
+    Double flatPrice;
     @JsonAlias("postal_box")
-    private String postalBox;
+    String postalBox;
     @JsonAlias("fias_id")
-    private String fiasId;
+    String fiasId;
     @JsonAlias("fias_code")
-    private String fiasCode;
+    String fiasCode;
     @JsonAlias("fias_level")
-    private String fiasLevel;
+    String fiasLevel;
     @JsonAlias("fias_actuality_state")
-    private String fiasActualityState;
+    String fiasActualityState;
     @JsonAlias("kladr_id")
-    private String kladrId;
+    String kladrId;
     @JsonAlias("geoname_id")
-    private String geonameId;
+    String geonameId;
     @JsonAlias("capital_marker")
-    private String capitalMarker;
-    private String okato;
-    private String oktmo;
+    String capitalMarker;
+    String okato;
+    String oktmo;
     @JsonAlias("tax_office")
-    private String taxOffice;
+    String taxOffice;
     @JsonAlias("tax_office_legal")
-    private String taxOfficeLegal;
-    private ZoneId timezone;
+    String taxOfficeLegal;
+    ZoneId timezone;
     @JsonAlias("geo_lat")
-    private Double geoLat;
+    Double geoLat;
     @JsonAlias("geo_lon")
-    private Double geoLon;
+    Double geoLon;
     @JsonAlias("beltway_hit")
-    private String beltwayHit;
+    String beltwayHit;
     @JsonAlias("beltway_distance")
-    private Double beltwayDistance;
-    private List<Metro> metro;
+    Double beltwayDistance;
+    List<Metro> metro;
     @JsonAlias("qc_geo")
-    private String qcGeo;
+    String qcGeo;
     @JsonAlias("qc_complete")
-    private String qcComplete;
+    String qcComplete;
     @JsonAlias("qc_house")
-    private String qcHouse;
+    String qcHouse;
     @JsonAlias("history_values")
-    private List<String> historyValues;
+    List<String> historyValues;
     @JsonAlias("unparsed_parts")
-    private String unparsedParts;
-    private String source;
-    private String qc;
+    String unparsedParts;
+    String source;
+    String qc;
 
-    @Data
+    @Value
+    @Builder
     public static class Metro {
 
-        private String name;
-        private String line;
-        private Double distance;
+        String name;
+        String line;
+        Double distance;
     }
 }

@@ -1,6 +1,7 @@
 package com.kuliginstepan.dadata.client.domain.fio;
 
 import com.kuliginstepan.dadata.client.domain.AdditionalProps;
+import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Value;
 
@@ -8,14 +9,15 @@ import lombok.Value;
  * @see <a href="https://confluence.hflabs.ru/pages/viewpage.action?pageId=204669113">Dadata fio object</a>
  */
 
-@EqualsAndHashCode(callSuper = true)
 @Value
+@Builder
+@EqualsAndHashCode(callSuper = true)
 public class Fio extends AdditionalProps {
 
-    private String name;
-    private String surname;
-    private String patronymic;
-    private Gender gender;
-    private String source;
-    private String qc;
+    String name;
+    String surname;
+    String patronymic;
+    Gender gender;
+    String source;
+    String qc;
 }
