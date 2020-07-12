@@ -6,7 +6,7 @@ import com.kuliginstepan.dadata.client.domain.Suggestion;
 import com.kuliginstepan.dadata.client.domain.address.Address;
 import com.kuliginstepan.dadata.client.domain.organization.Organization;
 import java.util.List;
-import lombok.Data;
+import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Value;
 
@@ -14,41 +14,44 @@ import lombok.Value;
  * @see <a href="https://confluence.hflabs.ru/pages/viewpage.action?pageId=262996082">Dadata bank object</a>
  */
 
-@EqualsAndHashCode(callSuper = true)
 @Value
+@Builder
+@EqualsAndHashCode(callSuper = true)
 public class Bank extends AdditionalProps {
 
-    private Opf opf;
-    private Name name;
-    private String bic;
-    private String swift;
-    private String okpo;
+    Opf opf;
+    Name name;
+    String bic;
+    String swift;
+    String okpo;
     @JsonAlias("correspondent_account")
-    private String correspondentAccount;
+    String correspondentAccount;
     @JsonAlias("registration_number")
-    private String registrationNumber;
-    private String rkc;
-    private Suggestion<Address> address;
-    private List<String> phones;
-    private Organization.State state;
+    String registrationNumber;
+    String rkc;
+    Suggestion<Address> address;
+    List<String> phones;
+    Organization.State state;
 
-    @Data
+    @Value
+    @Builder
     public static class Opf {
 
-        private BankType type;
+        BankType type;
         @JsonAlias("full")
-        private String fullName;
+        String fullName;
         @JsonAlias("short")
-        private String shortName;
+        String shortName;
     }
 
-    @Data
+    @Value
+    @Builder
     public static class Name {
 
-        private String payment;
+        String payment;
         @JsonAlias("full")
-        private String fullName;
+        String fullName;
         @JsonAlias("short")
-        private String shortName;
+        String shortName;
     }
 }

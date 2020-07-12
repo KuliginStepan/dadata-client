@@ -7,6 +7,7 @@ import com.kuliginstepan.dadata.client.domain.SuggestionType;
 import com.kuliginstepan.dadata.client.domain.address.Address;
 import com.kuliginstepan.dadata.client.domain.address.AddressRequest;
 import com.kuliginstepan.dadata.client.domain.address.GeolocateRequest;
+import com.kuliginstepan.dadata.client.domain.address.IplocateResponse;
 import com.kuliginstepan.dadata.client.domain.bank.Bank;
 import com.kuliginstepan.dadata.client.domain.bank.BankRequest;
 import com.kuliginstepan.dadata.client.domain.court.Court;
@@ -26,6 +27,7 @@ import com.kuliginstepan.dadata.client.domain.postal.PostalOffice;
 import com.kuliginstepan.dadata.client.domain.postal.PostalOfficeRequest;
 import com.kuliginstepan.dadata.client.exception.DadataException;
 import com.kuliginstepan.dadata.client.exception.ErrorDetails;
+import java.util.Objects;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -137,6 +139,22 @@ public class DadataClient {
             SuggestionTypes.ADDRESS.getSuggestOperationPrefix());
     }
 
+    public Mono<Suggestion<Address>> iplocate(String ip) {
+        return webClient
+            .get().uri(builder -> builder
+                .path("/iplocate" + SuggestionTypes.ADDRESS.getSuggestOperationPrefix())
+                .queryParam("ip", ip)
+                .build())
+            .exchange()
+            .flatMap(
+                clientResponse -> responseToBody(clientResponse, new ParameterizedTypeReference<IplocateResponse>() {}))
+            .handle((response, sink) -> {
+                if (Objects.nonNull(response.getLocation())) {
+                    sink.next(response.getLocation());
+                }
+            });
+    }
+
     protected <T> Flux<Suggestion<T>> suggest(SuggestionType<T> suggestionType, BasicRequest request) {
         return executeOperation(suggestionType.getResponseClass(), request, SUGGESTION_PREFIX,
             suggestionType.getSuggestOperationPrefix());
@@ -148,10 +166,11 @@ public class DadataClient {
     }
 
     protected <T> Flux<Suggestion<T>> executeOperation(ParameterizedTypeReference<DadataResponse<T>> responseClass,
-        BasicRequest request, String operationPrefix, String suggestionTypePrefix) {
+                                                       BasicRequest request, String operationPrefix,
+                                                       String suggestionTypePrefix) {
         return webClient
             .post().uri(operationPrefix + suggestionTypePrefix)
-            .body(BodyInserters.fromObject(request))
+            .body(BodyInserters.fromValue(request))
             .exchange()
             .flatMap(clientResponse -> responseToBody(clientResponse, responseClass))
             .map(DadataResponse::getSuggestions)
