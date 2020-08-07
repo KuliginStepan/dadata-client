@@ -14,6 +14,7 @@ public class AddressRequestBuilder extends RequestBuilder<AddressRequest> {
     private Map<String, String> fromBound = new HashMap<>();
     private Map<String, String> toBound = new HashMap<>();
     private Boolean restrictValue = false;
+    private String language;
 
     public static AddressRequestBuilder create(String query) {
         return new AddressRequestBuilder(query);
@@ -43,9 +44,15 @@ public class AddressRequestBuilder extends RequestBuilder<AddressRequest> {
         return this;
     }
 
+    public AddressRequestBuilder outputLanguage(String language) {
+        this.language = language;
+        return this;
+    }
+
+
     @Override
     public AddressRequest build() {
         return new AddressRequest(super.query, super.count, super.locationsBoost, locations, fromBound, toBound,
-            restrictValue);
+            restrictValue, language);
     }
 }

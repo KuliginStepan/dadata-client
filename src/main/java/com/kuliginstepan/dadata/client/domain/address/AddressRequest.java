@@ -25,17 +25,21 @@ public class AddressRequest extends BasicRequest {
     private Map<String, String> toBound;
     @JsonProperty("restrict_value")
     private Boolean restrictValue;
+    @JsonProperty("language")
+    private String language;
+
 
     public AddressRequest(String query,
         Integer count,
         List<Map<FilterProperty, String>> locationsBoost,
         List<Map<FilterProperty, String>> locations, Map<String, String> fromBound,
-        Map<String, String> toBound, Boolean restrictValue) {
+        Map<String, String> toBound, Boolean restrictValue, String language) {
         super(query, count);
         this.locationsBoost = locationsBoost;
         this.locations = locations;
         this.fromBound = fromBound;
         this.toBound = toBound;
         this.restrictValue = restrictValue;
+        this.language = language;
     }
 }
