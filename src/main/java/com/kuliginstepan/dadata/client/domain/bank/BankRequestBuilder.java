@@ -7,6 +7,7 @@ import com.kuliginstepan.dadata.client.domain.address.FilterProperty;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.EnumSet;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -14,7 +15,7 @@ import java.util.Set;
 public class BankRequestBuilder extends RequestBuilder<BankRequest> {
 
     private List<Map<FilterProperty, String>> locations = new ArrayList<>();
-    private Set<OrganizationStatus> statuses = EnumSet.allOf(OrganizationStatus.class);
+    private Set<OrganizationStatus> statuses = new HashSet<>();
     private Set<BankType> types = EnumSet.allOf(BankType.class);
 
     public static BankRequestBuilder create(String query) {

@@ -21,13 +21,13 @@ import lombok.Value;
 public class OrganizationRequest extends BasicRequest {
 
     @JsonProperty("locations_boost")
-    private List<Map<FilterProperty, String>> locationsBoost;
-    private List<Map<FilterProperty, String>> locations;
+    List<Map<FilterProperty, String>> locationsBoost;
+    List<Map<FilterProperty, String>> locations;
     @JsonProperty("status")
-    private Set<OrganizationStatus> statuses;
-    private OrganizationType type;
+    Set<OrganizationStatus> statuses;
+    OrganizationType type;
     @JsonProperty("branch_type")
-    private BranchType branchType;
+    BranchType branchType;
 
     public OrganizationRequest(String query,
         Integer count,

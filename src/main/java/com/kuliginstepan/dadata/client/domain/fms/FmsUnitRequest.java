@@ -11,7 +11,7 @@ import lombok.Value;
 @EqualsAndHashCode(callSuper = true)
 public class FmsUnitRequest extends BasicRequest {
 
-    private List<FmsUnitFilter> filters;
+    List<FmsUnitFilter> filters;
 
     @Builder
     public FmsUnitRequest(String query, @Singular List<FmsUnitFilter> filters) {

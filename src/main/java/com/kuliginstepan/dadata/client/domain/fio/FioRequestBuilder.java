@@ -2,12 +2,12 @@ package com.kuliginstepan.dadata.client.domain.fio;
 
 
 import com.kuliginstepan.dadata.client.domain.RequestBuilder;
-import java.util.EnumSet;
+import java.util.HashSet;
 import java.util.Set;
 
 public class FioRequestBuilder extends RequestBuilder<FioRequest> {
 
-    private Set<FioPart> parts = EnumSet.allOf(FioPart.class);
+    private Set<FioPart> parts = new HashSet<>();
     private Gender gender;
 
     public static FioRequestBuilder create(String query) {
