@@ -14,8 +14,8 @@ import lombok.Value;
 @EqualsAndHashCode(callSuper = true)
 public class FioRequest extends BasicRequest {
 
-    private Set<FioPart> parts;
-    private Gender gender;
+    Set<FioPart> parts;
+    Gender gender;
 
     public FioRequest(String query, Integer count, Set<FioPart> parts,
         Gender gender) {

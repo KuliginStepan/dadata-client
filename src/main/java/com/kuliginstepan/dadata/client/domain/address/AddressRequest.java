@@ -17,14 +17,14 @@ import lombok.Value;
 public class AddressRequest extends BasicRequest {
 
     @JsonProperty("locations_boost")
-    private List<Map<FilterProperty, String>> locationsBoost;
-    private List<Map<FilterProperty, String>> locations;
+    List<Map<FilterProperty, String>> locationsBoost;
+    List<Map<FilterProperty, String>> locations;
     @JsonProperty("from_bound")
-    private Map<String, String> fromBound;
+    Map<String, String> fromBound;
     @JsonProperty("to_bound")
-    private Map<String, String> toBound;
+    Map<String, String> toBound;
     @JsonProperty("restrict_value")
-    private Boolean restrictValue;
+    Boolean restrictValue;
 
     public AddressRequest(String query,
         Integer count,

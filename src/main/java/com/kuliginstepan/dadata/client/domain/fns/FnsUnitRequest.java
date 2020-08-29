@@ -14,7 +14,7 @@ import lombok.Value;
 @EqualsAndHashCode(callSuper = true)
 public class FnsUnitRequest extends BasicRequest {
 
-    private List<Map<String, String>> filters;
+    List<Map<String, String>> filters;
 
     @Builder
     public FnsUnitRequest(String query, @Singular List<String> regionCodes) {

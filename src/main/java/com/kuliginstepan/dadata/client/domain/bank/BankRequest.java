@@ -20,12 +20,12 @@ import lombok.Value;
 public class BankRequest extends BasicRequest {
 
     @JsonProperty("locations_boost")
-    private List<Map<FilterProperty, String>> locationsBoost;
-    private List<Map<FilterProperty, String>> locations;
+    List<Map<FilterProperty, String>> locationsBoost;
+    List<Map<FilterProperty, String>> locations;
     @JsonProperty("status")
-    private Set<OrganizationStatus> statuses;
+    Set<OrganizationStatus> statuses;
     @JsonProperty("type")
-    private Set<BankType> types;
+    Set<BankType> types;
 
     public BankRequest(String query, Integer count, List<Map<FilterProperty, String>> locationsBoost,
         List<Map<FilterProperty, String>> locations,
