@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonAlias;
 import com.kuliginstepan.dadata.client.domain.AdditionalProps;
 import com.kuliginstepan.dadata.client.domain.Suggestion;
 import com.kuliginstepan.dadata.client.domain.address.Address;
-import com.kuliginstepan.dadata.client.domain.organization.Organization;
+import com.kuliginstepan.dadata.client.domain.organization.State;
 import java.util.List;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
@@ -31,7 +31,7 @@ public class Bank extends AdditionalProps {
     String rkc;
     Suggestion<Address> address;
     List<String> phones;
-    Organization.State state;
+    State state;
 
     @Value
     @Builder

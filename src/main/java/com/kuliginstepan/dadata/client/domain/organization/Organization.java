@@ -3,7 +3,6 @@ package com.kuliginstepan.dadata.client.domain.organization;
 import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.kuliginstepan.dadata.client.domain.AdditionalProps;
-import com.kuliginstepan.dadata.client.domain.OrganizationStatus;
 import com.kuliginstepan.dadata.client.domain.Suggestion;
 import com.kuliginstepan.dadata.client.domain.address.Address;
 import com.kuliginstepan.dadata.client.json.LocalDateDeserializer;
@@ -22,99 +21,51 @@ import lombok.Value;
 @EqualsAndHashCode(callSuper = true)
 public class Organization extends AdditionalProps {
 
-    String kpp;
-    Double capital;
-    Management management;
-    List<String> founders;
-    List<String> managers;
-    OrganizationType type;
-    @JsonAlias("branch_type")
-    BranchType branchType;
-    @JsonAlias("branch_count")
-    Integer branchCount;
-    @JsonAlias("employee_count")
-    Integer employeeCount;
+    Suggestion<Address> address;
     String source;
     String qc;
-    String hid;
-    State state;
-    Opf opf;
-    Name name;
+    @JsonAlias("branch_count")
+    Integer branchCount;
+    @JsonAlias("branch_type")
+    BranchType branchType;
     String inn;
+    String kpp;
     String ogrn;
-    String okpo;
-    String okved;
-    List<Okved> okveds;
-    String authorities;
-    String documents;
-    List<String> licenses;
-    Suggestion<Address> address;
-    List<String> phones;
-    List<String> emails;
     @JsonAlias("ogrn_date")
     @JsonDeserialize(using = LocalDateDeserializer.class)
     LocalDate ogrnDate;
+    String hid;
+    Management management;
+    Name name;
+    String okato;
+    String oktmo;
+    String okpo;
+    String okogu;
+    String okfs;
+    Finance finance;
+    String okved;
     @JsonAlias("okved_type")
     String okvedType;
+    Opf opf;
+    State state;
+    OrganizationType type;
+    @JsonAlias("employee_count")
+    Integer employeeCount;
 
-    @Value
-    @Builder
-    public static class Management {
+    List<Okved> okveds;
+    Authorities authorities;
+    Citizenship citizenship;
 
-        String name;
-        String post;
-    }
+    List<Founder> founders;
+    List<Manager> managers;
+    List<Entity> predecessors;
+    List<Entity> successors;
+    Capital capital;
+    Documents documents;
+    List<License> licenses;
 
-    @Value
-    @Builder
-    public static class State {
+    List<String> phones;
+    List<String> emails;
 
-        OrganizationStatus status;
-        @JsonAlias("actuality_date")
-        @JsonDeserialize(using = LocalDateDeserializer.class)
-        LocalDate actualityDate;
-        @JsonAlias("registration_date")
-        @JsonDeserialize(using = LocalDateDeserializer.class)
-        LocalDate registrationDate;
-        @JsonAlias("liquidation_date")
-        @JsonDeserialize(using = LocalDateDeserializer.class)
-        LocalDate liquidationDate;
-    }
 
-    @Value
-    @Builder
-    public static class Opf {
-
-        String type;
-        String code;
-        @JsonAlias("full")
-        String fullName;
-        @JsonAlias("short")
-        String shortName;
-    }
-
-    @Value
-    @Builder
-    public static class Name {
-
-        @JsonAlias("full_with_opf")
-        String fullWithOpf;
-        @JsonAlias("short_with_opf")
-        String shortWithOpf;
-        String latin;
-        @JsonAlias("full")
-        String fullName;
-        @JsonAlias("short")
-        String shortName;
-    }
-
-    @Value
-    @Builder
-    public static class Okved {
-
-        Boolean main;
-        String type;
-        String code;
-        String name;
-    }
 }

@@ -9,7 +9,7 @@ plugins {
 apply from: 'gradle/publish.gradle'
 
 group = 'com.github.kuliginstepan'
-version = '2.3.1'
+version = '2.4.0'
 sourceCompatibility = '1.8'
 
 repositories {
@@ -35,6 +35,10 @@ dependencies {
     annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
     annotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+test {
+    useJUnitPlatform()
 }
 
 jacocoTestReport {

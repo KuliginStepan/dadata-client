@@ -1,0 +1,265 @@
+{
+    "kpp": "772501001",
+    "capital": {
+        "type": "УСТАВНЫЙ КАПИТАЛ",
+        "value": 300010
+    },
+    "management": {
+        "name": "Овсепян Хачатур Меликович",
+        "post": "ДИРЕКТОР",
+        "disqualified": null
+    },
+    "founders": [
+        {
+            "inn": "503224050039",
+            "fio": {
+                "surname": "Овсепян",
+                "name": "Хачатур",
+                "patronymic": "Меликович",
+                "gender": "MALE",
+                "source": "ОВСЕПЯН ХАЧАТУР МЕЛИКОВИЧ",
+                "qc": null
+            },
+            "hid": "c5ea0c7f034c9bbed2e85e0e8066a15c8199e16208e22be87f4b3fbed460ad60",
+            "type": "PHYSICAL",
+            "share": {
+                "value": 100,
+                "type": "PERCENT"
+            }
+        }
+    ],
+    "managers": [
+        {
+            "inn": "503224050039",
+            "fio": {
+                "surname": "Овсепян",
+                "name": "Хачатур",
+                "patronymic": "Меликович",
+                "gender": "MALE",
+                "source": "ОВСЕПЯН ХАЧАТУР МЕЛИКОВИЧ",
+                "qc": null
+            },
+            "post": "ДИРЕКТОР",
+            "hid": "e937f91039f3715a5942a147db8158af7315c9325d476f1aa7e44bfded3c6834",
+            "type": "EMPLOYEE"
+        }
+    ],
+    "predecessors": null,
+    "successors": null,
+    "branch_type": "MAIN",
+    "branch_count": 0,
+    "source": null,
+    "qc": null,
+    "hid": "e62d2e862c96e89569ded4da2597280c4fa99ad48bf089c518d0dd7bdb5add17",
+    "type": "LEGAL",
+    "state": {
+        "status": "ACTIVE",
+        "code": null,
+        "actuality_date": 1586995200000,
+        "registration_date": 728179200000,
+        "liquidation_date": null
+    },
+    "opf": {
+        "type": "2014",
+        "code": "12300",
+        "full": "Общество с ограниченной ответственностью",
+        "short": "ООО"
+    },
+    "name": {
+        "full_with_opf": "ОБЩЕСТВО С ОГРАНИЧЕННОЙ ОТВЕТСТВЕННОСТЬЮ \"СТЕКЛОКОН\"",
+        "short_with_opf": "ООО \"СТЕКЛОКОН\"",
+        "latin": null,
+        "full": "СТЕКЛОКОН",
+        "short": "СТЕКЛОКОН"
+    },
+    "inn": "7725002343",
+    "ogrn": "1027739468877",
+    "okpo": "26361669",
+    "okato": "45296559000",
+    "oktmo": "45914000000",
+    "okogu": "4210014",
+    "okfs": "16",
+    "okved": "46.90",
+    "okveds": [
+        {
+            "main": true,
+            "type": "2014",
+            "code": "46.90",
+            "name": "Торговля оптовая неспециализированная"
+        }
+    ],
+    "authorities": {
+        "fts_registration": {
+            "type": "FEDERAL_TAX_SERVICE",
+            "code": "7746",
+            "name": "Межрайонная инспекция Федеральной налоговой службы № 46 по г. Москве",
+            "address": "125373, г.Москва, Походный проезд, домовладение 3, стр.2"
+        },
+        "fts_report": {
+            "type": "FEDERAL_TAX_SERVICE",
+            "code": "7725",
+            "name": "Инспекция Федеральной налоговой службы № 25 по г.Москве",
+            "address": null
+        },
+        "pf": {
+            "type": "PENSION_FUND",
+            "code": "087619",
+            "name": "Государственное учреждение - Главное Управление Пенсионного фонда РФ №8 Управление №1 по г. Москве и Московской области муниципальный район Павелецкий г.Москвы",
+            "address": null
+        },
+        "sif": {
+            "type": "SOCIAL_INSURANCE_FUND",
+            "code": "7713",
+            "name": "Филиал №13 Государственного учреждения - Московского регионального отделения Фонда социального страхования Российской Федерации",
+            "address": null
+        }
+    },
+    "documents": {
+        "fts_registration": {
+            "type": "FTS_REGISTRATION",
+            "series": "77",
+            "number": "008051063",
+            "issue_date": 1035763200000,
+            "issue_authority": "7739"
+        },
+        "pf_registration": {
+            "type": "PF_REGISTRATION",
+            "series": null,
+            "number": "087619002702",
+            "issue_date": 721353600000,
+            "issue_authority": "087619"
+        },
+        "sif_registration": {
+            "type": "SIF_REGISTRATION",
+            "series": null,
+            "number": "771300505977131",
+            "issue_date": 918000000000,
+            "issue_authority": "7713"
+        },
+        "smb": {
+            "category": "MICRO",
+            "type": "SMB",
+            "series": null,
+            "number": null,
+            "issue_date": 1469998800000,
+            "issue_authority": null
+        }
+    },
+    "licenses": null,
+    "finance": {
+        "tax_system": "USN",
+        "income": 1922000,
+        "expense": 115000,
+        "debt": 42.56,
+        "penalty": null
+    },
+    "address": {
+        "value": "г Москва, Даниловская наб, д 2 к 4",
+        "unrestricted_value": "115114, г Москва, Даниловский р-н, Даниловская наб, д 2 к 4",
+        "data": {
+            "postal_code": "115114",
+            "country": "Россия",
+            "country_iso_code": "RU",
+            "federal_district": "Центральный",
+            "region_fias_id": "0c5b2444-70a0-4932-980c-b4dc0d3f02b5",
+            "region_kladr_id": "7700000000000",
+            "region_iso_code": "RU-MOW",
+            "region_with_type": "г Москва",
+            "region_type": "г",
+            "region_type_full": "город",
+            "region": "Москва",
+            "area_fias_id": null,
+            "area_kladr_id": null,
+            "area_with_type": null,
+            "area_type": null,
+            "area_type_full": null,
+            "area": null,
+            "city_fias_id": "0c5b2444-70a0-4932-980c-b4dc0d3f02b5",
+            "city_kladr_id": "7700000000000",
+            "city_with_type": "г Москва",
+            "city_type": "г",
+            "city_type_full": "город",
+            "city": "Москва",
+            "city_area": "Южный",
+            "city_district_fias_id": null,
+            "city_district_kladr_id": null,
+            "city_district_with_type": "Даниловский р-н",
+            "city_district_type": "р-н",
+            "city_district_type_full": "район",
+            "city_district": "Даниловский",
+            "settlement_fias_id": null,
+            "settlement_kladr_id": null,
+            "settlement_with_type": null,
+            "settlement_type": null,
+            "settlement_type_full": null,
+            "settlement": null,
+            "street_fias_id": "fb4d2fdd-0b4a-4e8d-b8cd-e7a28cfd5798",
+            "street_kladr_id": "77000000000115400",
+            "street_with_type": "Даниловская наб",
+            "street_type": "наб",
+            "street_type_full": "набережная",
+            "street": "Даниловская",
+            "house_fias_id": "cb4d5826-4621-4eca-b60b-5957eaf6c9aa",
+            "house_kladr_id": "7700000000011540004",
+            "house_type": "д",
+            "house_type_full": "дом",
+            "house": "2",
+            "block_type": "к",
+            "block_type_full": "корпус",
+            "block": "4",
+            "flat_fias_id": null,
+            "flat_type": null,
+            "flat_type_full": null,
+            "flat": null,
+            "flat_area": null,
+            "square_meter_price": "177863",
+            "flat_price": null,
+            "postal_box": null,
+            "fias_id": "cb4d5826-4621-4eca-b60b-5957eaf6c9aa",
+            "fias_code": "77000000000000011540004",
+            "fias_level": "8",
+            "fias_actuality_state": "0",
+            "kladr_id": "7700000000011540004",
+            "geoname_id": "524901",
+            "capital_marker": "0",
+            "okato": "45296559000",
+            "oktmo": "45914000",
+            "tax_office": "7725",
+            "tax_office_legal": "7725",
+            "timezone": "UTC+3",
+            "geo_lat": "55.708112",
+            "geo_lon": "37.6422704",
+            "beltway_hit": "IN_MKAD",
+            "beltway_distance": null,
+            "metro": [
+                {
+                    "name": "Автозаводская",
+                    "line": "Замоскворецкая",
+                    "distance": 0.9
+                },
+                {
+                    "name": "ЗИЛ",
+                    "line": "МЦК",
+                    "distance": 1.2
+                },
+                {
+                    "name": "Тульская",
+                    "line": "Серпуховско-Тимирязевская",
+                    "distance": 1.2
+                }
+            ],
+            "qc_geo": "0",
+            "qc_complete": null,
+            "qc_house": null,
+            "history_values": null,
+            "unparsed_parts": null,
+            "source": "114115, ГОРОД МОСКВА, НАБЕРЕЖНАЯ ДАНИЛОВСКАЯ, 2, 4",
+            "qc": "0"
+        }
+    },
+    "phones": null,
+    "emails": null,
+    "ogrn_date": 1035763200000,
+    "okved_type": "2014",
+    "employee_count": 1
+}

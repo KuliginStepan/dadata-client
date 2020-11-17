@@ -4,5 +4,6 @@ public enum OrganizationStatus {
     ACTIVE,
     LIQUIDATING,
     LIQUIDATED,
-    REORGANIZING
+    REORGANIZING,
+    BANKRUPT
 }
