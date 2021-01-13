@@ -1,6 +1,5 @@
 package com.kuliginstepan.dadata.client.domain.okpd2;
 
-import com.fasterxml.jackson.annotation.JsonAlias;
 import com.kuliginstepan.dadata.client.domain.AdditionalProps;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;

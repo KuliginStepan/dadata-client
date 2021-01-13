@@ -1,17 +1,13 @@
 package com.kuliginstepan.dadata.client;
 
 import com.kuliginstepan.dadata.client.domain.BasicRequest;
-import com.kuliginstepan.dadata.client.domain.OrganizationStatus;
 import com.kuliginstepan.dadata.client.domain.Suggestion;
 import com.kuliginstepan.dadata.client.domain.okpd2.Okpd2;
-import com.kuliginstepan.dadata.client.domain.organization.*;
 import org.junit.Test;
 
 import java.util.List;
 
 import static com.kuliginstepan.dadata.client.TestUtils.CLIENT;
-import static com.kuliginstepan.dadata.client.TestUtils.getDistinctList;
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.*;
 
 public class Okpd2SuggestionTest {

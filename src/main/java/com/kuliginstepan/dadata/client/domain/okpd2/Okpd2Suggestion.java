@@ -2,7 +2,6 @@ package com.kuliginstepan.dadata.client.domain.okpd2;
 
 import com.kuliginstepan.dadata.client.domain.DadataResponse;
 import com.kuliginstepan.dadata.client.domain.SuggestionType;
-import com.kuliginstepan.dadata.client.domain.delivery.Delivery;
 import org.springframework.core.ParameterizedTypeReference;
 
 public class Okpd2Suggestion implements SuggestionType<Okpd2> {
