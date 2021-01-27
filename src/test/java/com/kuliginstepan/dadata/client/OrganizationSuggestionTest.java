@@ -123,12 +123,12 @@ public class OrganizationSuggestionTest {
     public void rangingSuggestOrganizationTest() {
         List<Suggestion<Organization>> suggestions = CLIENT
             .suggestOrganization(
-                OrganizationRequestBuilder.create("ип муромова").locationBoost("56").build()).collectList()
+                OrganizationRequestBuilder.create("ип муромова").locationBoost("63").build()).collectList()
             .block();
 
         assertNotNull(suggestions);
         assertFalse(suggestions.isEmpty());
-        assertTrue(suggestions.get(0).getData().getAddress().getData().getKladrId().startsWith("56"));
+        assertTrue(suggestions.get(0).getData().getAddress().getData().getKladrId().startsWith("63"));
     }
 
     @Test
