@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.kuliginstepan.dadata.client.domain.AdditionalProps;
 import com.kuliginstepan.dadata.client.domain.Suggestion;
 import com.kuliginstepan.dadata.client.domain.address.Address;
+import com.kuliginstepan.dadata.client.domain.email.Email;
 import com.kuliginstepan.dadata.client.json.LocalDateDeserializer;
 import java.time.LocalDate;
 import java.util.List;
@@ -65,7 +66,7 @@ public class Organization extends AdditionalProps {
     List<License> licenses;
 
     List<String> phones;
-    List<String> emails;
+    List<Suggestion<Email>> emails;
 
 
 }
