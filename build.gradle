@@ -9,7 +9,7 @@ plugins {
 apply from: 'gradle/publish.gradle'
 
 group = 'com.github.kuliginstepan'
-version = '2.4.0'
+version = '2.5.0'
 sourceCompatibility = '1.8'
 
 repositories {

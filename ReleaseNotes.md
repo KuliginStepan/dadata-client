@@ -1,3 +1,8 @@
+# 2.5.0
+
+- Добавлены методы, реализующие API для ОКПД 2 ([#23](https://github.com/KuliginStepan/dadata-client/pull/23)) 
+- Исправление ошибки, возникающей в результате неуспешной десериализации поля data.emails[] ([#25](https://github.com/KuliginStepan/dadata-client/pull/25)) 
+
 # 2.4.0
 
 - Актуализирован объект `Organization` для поддержки всех тарифов
@@ -9,7 +14,7 @@
 
 # 2.2.0
 
-- Добавлен статус `REORGANIZING` для организаций ([#13](https://github.com/KuliginStepan/dadata-client/pull/16))
+- Добавлен статус `REORGANIZING` для организаций ([#16](https://github.com/KuliginStepan/dadata-client/pull/16))
 
 ## 2.1.0
 
