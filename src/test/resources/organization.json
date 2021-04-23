@@ -257,7 +257,28 @@
             "qc": "0"
         }
     },
-    "phones": null,
+    "phones": [
+        {
+            "value":"+7 846 2316014",
+            "unrestricted_value":"+7 846 2316014",
+            "data":{
+                "source": "раб 846)231.60.14 *139",
+                "type": "Стационарный",
+                "phone": "+7 846 231-60-14 доб. 139",
+                "country_code": "7",
+                "city_code": "846",
+                "number": "2316014",
+                "extension": "139",
+                "provider": "ООО \"СИПАУТНЭТ\"",
+                "country": "Россия",
+                "region": "Самарская область",
+                "city": "Самара",
+                "timezone": "UTC+4",
+                "qc_conflict": 0,
+                "qc": 0
+            }
+        }
+    ],
     "emails": null,
     "ogrn_date": 1035763200000,
     "okved_type": "2014",
