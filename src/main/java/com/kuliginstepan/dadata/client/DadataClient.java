@@ -20,6 +20,7 @@ import com.kuliginstepan.dadata.client.domain.fms.FmsUnit;
 import com.kuliginstepan.dadata.client.domain.fms.FmsUnitRequest;
 import com.kuliginstepan.dadata.client.domain.fns.FnsUnit;
 import com.kuliginstepan.dadata.client.domain.fns.FnsUnitRequest;
+import com.kuliginstepan.dadata.client.domain.okpd2.Okpd2;
 import com.kuliginstepan.dadata.client.domain.organization.FindOrganizationByIdRequest;
 import com.kuliginstepan.dadata.client.domain.organization.Organization;
 import com.kuliginstepan.dadata.client.domain.organization.OrganizationRequest;
@@ -132,6 +133,17 @@ public class DadataClient {
      */
     public Mono<Suggestion<Delivery>> findDeliveryById(String id) {
         return findById(SuggestionTypes.DELIVERY, new BasicRequest(id));
+    }
+
+    /**
+     * @param code okpd2 code
+     */
+    public Mono<Suggestion<Okpd2>> findOkpd2ByCode(String code) {
+        return findById(SuggestionTypes.OKPD_2, new BasicRequest(code));
+    }
+
+    public Flux<Suggestion<Okpd2>> suggestOkpd2(BasicRequest request) {
+        return suggest(SuggestionTypes.OKPD_2, request);
     }
 
     public Flux<Suggestion<Address>> geolocate(GeolocateRequest request) {
