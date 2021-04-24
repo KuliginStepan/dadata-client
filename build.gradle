@@ -2,15 +2,27 @@ plugins {
     id 'java-library'
     id 'jacoco'
     id 'maven-publish'
-    id 'io.codearte.nexus-staging' version '0.21.2'
+    id 'io.github.gradle-nexus.publish-plugin' version '1.0.0'
     id 'signing'
 }
 
 apply from: 'gradle/publish.gradle'
 
 group = 'com.github.kuliginstepan'
-version = '2.5.0'
+version = '2.5.1'
 sourceCompatibility = '1.8'
+
+def nexusUsername = System.getenv("NEXUS_USERNAME") ?: (project.findProperty("NEXUS_USERNAME") ?: "")
+def nexusPassword = System.getenv("NEXUS_PASSWORD") ?: (project.findProperty("NEXUS_PASSWORD") ?: "")
+
+nexusPublishing {
+    repositories {
+        sonatype {
+            username = nexusUsername
+            password = nexusPassword
+        }
+    }
+}
 
 repositories {
     mavenCentral()
