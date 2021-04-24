@@ -65,7 +65,7 @@ public class Organization extends AdditionalProps {
     Documents documents;
     List<License> licenses;
 
-    List<String> phones;
+    List<Suggestion<Phone>> phones;
     List<Suggestion<Email>> emails;
 
 
