@@ -15,7 +15,7 @@ public class Finance {
     BigDecimal expense;
     BigDecimal debt;
     BigDecimal penalty;
-    String year;
+    Integer year;
 
     public enum TaxSystem {
 
