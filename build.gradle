@@ -9,7 +9,7 @@ plugins {
 apply from: 'gradle/publish.gradle'
 
 group = 'com.github.kuliginstepan'
-version = '2.5.1'
+version = '2.5.2'
 sourceCompatibility = '1.8'
 
 def nexusUsername = System.getenv("NEXUS_USERNAME") ?: (project.findProperty("NEXUS_USERNAME") ?: "")
