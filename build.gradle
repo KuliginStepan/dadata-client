@@ -9,7 +9,7 @@ plugins {
 apply from: 'gradle/publish.gradle'
 
 group = 'com.github.kuliginstepan'
-version = '2.5.2'
+version = '2.5.3'
 sourceCompatibility = '1.8'
 
 def nexusUsername = System.getenv("NEXUS_USERNAME") ?: (project.findProperty("NEXUS_USERNAME") ?: "")
@@ -33,9 +33,32 @@ java {
     withJavadocJar()
 }
 
+configurations {
+    internal {
+        visible = false
+        canBeConsumed = false
+        canBeResolved = false
+    }
+    annotationProcessor {
+        extendsFrom(internal)
+    }
+    compileClasspath {
+        extendsFrom(internal)
+    }
+    runtimeClasspath {
+        extendsFrom(internal)
+    }
+    testCompileClasspath {
+        extendsFrom(internal)
+    }
+    testRuntimeClasspath {
+        extendsFrom(internal)
+    }
+}
+
 dependencies {
-    implementation platform('org.springframework.boot:spring-boot-starter-parent:2.2.6.RELEASE')
-    annotationProcessor platform('org.springframework.boot:spring-boot-starter-parent:2.2.6.RELEASE')
+    internal platform('org.springframework.boot:spring-boot-starter-parent:2.2.6.RELEASE')
+    internal platform('org.springframework.boot:spring-boot-starter-parent:2.2.6.RELEASE')
     implementation 'org.springframework.boot:spring-boot'
     implementation 'org.springframework.boot:spring-boot-autoconfigure'
     implementation 'org.springframework:spring-webflux'
@@ -43,7 +66,7 @@ dependencies {
     implementation 'com.fasterxml.jackson.core:jackson-databind'
     implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310'
     implementation 'org.slf4j:slf4j-api'
-    compile 'org.projectlombok:lombok'
+    compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
     annotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
