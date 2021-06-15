@@ -1,3 +1,12 @@
+# 2.5.3
+
+- Зависимость на lombok исключена из pom
+- Секция dependencyManagement исключена из pom
+
+# 2.5.2
+
+- Добавлен год в финансовые показатели организации ([#27](https://github.com/KuliginStepan/dadata-client/pull/27))
+
 # 2.5.1
 
 - Исправление ошибки возникающей в результате неуспешной десериализации поля
@@ -6,8 +15,7 @@
 # 2.5.0
 
 - Добавлены методы, реализующие API для ОКПД 2 ([#23](https://github.com/KuliginStepan/dadata-client/pull/23))
-- Исправление ошибки, возникающей в результате неуспешной десериализации поля
-  data.emails[] ([#25](https://github.com/KuliginStepan/dadata-client/pull/25))
+- Исправление ошибки, возникающей в результате неуспешной десериализации поля data.emails[] ([#25](https://github.com/KuliginStepan/dadata-client/pull/25))
 
 # 2.4.0
 

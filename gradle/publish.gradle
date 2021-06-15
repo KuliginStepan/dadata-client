@@ -31,6 +31,14 @@ publishing {
             }
             from components.java
             pom(pomDefinition)
+            versionMapping {
+                usage('java-api') {
+                    fromResolutionOf('runtimeClasspath')
+                }
+                usage('java-runtime') {
+                    fromResolutionResult()
+                }
+            }
         }
     }
 }
