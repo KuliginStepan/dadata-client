@@ -1,18 +1,16 @@
 package com.kuliginstepan.dadata.client;
 
-import static com.kuliginstepan.dadata.client.TestUtils.CLIENT;
-import static com.kuliginstepan.dadata.client.TestUtils.getDistinctList;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertThat;
-
 import com.kuliginstepan.dadata.client.domain.BasicRequest;
 import com.kuliginstepan.dadata.client.domain.Suggestion;
 import com.kuliginstepan.dadata.client.domain.email.Email;
-import java.util.List;
-import org.hamcrest.core.IsCollectionContaining;
+import org.hamcrest.core.IsIterableContaining;
 import org.junit.Test;
+
+import java.util.List;
+
+import static com.kuliginstepan.dadata.client.TestUtils.CLIENT;
+import static com.kuliginstepan.dadata.client.TestUtils.getDistinctList;
+import static org.junit.Assert.*;
 
 public class EmailSuggestionTest {
 
@@ -28,6 +26,6 @@ public class EmailSuggestionTest {
         assertEquals(7, suggestions.size());
         assertEquals(1, locals.size());
         assertEquals("sacred_grove", locals.get(0));
-        assertThat(domain, IsCollectionContaining.hasItems("mail.ru", "yandex.ru", "pochta.ru"));
+        assertThat(domain, IsIterableContaining.hasItems("mail.ru", "bk.ru", "mail.ua", "internet.ru", "gmail.com", "yandex.ru", "ya.ru"));
     }
 }
