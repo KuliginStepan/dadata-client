@@ -72,7 +72,7 @@ public class DadataClientBuilder {
             .defaultHeader(HttpHeaders.AUTHORIZATION, "Token " + token)
             .codecs(codecs -> {
                 codecs.defaultCodecs().jackson2JsonDecoder(new Jackson2JsonDecoder(mapper));
-                codecs.defaultCodecs().maxInMemorySize(defaultProps.getMaxInMemorySize());
+                codecs.defaultCodecs().maxInMemorySize(ofNullable(maxInMemorySize).orElse(defaultProps.getMaxInMemorySize()));
             })
             .build();
         return new DadataClient(client);

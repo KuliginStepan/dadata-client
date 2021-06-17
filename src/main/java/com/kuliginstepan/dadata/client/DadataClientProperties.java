@@ -26,7 +26,7 @@ public class DadataClientProperties {
     private Duration timeout = Duration.of(5, ChronoUnit.SECONDS);
 
     /**
-     * Maximum byte buffer size. Default - 256 Kb
+     * Maximum byte buffer size. Default - 512 Kb
      */
-    private Integer maxInMemorySize = 256 * 1024;
+    private Integer maxInMemorySize = 512 * 1024;
 }
