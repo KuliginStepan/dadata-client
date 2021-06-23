@@ -1,9 +1,11 @@
 package com.kuliginstepan.dadata.client;
 
-import java.time.Duration;
-import java.time.temporal.ChronoUnit;
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.util.unit.DataSize;
+
+import java.time.Duration;
+import java.time.temporal.ChronoUnit;
 
 @ConfigurationProperties(prefix = "dadata.client")
 @Data
@@ -23,4 +25,9 @@ public class DadataClientProperties {
      * Request timeout. Default - 5 seconds
      */
     private Duration timeout = Duration.of(5, ChronoUnit.SECONDS);
+
+    /**
+     * Maximum byte buffer size. Default - 512 Kb
+     */
+    private DataSize maxInMemorySize = DataSize.ofKilobytes(512L);
 }

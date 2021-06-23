@@ -16,6 +16,7 @@ public class DadataClientAutoConfiguration {
             .token(clientProperties.getToken())
             .timeout(clientProperties.getTimeout())
             .baseUrl(clientProperties.getBaseUrl())
+            .maxInMemorySize(clientProperties.getMaxInMemorySize())
             .build();
     }
 }
