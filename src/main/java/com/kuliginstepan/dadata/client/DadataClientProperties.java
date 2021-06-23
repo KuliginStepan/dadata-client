@@ -2,6 +2,7 @@ package com.kuliginstepan.dadata.client;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.util.unit.DataSize;
 
 import java.time.Duration;
 import java.time.temporal.ChronoUnit;
@@ -28,5 +29,5 @@ public class DadataClientProperties {
     /**
      * Maximum byte buffer size. Default - 512 Kb
      */
-    private Integer maxInMemorySize = 512 * 1024;
+    private DataSize maxInMemorySize = DataSize.ofKilobytes(512L);
 }

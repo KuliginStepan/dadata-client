@@ -8,6 +8,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.client.reactive.ReactorClientHttpConnector;
 import org.springframework.http.codec.json.Jackson2JsonDecoder;
 import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
+import org.springframework.util.unit.DataSize;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.netty.http.client.HttpClient;
 import reactor.netty.tcp.TcpClient;
@@ -15,6 +16,7 @@ import reactor.netty.tcp.TcpClient;
 import java.time.Duration;
 import java.util.concurrent.TimeUnit;
 
+import static java.lang.Math.toIntExact;
 import static java.util.Optional.ofNullable;
 
 public class DadataClientBuilder {
@@ -23,7 +25,7 @@ public class DadataClientBuilder {
     private Duration timeout;
     private String token;
     private String baseUrl;
-    private Integer maxInMemorySize;
+    private DataSize maxInMemorySize;
 
 
     public DadataClientBuilder webClient(WebClient webClient) {
@@ -46,7 +48,7 @@ public class DadataClientBuilder {
         return this;
     }
 
-    public DadataClientBuilder maxInMemorySize(int maxInMemorySize) {
+    public DadataClientBuilder maxInMemorySize(DataSize maxInMemorySize) {
         this.maxInMemorySize = maxInMemorySize;
         return this;
     }
@@ -72,7 +74,7 @@ public class DadataClientBuilder {
             .defaultHeader(HttpHeaders.AUTHORIZATION, "Token " + token)
             .codecs(codecs -> {
                 codecs.defaultCodecs().jackson2JsonDecoder(new Jackson2JsonDecoder(mapper));
-                codecs.defaultCodecs().maxInMemorySize(ofNullable(maxInMemorySize).orElse(defaultProps.getMaxInMemorySize()));
+                codecs.defaultCodecs().maxInMemorySize(toIntExact(ofNullable(maxInMemorySize).orElse(defaultProps.getMaxInMemorySize()).toBytes()));
             })
             .build();
         return new DadataClient(client);
