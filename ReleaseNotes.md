@@ -1,3 +1,8 @@
+# 2.5.4
+
+- Добавлен параметр максимального разрешенного размера байтового
+  буфера ([#28](https://github.com/KuliginStepan/dadata-client/pull/28))
+
 # 2.5.3
 
 - Зависимость на lombok исключена из pom
@@ -9,8 +14,7 @@
 
 # 2.5.1
 
-- Исправление ошибки возникающей в результате неуспешной десериализации поля
-  data.phones[] ([#26](https://github.com/KuliginStepan/dadata-client/pull/26))
+- Исправление ошибки возникающей в результате неуспешной десериализации поля data.phones[] ([#26](https://github.com/KuliginStepan/dadata-client/pull/26))
 
 # 2.5.0
 
