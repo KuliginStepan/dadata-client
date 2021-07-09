@@ -26,6 +26,8 @@ public class Bank extends AdditionalProps {
     String okpo;
     @JsonAlias("correspondent_account")
     String correspondentAccount;
+    @JsonAlias("treasury_accounts")
+    List<String> treasuryAccounts;
     @JsonAlias("registration_number")
     String registrationNumber;
     String rkc;
