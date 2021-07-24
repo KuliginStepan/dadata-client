@@ -30,4 +30,24 @@ public class DadataClientProperties {
      * Maximum byte buffer size. Default - 512 Kb
      */
     private DataSize maxInMemorySize = DataSize.ofKilobytes(512L);
+
+    /**
+     * Proxy server type
+     */
+    private String proxyType;
+
+    /**
+     * Proxy server address
+     */
+    private String proxyServer;
+
+    /**
+     * Proxy server port
+     */
+    private Integer proxyPort;
+
+    /**
+     * SSL verification option
+     */
+    private boolean verifySsl = true;
 }
