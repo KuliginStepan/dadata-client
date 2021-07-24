@@ -112,7 +112,7 @@ public class DadataClientBuilder {
 
         if (clientProperties.getProxyType() != null && clientProperties.getProxyServer() != null && clientProperties.getProxyPort() != null) {
             ProxyProvider.Proxy proxyType = ProxyProvider.Proxy.valueOf(clientProperties.getProxyType().toUpperCase());
-            tcpClient.proxy(typeSpec -> {
+            tcpClient = tcpClient.proxy(typeSpec -> {
                 ProxyProvider.Builder builder = typeSpec.type(proxyType)
                         .address(new InetSocketAddress(clientProperties.getProxyServer(), clientProperties.getProxyPort()));
 
@@ -129,7 +129,7 @@ public class DadataClientBuilder {
         }
 
         if (!clientProperties.isVerifySsl()) {
-            tcpClient.secure(sslContextSpec -> sslContextSpec.sslContext(SslContextBuilder.forClient()
+            tcpClient = tcpClient.secure(sslContextSpec -> sslContextSpec.sslContext(SslContextBuilder.forClient()
                     .trustManager(InsecureTrustManagerFactory.INSTANCE)));
         }
 
