@@ -31,6 +31,8 @@ Maven:
 
 ## Configuration
 
+Dadata client provides `DadataClientAutoConfiguration` which configures `DadataClient` bean for you.
+
 ### Primary settings
 
 It's required to add property `dadata.client.token` with your Dadata API Token.
@@ -57,8 +59,6 @@ If you have configured above options you can use authentication via username/pas
 There is no authorization at proxy if no username defined in system environment.
 
 `dadata.client.verifySsl` - enable/disable server SSL-certificate verification at client-side, defaults to true
-
-Dadata client provides `DadataClientAutoConfiguration` which configures `DadataClient` bean for you.
 
 ## Usage
 
