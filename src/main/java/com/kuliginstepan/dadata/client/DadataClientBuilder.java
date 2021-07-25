@@ -30,7 +30,7 @@ import static java.util.Optional.ofNullable;
 public class DadataClientBuilder {
 
     private static final Map<ProxyProvider.Proxy, PasswordAuthentication> proxyAuthProps = new HashMap<ProxyProvider.Proxy, PasswordAuthentication>() {{
-        put(ProxyProvider.Proxy.HTTP, new PasswordAuthentication("http.ProxyUser", "http.ProxyPassword".toCharArray()));
+        put(ProxyProvider.Proxy.HTTP, new PasswordAuthentication("http.proxyUser", "http.proxyPassword".toCharArray()));
         put(ProxyProvider.Proxy.SOCKS4, new PasswordAuthentication("java.net.socks.username", "java.net.socks.password".toCharArray()));
         put(ProxyProvider.Proxy.SOCKS5, new PasswordAuthentication("java.net.socks.username", "java.net.socks.password".toCharArray()));
     }};

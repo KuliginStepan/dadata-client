@@ -1,20 +1,19 @@
 package com.kuliginstepan.dadata.client;
 
-import static com.kuliginstepan.dadata.client.TestUtils.CLIENT;
-import static com.kuliginstepan.dadata.client.TestUtils.getDistinctList;
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
-
 import com.kuliginstepan.dadata.client.domain.Suggestion;
 import com.kuliginstepan.dadata.client.domain.address.Address;
 import com.kuliginstepan.dadata.client.domain.address.AddressRequestBuilder;
 import com.kuliginstepan.dadata.client.domain.address.Bound;
 import com.kuliginstepan.dadata.client.domain.address.FilterProperty;
-import java.util.List;
+import org.hamcrest.Matchers;
+import org.hamcrest.text.IsEqualIgnoringCase;
 import org.junit.Test;
+
+import java.util.List;
+
+import static com.kuliginstepan.dadata.client.TestUtils.CLIENT;
+import static com.kuliginstepan.dadata.client.TestUtils.getDistinctList;
+import static org.junit.Assert.*;
 
 public class AddressSuggestionTest {
 
@@ -58,13 +57,13 @@ public class AddressSuggestionTest {
             .location(FilterProperty.REGION_TYPE_FULL, "республика")
             .build()).collectList().block();
 
+        assertNotNull(suggestions);
+        assertFalse(suggestions.isEmpty());
+
         List<String> regionTypes = getDistinctList(it -> it.getData().getRegionType(), suggestions);
 
-        assertThat(suggestions).isNotEmpty();
-        assertThat(regionTypes)
-            .isNotEmpty()
-            .first().asString()
-            .isEqualToIgnoringCase("респ");
+        assertFalse(regionTypes.isEmpty());
+        assertThat(regionTypes.get(0), IsEqualIgnoringCase.equalToIgnoringCase("респ"));
     }
 
     @Test
@@ -87,10 +86,11 @@ public class AddressSuggestionTest {
             .location(FilterProperty.CITY, "Тольятти")
             .build()).collectList().block();
 
-        List<String> regions = getDistinctList(it -> it.getData().getRegion(), suggestions);
-
         assertNotNull(suggestions);
         assertFalse(suggestions.isEmpty());
+
+        List<String> regions = getDistinctList(it -> it.getData().getRegion(), suggestions);
+
         assertEquals(1, regions.size());
         assertEquals("Самарская", regions.get(0));
         assertEquals(10, suggestions.size());
@@ -107,10 +107,11 @@ public class AddressSuggestionTest {
             .location(FilterProperty.REGION, "ростовская")
             .build()).collectList().block();
 
-        List<String> regions = getDistinctList(it -> it.getData().getRegion(), suggestions);
-
         assertNotNull(suggestions);
         assertFalse(suggestions.isEmpty());
+
+        List<String> regions = getDistinctList(it -> it.getData().getRegion(), suggestions);
+
         assertEquals(1, regions.size());
         assertEquals("Ростовская", regions.get(0));
         assertEquals(10, suggestions.size());
@@ -121,10 +122,11 @@ public class AddressSuggestionTest {
         List<Suggestion<Address>> suggestions = CLIENT.suggestAddress(AddressRequestBuilder.create("Ботаническая")
             .location(FilterProperty.REGION, "москва").build()).collectList().block();
 
-        List<String> cityKladrIds = getDistinctList(it -> it.getData().getCityKladrId(), suggestions);
-
         assertNotNull(suggestions);
         assertFalse(suggestions.isEmpty());
+
+        List<String> cityKladrIds = getDistinctList(it -> it.getData().getCityKladrId(), suggestions);
+
         assertEquals(1, cityKladrIds.size());
         assertTrue(cityKladrIds.get(0).startsWith("77"));
         assertEquals(2, suggestions.size());
@@ -136,10 +138,11 @@ public class AddressSuggestionTest {
             .location(FilterProperty.CITY_FIAS_ID, "110d6ad9-0b64-47cf-a2ee-7e935228799c").build()).collectList()
             .block();
 
-        List<String> cityFiasIds = getDistinctList(it -> it.getData().getCityFiasId(), suggestions);
-
         assertNotNull(suggestions);
         assertFalse(suggestions.isEmpty());
+
+        List<String> cityFiasIds = getDistinctList(it -> it.getData().getCityFiasId(), suggestions);
+
         assertEquals(1, cityFiasIds.size());
         assertEquals("110d6ad9-0b64-47cf-a2ee-7e935228799c", cityFiasIds.get(0));
         assertEquals(10, suggestions.size());
@@ -181,13 +184,18 @@ public class AddressSuggestionTest {
 
         assertNotNull(suggestions);
         assertFalse(suggestions.isEmpty());
-        assertEquals("Санкт-Петербург", suggestions.get(0).getData().getRegion());
-        assertEquals("Ленинградская", suggestions.get(2).getData().getRegion());
+
+        suggestions.forEach(suggestion ->
+            assertThat(suggestion.getData().getRegion(), Matchers.anyOf(Matchers.is("Санкт-Петербург"), Matchers.is("Ленинградская")))
+        );
     }
 
     @Test
     public void findAddressByIdTest() {
         Suggestion<Address> suggestion = CLIENT.findAddressById("5f96fd6b-b3de-451f-b280-8fedf859e683").block();
+
+        assertNotNull(suggestion);
+
         assertEquals("5f96fd6b-b3de-451f-b280-8fedf859e683", suggestion.getData().getStreetFiasId());
     }
 }

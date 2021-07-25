@@ -68,6 +68,7 @@ dependencies {
     implementation 'io.projectreactor.netty:reactor-netty'
     implementation 'com.fasterxml.jackson.core:jackson-databind'
     implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310'
+    implementation 'com.google.code.findbugs:jsr305:3.0.2' // fixes javax.annotation.meta.When.MAYBE warning
     implementation 'org.slf4j:slf4j-api'
     compileOnly 'org.projectlombok:lombok'
     testCompileOnly 'org.projectlombok:lombok'
