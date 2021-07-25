@@ -17,7 +17,11 @@ import reactor.netty.tcp.ProxyProvider;
 import reactor.netty.tcp.TcpClient;
 
 import java.net.InetSocketAddress;
+import java.net.PasswordAuthentication;
 import java.time.Duration;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import static java.lang.Math.toIntExact;
@@ -25,11 +29,11 @@ import static java.util.Optional.ofNullable;
 
 public class DadataClientBuilder {
 
-    private static final String PROP_SOCKS_USERNAME = "java.net.socks.username";
-    private static final String PROP_SOCKS_PASSWORD = "java.net.socks.password";
-
-    private static final String PROP_HTTP_USERNAME = "http.proxyUser";
-    private static final String PROP_HTTP_PASSWORD = "http.proxyPassword";
+    private static final Map<ProxyProvider.Proxy, PasswordAuthentication> proxyAuthProps = new HashMap<ProxyProvider.Proxy, PasswordAuthentication>() {{
+        put(ProxyProvider.Proxy.HTTP, new PasswordAuthentication("http.ProxyUser", "http.ProxyPassword".toCharArray()));
+        put(ProxyProvider.Proxy.SOCKS4, new PasswordAuthentication("java.net.socks.username", "java.net.socks.password".toCharArray()));
+        put(ProxyProvider.Proxy.SOCKS5, new PasswordAuthentication("java.net.socks.username", "java.net.socks.password".toCharArray()));
+    }};
 
     private WebClient webClient;
 
@@ -42,6 +46,8 @@ public class DadataClientBuilder {
 
     /**
      * @see DadataClientBuilder#clientProperties(DadataClientProperties)
+     * @param timeout таймаут соединения
+     * @return билдер Dadata-клиента
      */
     @Deprecated
     public DadataClientBuilder timeout(Duration timeout) {
@@ -51,6 +57,8 @@ public class DadataClientBuilder {
 
     /**
      * @see DadataClientBuilder#clientProperties(DadataClientProperties)
+     * @param token токен доступа к API Dadata
+     * @return билдер Dadata-клиента
      */
     @Deprecated
     public DadataClientBuilder token(String token) {
@@ -60,6 +68,8 @@ public class DadataClientBuilder {
 
     /**
      * @see DadataClientBuilder#clientProperties(DadataClientProperties)
+     * @param baseUrl базовый URL Dadata API
+     * @return билдер Dadata-клиента
      */
     @Deprecated
     public DadataClientBuilder baseUrl(String baseUrl) {
@@ -69,6 +79,8 @@ public class DadataClientBuilder {
 
     /**
      * @see DadataClientBuilder#clientProperties(DadataClientProperties)
+     * @param maxInMemorySize размер буфера при обработке ответа от Dadata
+     * @return билдер Dadata-клиента
      */
     @Deprecated
     public DadataClientBuilder maxInMemorySize(DataSize maxInMemorySize) {
@@ -93,7 +105,7 @@ public class DadataClientBuilder {
                 .visibility(PropertyAccessor.CREATOR, Visibility.NON_PRIVATE)
                 .build();
         WebClient client = WebClient.builder()
-                .clientConnector(new ReactorClientHttpConnector(buildClient()))
+                .clientConnector(new ReactorClientHttpConnector(buildHttpClient()))
                 .baseUrl(clientProperties.getBaseUrl())
                 .defaultHeader(HttpHeaders.AUTHORIZATION, "Token " + clientProperties.getToken())
                 .codecs(codecs -> {
@@ -104,27 +116,22 @@ public class DadataClientBuilder {
         return new DadataClient(client);
     }
 
-    private HttpClient buildClient() {
+    private HttpClient buildHttpClient() {
         TcpClient tcpClient = TcpClient.create()
                 .doOnConnected(con -> con.addHandlerLast(
                         new ReadTimeoutHandler(clientProperties.getTimeout().toMillis(),
                                 TimeUnit.MILLISECONDS)));
 
         if (clientProperties.getProxyType() != null && clientProperties.getProxyServer() != null && clientProperties.getProxyPort() != null) {
-            ProxyProvider.Proxy proxyType = ProxyProvider.Proxy.valueOf(clientProperties.getProxyType().toUpperCase());
             tcpClient = tcpClient.proxy(typeSpec -> {
-                ProxyProvider.Builder builder = typeSpec.type(proxyType)
+                ProxyProvider.Builder builder = typeSpec.type(clientProperties.getProxyType())
                         .address(new InetSocketAddress(clientProperties.getProxyServer(), clientProperties.getProxyPort()));
 
-                if (proxyType.equals(ProxyProvider.Proxy.HTTP)) {
-                    ofNullable(System.getProperty(PROP_HTTP_USERNAME)).ifPresent(auth ->
-                            builder.username(System.getProperty(PROP_HTTP_USERNAME))
-                                    .password((username) -> System.getProperty(PROP_HTTP_PASSWORD)));
-                } else {
-                    ofNullable(System.getProperty(PROP_SOCKS_USERNAME)).ifPresent(auth ->
-                            builder.username(System.getProperty(PROP_SOCKS_USERNAME))
-                                    .password((username) -> System.getProperty(PROP_SOCKS_PASSWORD)));
-                }
+                PasswordAuthentication authProps = proxyAuthProps.get(clientProperties.getProxyType());
+
+                ofNullable(System.getProperty(authProps.getUserName())).ifPresent(username ->
+                        builder.username(System.getProperty(username))
+                                .password((auth) -> System.getProperty(Arrays.toString(authProps.getPassword()))));
             });
         }
 

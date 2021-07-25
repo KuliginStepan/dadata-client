@@ -45,7 +45,7 @@ Via `dadata.client.baseUrl` you can change Dadata base url, defaults to https://
 
 ### Proxy support and SSL verification
 
-`dadata.client.proxyType` - valid values are: HTTP, SOCKS4, SOCKS5
+`dadata.client.proxyType` - valid values are: HTTP, SOCKS4, SOCKS5, defaults to HTTP
 
 `dadata.client.proxyServer` - proxy hostname or ip address
 
@@ -53,8 +53,8 @@ Via `dadata.client.baseUrl` you can change Dadata base url, defaults to https://
 
 If you have configured above options you can use authentication via username/password pair just setting system properties for them.
 
-- for HTTP proxy you should use `http.proxyUser` and `http.proxyPassword` respectively.
-- for SOCKS proxy you should use `java.net.socks.username` and `java.net.socks.password` respectively.
+  - for HTTP proxy you should use `http.proxyUser` and `http.proxyPassword` respectively.
+  - for SOCKS proxy you should use `java.net.socks.username` and `java.net.socks.password` respectively.
 
 There is no authorization at proxy if no username defined in system environment.
 
