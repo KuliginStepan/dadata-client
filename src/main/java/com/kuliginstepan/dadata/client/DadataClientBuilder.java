@@ -122,12 +122,13 @@ public class DadataClientBuilder {
                         new ReadTimeoutHandler(clientProperties.getTimeout().toMillis(),
                                 TimeUnit.MILLISECONDS)));
 
-        if (clientProperties.getProxyType() != null && clientProperties.getProxyServer() != null && clientProperties.getProxyPort() != null) {
+        DadataClientProperties.ProxyProperties proxyProperties = clientProperties.getProxy();
+        if (proxyProperties != null) {
             tcpClient = tcpClient.proxy(typeSpec -> {
-                ProxyProvider.Builder builder = typeSpec.type(clientProperties.getProxyType())
-                        .address(new InetSocketAddress(clientProperties.getProxyServer(), clientProperties.getProxyPort()));
+                ProxyProvider.Builder builder = typeSpec.type(proxyProperties.getType())
+                        .address(new InetSocketAddress(proxyProperties.getServer(), proxyProperties.getPort()));
 
-                PasswordAuthentication authProps = proxyAuthProps.get(clientProperties.getProxyType());
+                PasswordAuthentication authProps = proxyAuthProps.get(proxyProperties.getType());
 
                 ofNullable(System.getProperty(authProps.getUserName())).ifPresent(username ->
                         builder.username(System.getProperty(username))

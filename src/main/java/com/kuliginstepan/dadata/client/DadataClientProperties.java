@@ -1,6 +1,8 @@
 package com.kuliginstepan.dadata.client;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.NonNull;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.util.unit.DataSize;
 import reactor.netty.tcp.ProxyProvider;
@@ -11,6 +13,28 @@ import java.time.temporal.ChronoUnit;
 @ConfigurationProperties(prefix = "dadata.client")
 @Data
 public class DadataClientProperties {
+
+    @Data
+    @NoArgsConstructor
+    public static class ProxyProperties {
+        /**
+         * Proxy server type, defaults to HTTP
+         */
+        @NonNull
+        private ProxyProvider.Proxy type = ProxyProvider.Proxy.HTTP;
+
+        /**
+         * Proxy server address
+         */
+        @NonNull
+        private String server;
+
+        /**
+         * Proxy server port
+         */
+        @NonNull
+        private Integer port;
+    }
 
     /**
      * Dadata base url
@@ -33,19 +57,9 @@ public class DadataClientProperties {
     private DataSize maxInMemorySize = DataSize.ofKilobytes(512L);
 
     /**
-     * Proxy server type, defaults to HTTP
+     * Proxy properties
      */
-    private ProxyProvider.Proxy proxyType = ProxyProvider.Proxy.HTTP;
-
-    /**
-     * Proxy server address
-     */
-    private String proxyServer;
-
-    /**
-     * Proxy server port
-     */
-    private Integer proxyPort;
+    private ProxyProperties proxy;
 
     /**
      * SSL verification option
