@@ -45,11 +45,11 @@ Via `dadata.client.baseUrl` you can change Dadata base url, defaults to https://
 
 ### Proxy support and SSL verification
 
-`dadata.client.proxyType` - valid values are: HTTP, SOCKS4, SOCKS5, defaults to HTTP
+`dadata.client.proxy.type` - valid values are: HTTP, SOCKS4, SOCKS5, defaults to HTTP
 
-`dadata.client.proxyServer` - proxy hostname or ip address
+`dadata.client.proxy.server` - proxy hostname or ip address
 
-`dadata.client.proxyPort` - proxy port, positive number
+`dadata.client.proxy.port` - proxy port, positive number
 
 If you have configured above options you can use authentication via username/password pair just setting system properties for them.
 
