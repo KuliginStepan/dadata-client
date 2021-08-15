@@ -13,6 +13,14 @@ public class DadataClientBuilderTest {
         DadataClient client = new DadataClientBuilder().build();
     }
 
+    @Test(expected = NullPointerException.class)
+    public void shouldFailsIncorrectProxy() {
+        DadataClientProperties properties = new DadataClientProperties();
+        properties.setToken(TestUtils.TOKEN);
+        properties.setProxy(new DadataClientProperties.ProxyProperties());
+        DadataClient client = new DadataClientBuilder().clientProperties(properties).build();
+    }
+
     @Test
     public void shouldUseProvidedWebClient() {
         WebClient webClient = WebClient.create();

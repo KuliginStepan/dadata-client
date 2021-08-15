@@ -5,6 +5,7 @@ import static org.junit.Assert.assertNotNull;
 
 import com.kuliginstepan.dadata.client.domain.Suggestion;
 import com.kuliginstepan.dadata.client.domain.delivery.Delivery;
+import com.kuliginstepan.dadata.client.domain.delivery.DeliverySuggestion;
 import org.junit.Test;
 
 public class DeliverySuggestionTest {
@@ -21,5 +22,8 @@ public class DeliverySuggestionTest {
         assertEquals("196006461", delivery.getDpdId());
     }
 
-
+    @Test(expected = UnsupportedOperationException.class)
+    public void getSuggestOperationPrefix() {
+        new DeliverySuggestion().getSuggestOperationPrefix();
+    }
 }

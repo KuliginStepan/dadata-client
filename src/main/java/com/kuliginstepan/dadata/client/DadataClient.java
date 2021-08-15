@@ -102,6 +102,7 @@ public class DadataClient {
 
     /**
      * @param id Fms unit code. Format: 'XXX-XXX'
+     * @return mono object
      */
     public Mono<Suggestion<FmsUnit>> findFmsUnitById(String id) {
         return findById(SuggestionTypes.FMS, new BasicRequest(id));
@@ -109,6 +110,7 @@ public class DadataClient {
 
     /**
      * @param id Fns unit code or inn
+     * @return mono object
      */
     public Mono<Suggestion<FnsUnit>> findFnsUnitById(String id) {
         return findById(SuggestionTypes.FNS, new BasicRequest(id));
@@ -116,6 +118,7 @@ public class DadataClient {
 
     /**
      * @param index Postal office index
+     * @return mono object
      */
     public Mono<Suggestion<PostalOffice>> findPostalOfficeById(String index) {
         return findById(SuggestionTypes.POSTAL_OFFICE, new BasicRequest(index));
@@ -123,6 +126,7 @@ public class DadataClient {
 
     /**
      * @param id Court code
+     * @return mono object
      */
     public Mono<Suggestion<Court>> findCourtById(String id) {
         return findById(SuggestionTypes.COURT, new BasicRequest(id));
@@ -130,6 +134,7 @@ public class DadataClient {
 
     /**
      * @param id City kladr id
+     * @return mono object
      */
     public Mono<Suggestion<Delivery>> findDeliveryById(String id) {
         return findById(SuggestionTypes.DELIVERY, new BasicRequest(id));
@@ -137,6 +142,7 @@ public class DadataClient {
 
     /**
      * @param code okpd2 code
+     * @return mono object
      */
     public Mono<Suggestion<Okpd2>> findOkpd2ByCode(String code) {
         return findById(SuggestionTypes.OKPD_2, new BasicRequest(code));

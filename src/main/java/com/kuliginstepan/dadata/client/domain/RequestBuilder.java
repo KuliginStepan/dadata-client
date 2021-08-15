@@ -17,6 +17,7 @@ public abstract class RequestBuilder<T> {
 
     /**
      * @param kladrId – first 2 digits of region kladr id or full region kladr id
+     * @return builder
      */
     public RequestBuilder<T> locationBoost(String kladrId) {
         locationsBoost.add(Collections.singletonMap(FilterProperty.KLADR_ID, kladrId));
@@ -25,6 +26,7 @@ public abstract class RequestBuilder<T> {
 
     /**
      * @param count – default to 10, max 20
+     * @return builder
      */
     public RequestBuilder<T> count(int count) {
         this.count = count;
