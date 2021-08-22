@@ -9,7 +9,7 @@ plugins {
 apply from: 'gradle/publish.gradle'
 
 group = 'com.github.kuliginstepan'
-version = '2.5.5'
+version = '2.6.0'
 sourceCompatibility = '1.8'
 
 def nexusUsername = System.getenv("NEXUS_USERNAME") ?: (project.findProperty("NEXUS_USERNAME") ?: "")
@@ -69,6 +69,7 @@ dependencies {
     implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310'
     implementation 'com.google.code.findbugs:jsr305:3.0.2' // fixes javax.annotation.meta.When.MAYBE warning
     implementation 'org.slf4j:slf4j-api'
+    implementation 'javax.validation:validation-api'
     compileOnly 'org.projectlombok:lombok'
     testCompileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'

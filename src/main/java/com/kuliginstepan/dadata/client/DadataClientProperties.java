@@ -1,14 +1,13 @@
 package com.kuliginstepan.dadata.client;
 
+import java.time.Duration;
+import java.time.temporal.ChronoUnit;
+import javax.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.NonNull;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.util.unit.DataSize;
 import reactor.netty.tcp.ProxyProvider;
-
-import java.time.Duration;
-import java.time.temporal.ChronoUnit;
 
 @ConfigurationProperties(prefix = "dadata.client")
 @Data
@@ -20,19 +19,19 @@ public class DadataClientProperties {
         /**
          * Proxy server type, defaults to HTTP
          */
-        @NonNull
+        @NotNull
         private ProxyProvider.Proxy type = ProxyProvider.Proxy.HTTP;
 
         /**
          * Proxy server address
          */
-        @NonNull
+        @NotNull
         private String server;
 
         /**
          * Proxy server port
          */
-        @NonNull
+        @NotNull
         private Integer port;
     }
 
