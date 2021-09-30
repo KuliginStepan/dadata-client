@@ -131,8 +131,8 @@ public class DadataClientBuilder {
                 PasswordAuthentication authProps = proxyAuthProps.get(proxyProperties.getType());
 
                 ofNullable(System.getProperty(authProps.getUserName())).ifPresent(username ->
-                        builder.username(System.getProperty(username))
-                                .password((auth) -> System.getProperty(Arrays.toString(authProps.getPassword()))));
+                        builder.username(username)
+                                .password((auth) -> System.getProperty(String.valueOf(authProps.getPassword()))));
             });
         }
 
