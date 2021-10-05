@@ -6,5 +6,7 @@ public enum BankType {
     BANK_BRANCH,
     NKO_BRANCH,
     RKC,
+    CBR,
+    TREASURY,
     OTHER
 }
