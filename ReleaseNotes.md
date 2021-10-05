@@ -1,6 +1,10 @@
+# 2.6.1
+
+- Исправление ошибки аутентификации на прокси ([#31](https://github.com/KuliginStepan/dadata-client/pull/31))
+
 # 2.6.0
 
-- Поддержка соединения через proxy сервер ([#28](https://github.com/KuliginStepan/dadata-client/pull/30))
+- Поддержка соединения через proxy сервер ([#30](https://github.com/KuliginStepan/dadata-client/pull/30))
 
 # 2.5.4
 

@@ -66,7 +66,7 @@ public class OrganizationSuggestionTest {
 
         assertNotNull(suggestions);
         assertFalse(suggestions.isEmpty());
-        assertEquals(3, suggestions.size());
+        assertEquals(4, suggestions.size());
         assertEquals(1, regionKladrIds.size());
         assertTrue(regionKladrIds.get(0).startsWith("77"));
     }
