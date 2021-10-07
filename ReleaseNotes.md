@@ -1,3 +1,8 @@
+# 2.6.2
+
+- Поддержка поиска банковских подразделений управления ЦБ и Казначества ([#32](https://github.com/KuliginStepan/dadata-client/pull/32))
+
+
 # 2.6.1
 
 - Исправление ошибки аутентификации на прокси ([#31](https://github.com/KuliginStepan/dadata-client/pull/31))
