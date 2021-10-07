@@ -41,12 +41,25 @@ public class BankSuggestionTest {
     }
 
     @Test
+    public void suggestBankTreasuryTest() {
+        List<Suggestion<Bank>> suggestions = TestUtils.CLIENT
+            .suggestBank(BankRequestBuilder.create("024501901").build()).collectList()
+            .block();
+        assertNotNull(suggestions);
+        assertFalse(suggestions.isEmpty());
+        assertFalse(suggestions.get(0).getData().getTreasuryAccounts().isEmpty());
+    }
+
+    @Test
     public void suggestBankWithLocationTest() {
         List<Suggestion<Bank>> suggestions = TestUtils.CLIENT
             .suggestBank(BankRequestBuilder.create("сбербанк").location("6100000100000").build()).collectList()
             .block();
-        List<String> kladrIds = getDistinctList(it -> it.getData().getAddress().getData().getKladrId(), suggestions);
+
         assertNotNull(suggestions);
+
+        List<String> kladrIds = getDistinctList(it -> it.getData().getAddress().getData().getKladrId(), suggestions);
+
         assertFalse(suggestions.isEmpty());
         assertEquals(1, kladrIds.size());
         assertTrue(kladrIds.get(0).startsWith("61"));
@@ -58,8 +71,11 @@ public class BankSuggestionTest {
             .suggestBank(BankRequestBuilder.create("мастер банк").status(OrganizationStatus.LIQUIDATED)
                 .status(OrganizationStatus.LIQUIDATING).build()).collectList()
             .block();
-        List<OrganizationStatus> statuses = getDistinctList(it -> it.getData().getState().getStatus(), suggestions);
+
         assertNotNull(suggestions);
+
+        List<OrganizationStatus> statuses = getDistinctList(it -> it.getData().getState().getStatus(), suggestions);
+
         assertFalse(suggestions.isEmpty());
         assertFalse(statuses.contains(OrganizationStatus.ACTIVE));
     }
@@ -70,8 +86,10 @@ public class BankSuggestionTest {
             .suggestBank(BankRequestBuilder.create("сбербанк").type(BankType.BANK_BRANCH).type(BankType.BANK).build())
             .collectList()
             .block();
-        List<BankType> types = getDistinctList(it -> it.getData().getOpf().getType(), suggestions);
         assertNotNull(suggestions);
+
+        List<BankType> types = getDistinctList(it -> it.getData().getOpf().getType(), suggestions);
+
         assertFalse(suggestions.isEmpty());
         assertEquals(2, types.size());
         assertTrue(types.contains(BankType.BANK));
