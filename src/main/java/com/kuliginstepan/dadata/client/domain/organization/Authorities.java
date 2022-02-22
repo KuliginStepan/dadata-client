@@ -3,9 +3,11 @@ package com.kuliginstepan.dadata.client.domain.organization;
 import com.fasterxml.jackson.annotation.JsonAlias;
 import lombok.Builder;
 import lombok.Value;
+import lombok.extern.jackson.Jacksonized;
 
 @Value
 @Builder
+@Jacksonized
 public class Authorities {
 
     @JsonAlias("fts_registration")
@@ -18,6 +20,7 @@ public class Authorities {
 
     @Value
     @Builder
+    @Jacksonized
     public static class Authority {
 
         String type;

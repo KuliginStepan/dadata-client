@@ -1,21 +1,27 @@
 package com.kuliginstepan.dadata.client;
 
+import static org.assertj.core.api.AssertionsForClassTypes.assertThatExceptionOfType;
+
 import com.kuliginstepan.dadata.client.domain.BasicRequest;
 import com.kuliginstepan.dadata.client.domain.fio.FioSuggestion;
 import com.kuliginstepan.dadata.client.exception.DadataException;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class DadataClientTest {
 
-    @Test(expected = DadataException.class)
+    @Test
     public void clientWithBadTokenTest() {
-        DadataClient client = new DadataClientBuilder().token("123456").build();
-        client.findAddressById("").block();
+        assertThatExceptionOfType(DadataException.class)
+            .isThrownBy(() -> {
+                DadataClient client = new DadataClientBuilder().token("123456").build();
+                client.findAddressById("").block();
+            });
     }
 
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void notSupportedOperationTest() {
-        TestUtils.CLIENT.findById(new FioSuggestion(), new BasicRequest("test")).block();
+        assertThatExceptionOfType(UnsupportedOperationException.class)
+            .isThrownBy(() -> TestUtils.CLIENT.findById(new FioSuggestion(), new BasicRequest("test")).block());
     }
 
 }

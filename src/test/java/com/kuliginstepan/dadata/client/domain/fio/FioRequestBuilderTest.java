@@ -1,8 +1,9 @@
 package com.kuliginstepan.dadata.client.domain.fio;
 
-import static org.junit.Assert.assertEquals;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThatExceptionOfType;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class FioRequestBuilderTest {
 
@@ -15,8 +16,9 @@ public class FioRequestBuilderTest {
         assertEquals(Gender.FEMALE, request.getGender());
     }
 
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void fioRequestBuilderWithLocationTest() {
-        FioRequestBuilder.create("test").locationBoost("66").build();
+        assertThatExceptionOfType(UnsupportedOperationException.class)
+            .isThrownBy(() -> FioRequestBuilder.create("test").locationBoost("66").build());
     }
 }

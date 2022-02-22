@@ -1,24 +1,27 @@
 package com.kuliginstepan.dadata.client;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThatExceptionOfType;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.springframework.test.util.ReflectionTestUtils;
 import org.springframework.web.reactive.function.client.WebClient;
 
 public class DadataClientBuilderTest {
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void shouldFailsWithoutToken() {
-        DadataClient client = new DadataClientBuilder().build();
+        assertThatExceptionOfType(IllegalArgumentException.class)
+            .isThrownBy(() -> new DadataClientBuilder().build());
     }
 
-    @Test(expected = NullPointerException.class)
+    @Test
     public void shouldFailsIncorrectProxy() {
         DadataClientProperties properties = new DadataClientProperties();
         properties.setToken(TestUtils.TOKEN);
         properties.setProxy(new DadataClientProperties.ProxyProperties());
-        DadataClient client = new DadataClientBuilder().clientProperties(properties).build();
+        assertThatExceptionOfType(NullPointerException.class)
+            .isThrownBy(() -> new DadataClientBuilder().clientProperties(properties).build());
     }
 
     @Test

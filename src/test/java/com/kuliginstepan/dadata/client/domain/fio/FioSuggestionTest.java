@@ -1,8 +1,9 @@
 package com.kuliginstepan.dadata.client.domain.fio;
 
-import static org.junit.Assert.assertEquals;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThatExceptionOfType;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class FioSuggestionTest {
 
@@ -13,8 +14,9 @@ public class FioSuggestionTest {
         assertEquals("/fio", SUGGESTION.getSuggestOperationPrefix());
     }
 
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void getFindByIdOperationPrefix() {
-        SUGGESTION.getFindByIdOperationPrefix();
+        assertThatExceptionOfType(UnsupportedOperationException.class)
+            .isThrownBy(SUGGESTION::getFindByIdOperationPrefix);
     }
 }

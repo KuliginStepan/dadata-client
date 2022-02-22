@@ -9,17 +9,19 @@ import com.kuliginstepan.dadata.client.domain.email.Email;
 import com.kuliginstepan.dadata.client.json.LocalDateDeserializer;
 import java.time.LocalDate;
 import java.util.List;
-import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Value;
+import lombok.experimental.SuperBuilder;
+import lombok.extern.jackson.Jacksonized;
 
 /**
  * @see <a href="https://confluence.hflabs.ru/pages/viewpage.action?pageId=204669126">Dadata organization object</a>
  */
 
 @Value
-@Builder
+@SuperBuilder
 @EqualsAndHashCode(callSuper = true)
+@Jacksonized
 public class Organization extends AdditionalProps {
 
     Suggestion<Address> address;

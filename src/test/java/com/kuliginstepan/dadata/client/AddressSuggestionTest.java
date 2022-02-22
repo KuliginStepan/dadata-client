@@ -1,19 +1,22 @@
 package com.kuliginstepan.dadata.client;
 
+import static com.kuliginstepan.dadata.client.TestUtils.CLIENT;
+import static com.kuliginstepan.dadata.client.TestUtils.getDistinctList;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import com.kuliginstepan.dadata.client.domain.Suggestion;
 import com.kuliginstepan.dadata.client.domain.address.Address;
 import com.kuliginstepan.dadata.client.domain.address.AddressRequestBuilder;
 import com.kuliginstepan.dadata.client.domain.address.Bound;
 import com.kuliginstepan.dadata.client.domain.address.FilterProperty;
+import java.util.List;
 import org.hamcrest.Matchers;
 import org.hamcrest.text.IsEqualIgnoringCase;
-import org.junit.Test;
-
-import java.util.List;
-
-import static com.kuliginstepan.dadata.client.TestUtils.CLIENT;
-import static com.kuliginstepan.dadata.client.TestUtils.getDistinctList;
-import static org.junit.Assert.*;
+import org.junit.jupiter.api.Test;
 
 public class AddressSuggestionTest {
 

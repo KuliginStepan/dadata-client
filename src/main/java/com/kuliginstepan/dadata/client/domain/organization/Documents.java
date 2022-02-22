@@ -6,9 +6,11 @@ import com.kuliginstepan.dadata.client.json.LocalDateDeserializer;
 import java.time.LocalDate;
 import lombok.Builder;
 import lombok.Value;
+import lombok.extern.jackson.Jacksonized;
 
 @Value
 @Builder
+@Jacksonized
 public class Documents {
 
     @JsonAlias("fts_registration")
@@ -21,6 +23,7 @@ public class Documents {
 
     @Value
     @Builder
+    @Jacksonized
     public static class Smb {
 
         String type;

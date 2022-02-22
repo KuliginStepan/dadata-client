@@ -9,7 +9,7 @@ plugins {
 apply from: 'gradle/publish.gradle'
 
 group = 'com.github.kuliginstepan'
-version = '2.6.2'
+version = '3.0.0'
 sourceCompatibility = '1.8'
 
 def nexusUsername = System.getenv("NEXUS_USERNAME") ?: (project.findProperty("NEXUS_USERNAME") ?: "")
@@ -60,7 +60,7 @@ configurations {
 }
 
 dependencies {
-    internal platform('org.springframework.boot:spring-boot-starter-parent:2.2.6.RELEASE')
+    internal platform('org.springframework.boot:spring-boot-dependencies:2.6.3')
     implementation 'org.springframework.boot:spring-boot'
     implementation 'org.springframework.boot:spring-boot-autoconfigure'
     implementation 'org.springframework:spring-webflux'

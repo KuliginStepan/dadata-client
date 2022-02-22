@@ -1,15 +1,15 @@
 package com.kuliginstepan.dadata.client;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import com.kuliginstepan.dadata.client.domain.Suggestion;
 import com.kuliginstepan.dadata.client.domain.fms.FmsUnit;
 import com.kuliginstepan.dadata.client.domain.fms.FmsUnitFilter;
 import com.kuliginstepan.dadata.client.domain.fms.FmsUnitRequest;
 import java.util.List;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class FmsUnitSuggestionTest {
 

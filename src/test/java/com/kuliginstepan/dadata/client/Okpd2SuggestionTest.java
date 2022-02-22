@@ -1,14 +1,15 @@
 package com.kuliginstepan.dadata.client;
 
+import static com.kuliginstepan.dadata.client.TestUtils.CLIENT;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+
 import com.kuliginstepan.dadata.client.domain.BasicRequest;
 import com.kuliginstepan.dadata.client.domain.Suggestion;
 import com.kuliginstepan.dadata.client.domain.okpd2.Okpd2;
-import org.junit.Test;
-
 import java.util.List;
-
-import static com.kuliginstepan.dadata.client.TestUtils.CLIENT;
-import static org.junit.Assert.*;
+import org.junit.jupiter.api.Test;
 
 public class Okpd2SuggestionTest {
 

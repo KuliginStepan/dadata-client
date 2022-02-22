@@ -9,14 +9,17 @@ import java.util.List;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Value;
+import lombok.experimental.SuperBuilder;
+import lombok.extern.jackson.Jacksonized;
 
 /**
  * @see <a href="https://confluence.hflabs.ru/pages/viewpage.action?pageId=262996082">Dadata bank object</a>
  */
 
 @Value
-@Builder
+@SuperBuilder
 @EqualsAndHashCode(callSuper = true)
+@Jacksonized
 public class Bank extends AdditionalProps {
 
     Opf opf;
@@ -37,6 +40,7 @@ public class Bank extends AdditionalProps {
 
     @Value
     @Builder
+    @Jacksonized
     public static class Opf {
 
         BankType type;
@@ -48,6 +52,7 @@ public class Bank extends AdditionalProps {
 
     @Value
     @Builder
+    @Jacksonized
     public static class Name {
 
         String payment;

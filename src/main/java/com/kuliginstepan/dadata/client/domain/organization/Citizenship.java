@@ -3,9 +3,11 @@ package com.kuliginstepan.dadata.client.domain.organization;
 import com.fasterxml.jackson.annotation.JsonAlias;
 import lombok.Builder;
 import lombok.Value;
+import lombok.extern.jackson.Jacksonized;
 
 @Value
 @Builder
+@Jacksonized
 public class Citizenship {
 
     Code code;
@@ -13,6 +15,7 @@ public class Citizenship {
 
     @Value
     @Builder
+    @Jacksonized
     public static class Code {
 
         String numeric;
@@ -22,6 +25,7 @@ public class Citizenship {
 
     @Value
     @Builder
+    @Jacksonized
     public static class Name {
 
         String full;

@@ -7,14 +7,17 @@ import java.util.List;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Value;
+import lombok.experimental.SuperBuilder;
+import lombok.extern.jackson.Jacksonized;
 
 /**
  * @see <a href="https://confluence.hflabs.ru/pages/viewpage.action?pageId=204669103">Dadata address object</a>
  */
 
 @Value
-@Builder
+@SuperBuilder
 @EqualsAndHashCode(callSuper = true)
+@Jacksonized
 public class Address extends AdditionalProps {
 
     @JsonAlias("postal_code")
@@ -167,6 +170,7 @@ public class Address extends AdditionalProps {
 
     @Value
     @Builder
+    @Jacksonized
     public static class Metro {
 
         String name;

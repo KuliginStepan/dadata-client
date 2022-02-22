@@ -6,6 +6,6 @@ import lombok.Value;
 @Value
 public class DadataResponse<T> {
 
-    private List<Suggestion<T>> suggestions;
+    List<Suggestion<T>> suggestions;
 
 }

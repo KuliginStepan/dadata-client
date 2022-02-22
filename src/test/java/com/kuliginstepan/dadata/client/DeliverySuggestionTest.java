@@ -1,12 +1,13 @@
 package com.kuliginstepan.dadata.client;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThatExceptionOfType;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import com.kuliginstepan.dadata.client.domain.Suggestion;
 import com.kuliginstepan.dadata.client.domain.delivery.Delivery;
 import com.kuliginstepan.dadata.client.domain.delivery.DeliverySuggestion;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class DeliverySuggestionTest {
 
@@ -22,8 +23,9 @@ public class DeliverySuggestionTest {
         assertEquals("196006461", delivery.getDpdId());
     }
 
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void getSuggestOperationPrefix() {
-        new DeliverySuggestion().getSuggestOperationPrefix();
+        assertThatExceptionOfType(UnsupportedOperationException.class)
+            .isThrownBy(() -> new DeliverySuggestion().getSuggestOperationPrefix());
     }
 }

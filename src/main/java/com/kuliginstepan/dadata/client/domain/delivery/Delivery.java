@@ -2,17 +2,19 @@ package com.kuliginstepan.dadata.client.domain.delivery;
 
 import com.fasterxml.jackson.annotation.JsonAlias;
 import com.kuliginstepan.dadata.client.domain.AdditionalProps;
-import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Value;
+import lombok.experimental.SuperBuilder;
+import lombok.extern.jackson.Jacksonized;
 
 /**
  * @see <a href="https://dadata.ru/api/delivery/">Delivery docs</a>
  */
 
 @Value
-@Builder
+@SuperBuilder
 @EqualsAndHashCode(callSuper = true)
+@Jacksonized
 public class Delivery extends AdditionalProps {
 
     @JsonAlias("kladr_id")
