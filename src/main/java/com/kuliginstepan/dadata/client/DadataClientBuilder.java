@@ -17,7 +17,6 @@ import org.springframework.http.client.reactive.ReactorClientHttpConnector;
 import org.springframework.util.unit.DataSize;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.netty.http.client.HttpClient;
-import reactor.netty.tcp.TcpClient;
 import reactor.netty.transport.ProxyProvider;
 
 public class DadataClientBuilder {
@@ -107,14 +106,14 @@ public class DadataClientBuilder {
     }
 
     private HttpClient buildHttpClient() {
-        TcpClient tcpClient = TcpClient.create()
+        HttpClient httpClient = HttpClient.create()
             .doOnConnected(con -> con.addHandlerLast(
                 new ReadTimeoutHandler(clientProperties.getTimeout().toMillis(),
                     TimeUnit.MILLISECONDS)));
 
         DadataClientProperties.ProxyProperties proxyProperties = clientProperties.getProxy();
         if (proxyProperties != null) {
-            tcpClient = tcpClient.proxy(typeSpec -> {
+            httpClient = httpClient.proxy(typeSpec -> {
                 ProxyProvider.Builder builder = typeSpec.type(proxyProperties.getType())
                     .address(new InetSocketAddress(proxyProperties.getServer(), proxyProperties.getPort()));
 
@@ -127,10 +126,10 @@ public class DadataClientBuilder {
         }
 
         if (!clientProperties.isVerifySsl()) {
-            tcpClient = tcpClient.secure(sslContextSpec -> sslContextSpec.sslContext(SslContextBuilder.forClient()
+            httpClient = httpClient.secure(sslContextSpec -> sslContextSpec.sslContext(SslContextBuilder.forClient()
                 .trustManager(InsecureTrustManagerFactory.INSTANCE)));
         }
 
-        return HttpClient.from(tcpClient);
+        return httpClient;
     }
 }

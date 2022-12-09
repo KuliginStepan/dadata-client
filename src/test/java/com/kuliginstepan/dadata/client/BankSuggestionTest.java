@@ -30,6 +30,18 @@ public class BankSuggestionTest {
             .containsIgnoringCase("АЛЬФА-БАНК");
     }
 
+
+    @Test
+    public void findBankByBicTest() {
+        Suggestion<Bank> suggestions = TestUtils.CLIENT.findBankById("040507705")
+            .block();
+
+        assertThat(suggestions)
+            .extracting(Suggestion::getData)
+            .isNotNull();
+        System.out.println(suggestions);
+    }
+
     @Test
     public void rangingSuggestBankTest() {
         List<Suggestion<Bank>> suggestions = TestUtils.CLIENT

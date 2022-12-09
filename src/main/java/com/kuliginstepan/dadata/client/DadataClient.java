@@ -28,7 +28,6 @@ import com.kuliginstepan.dadata.client.domain.postal.PostalOffice;
 import com.kuliginstepan.dadata.client.domain.postal.PostalOfficeRequest;
 import com.kuliginstepan.dadata.client.exception.DadataException;
 import com.kuliginstepan.dadata.client.exception.ErrorDetails;
-import java.util.Objects;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -90,6 +89,10 @@ public class DadataClient {
 
     public Mono<Suggestion<Address>> findAddressById(String id) {
         return findById(SuggestionTypes.ADDRESS, new BasicRequest(id));
+    }
+
+    public Mono<Suggestion<Bank>> findBankById(String id) {
+        return findById(SuggestionTypes.BANK, new BasicRequest(id));
     }
 
     public Mono<Suggestion<Organization>> findOrganizationById(String id) {
@@ -159,18 +162,17 @@ public class DadataClient {
 
     public Mono<Suggestion<Address>> iplocate(String ip) {
         return webClient
-            .get().uri(builder -> builder
-                .path("/iplocate" + SuggestionTypes.ADDRESS.getSuggestOperationPrefix())
-                .queryParam("ip", ip)
-                .build())
-            .exchange()
-            .flatMap(
-                clientResponse -> responseToBody(clientResponse, new ParameterizedTypeReference<IplocateResponse>() {}))
-            .handle((response, sink) -> {
-                if (Objects.nonNull(response.getLocation())) {
-                    sink.next(response.getLocation());
-                }
-            });
+            .get()
+            .uri(builder ->
+                builder
+                    .path("/iplocate" + SuggestionTypes.ADDRESS.getSuggestOperationPrefix())
+                    .queryParam("ip", ip)
+                    .build()
+            )
+            .retrieve()
+            .onStatus(status -> !status.is2xxSuccessful(), DadataClient::errorResponse)
+            .bodyToMono(new ParameterizedTypeReference<IplocateResponse>() {})
+            .mapNotNull(IplocateResponse::getLocation);
     }
 
     protected <T> Flux<Suggestion<T>> suggest(SuggestionType<T> suggestionType, BasicRequest request) {
@@ -184,23 +186,20 @@ public class DadataClient {
     }
 
     protected <T> Flux<Suggestion<T>> executeOperation(ParameterizedTypeReference<DadataResponse<T>> responseClass,
-                                                       BasicRequest request, String operationPrefix,
-                                                       String suggestionTypePrefix) {
+        BasicRequest request, String operationPrefix,
+        String suggestionTypePrefix) {
         return webClient
             .post().uri(operationPrefix + suggestionTypePrefix)
             .body(BodyInserters.fromValue(request))
-            .exchange()
-            .flatMap(clientResponse -> responseToBody(clientResponse, responseClass))
+            .retrieve()
+            .onStatus(status -> !status.is2xxSuccessful(), DadataClient::errorResponse)
+            .bodyToMono(responseClass)
             .map(DadataResponse::getSuggestions)
             .flatMapMany(Flux::fromIterable);
     }
 
-    private static <T> Mono<T> responseToBody(ClientResponse response, ParameterizedTypeReference<T> type) {
-        if (response.statusCode().is2xxSuccessful()) {
-            return response.bodyToMono(type);
-        } else {
-            return response.bodyToMono(ErrorDetails.class)
-                .flatMap(error -> Mono.error(new DadataException(response.statusCode(), error)));
-        }
+    private static Mono<DadataException> errorResponse(ClientResponse response) {
+        return response.bodyToMono(ErrorDetails.class)
+            .flatMap(error -> Mono.error(new DadataException(response.statusCode(), error)));
     }
 }
