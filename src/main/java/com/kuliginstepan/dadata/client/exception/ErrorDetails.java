@@ -1,11 +1,15 @@
 package com.kuliginstepan.dadata.client.exception;
 
+import lombok.Builder;
 import lombok.Value;
+import lombok.extern.jackson.Jacksonized;
 
 @Value
+@Builder
+@Jacksonized
 public class ErrorDetails {
 
-    private String family;
-    private String reason;
-    private String message;
+    String family;
+    String reason;
+    String message;
 }

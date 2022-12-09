@@ -42,6 +42,7 @@ public class Documents {
 
     @Value
     @Builder
+    @Jacksonized
     public static class Document {
 
         String type;

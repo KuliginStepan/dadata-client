@@ -16,8 +16,4 @@ public class BankSuggestion implements SuggestionType<Bank> {
         return "/bank";
     }
 
-    @Override
-    public String getFindByIdOperationPrefix() {
-        throw new UnsupportedOperationException("Operation 'findById' not supported for Bank");
-    }
 }

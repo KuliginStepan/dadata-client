@@ -22,20 +22,22 @@ import lombok.extern.jackson.Jacksonized;
 @Jacksonized
 public class Bank extends AdditionalProps {
 
-    Opf opf;
-    Name name;
     String bic;
     String swift;
-    String okpo;
+    String inn;
+    String kpp;
+    @JsonAlias("registration_number")
+    String registrationNumber;
     @JsonAlias("correspondent_account")
     String correspondentAccount;
     @JsonAlias("treasury_accounts")
     List<String> treasuryAccounts;
-    @JsonAlias("registration_number")
-    String registrationNumber;
-    String rkc;
+    Name name;
+    @JsonAlias("payment_city")
+    String paymentCity;
+    Opf opf;
+    Cbr cbr;
     Suggestion<Address> address;
-    List<String> phones;
     State state;
 
     @Value
@@ -48,6 +50,16 @@ public class Bank extends AdditionalProps {
         String fullName;
         @JsonAlias("short")
         String shortName;
+    }
+
+    @Value
+    @Builder
+    @Jacksonized
+    public static class Cbr {
+
+        Name name;
+        String bic;
+        Suggestion<Address> address;
     }
 
     @Value
