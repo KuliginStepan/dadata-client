@@ -3,25 +3,23 @@ package com.kuliginstepan.dadata.client;
 import static java.lang.Math.toIntExact;
 import static java.util.Optional.ofNullable;
 
-import io.netty.handler.ssl.SslContextBuilder;
 import io.netty.handler.ssl.util.InsecureTrustManagerFactory;
 import io.netty.handler.timeout.ReadTimeoutHandler;
 import java.net.InetSocketAddress;
 import java.net.PasswordAuthentication;
-import java.time.Duration;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.client.reactive.ReactorClientHttpConnector;
-import org.springframework.util.unit.DataSize;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.netty.http.client.HttpClient;
+import reactor.netty.tcp.DefaultSslContextSpec;
 import reactor.netty.transport.ProxyProvider;
 
 public class DadataClientBuilder {
 
-    private static final Map<ProxyProvider.Proxy, PasswordAuthentication> proxyAuthProps = new HashMap<ProxyProvider.Proxy, PasswordAuthentication>() {{
+    private static final Map<ProxyProvider.Proxy, PasswordAuthentication> proxyAuthProps = new HashMap<>() {{
         put(ProxyProvider.Proxy.HTTP, new PasswordAuthentication("http.proxyUser", "http.proxyPassword".toCharArray()));
         put(ProxyProvider.Proxy.SOCKS4,
             new PasswordAuthentication("java.net.socks.username", "java.net.socks.password".toCharArray()));
@@ -35,50 +33,6 @@ public class DadataClientBuilder {
 
     public DadataClientBuilder webClient(WebClient webClient) {
         this.webClient = webClient;
-        return this;
-    }
-
-    /**
-     * @param timeout таймаут соединения
-     * @return билдер Dadata-клиента
-     * @see DadataClientBuilder#clientProperties(DadataClientProperties)
-     */
-    @Deprecated
-    public DadataClientBuilder timeout(Duration timeout) {
-        this.clientProperties.setTimeout(timeout);
-        return this;
-    }
-
-    /**
-     * @param token токен доступа к API Dadata
-     * @return билдер Dadata-клиента
-     * @see DadataClientBuilder#clientProperties(DadataClientProperties)
-     */
-    @Deprecated
-    public DadataClientBuilder token(String token) {
-        this.clientProperties.setToken(token);
-        return this;
-    }
-
-    /**
-     * @param baseUrl базовый URL Dadata API
-     * @return билдер Dadata-клиента
-     * @see DadataClientBuilder#clientProperties(DadataClientProperties)
-     */
-    @Deprecated
-    public DadataClientBuilder baseUrl(String baseUrl) {
-        this.clientProperties.setBaseUrl(baseUrl);
-        return this;
-    }
-
-    /**
-     * @param maxInMemorySize размер буфера при обработке ответа от Dadata
-     * @return билдер Dadata-клиента
-     * @see DadataClientBuilder#clientProperties(DadataClientProperties)
-     */
-    @Deprecated
-    public DadataClientBuilder maxInMemorySize(DataSize maxInMemorySize) {
-        this.clientProperties.setMaxInMemorySize(maxInMemorySize);
         return this;
     }
 
@@ -126,8 +80,14 @@ public class DadataClientBuilder {
         }
 
         if (!clientProperties.isVerifySsl()) {
-            httpClient = httpClient.secure(sslContextSpec -> sslContextSpec.sslContext(SslContextBuilder.forClient()
-                .trustManager(InsecureTrustManagerFactory.INSTANCE)));
+            httpClient = httpClient.secure(sslContextSpec ->
+                sslContextSpec.sslContext(
+                    DefaultSslContextSpec.forClient()
+                        .configure(sslContextBuilder ->
+                            sslContextBuilder.trustManager(InsecureTrustManagerFactory.INSTANCE)
+                        )
+                )
+            );
         }
 
         return httpClient;

@@ -1,16 +1,18 @@
 package com.kuliginstepan.dadata.client;
 
+import jakarta.validation.constraints.NotNull;
 import java.time.Duration;
 import java.time.temporal.ChronoUnit;
-import javax.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.util.unit.DataSize;
+import org.springframework.validation.annotation.Validated;
 import reactor.netty.transport.ProxyProvider;
 
-@ConfigurationProperties(prefix = "dadata.client")
 @Data
+@Validated
+@ConfigurationProperties(prefix = "dadata.client")
 public class DadataClientProperties {
 
     @Data

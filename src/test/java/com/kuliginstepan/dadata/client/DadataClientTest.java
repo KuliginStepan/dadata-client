@@ -13,7 +13,10 @@ public class DadataClientTest {
     public void clientWithBadTokenTest() {
         assertThatExceptionOfType(DadataException.class)
             .isThrownBy(() -> {
-                DadataClient client = new DadataClientBuilder().token("123456").build();
+                DadataClient client = new DadataClientBuilder()
+                    .clientProperties(new DadataClientProperties() {{
+                        setToken("123456");
+                    }}).build();
                 client.findAddressById("").block();
             });
     }

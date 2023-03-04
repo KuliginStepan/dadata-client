@@ -2,15 +2,15 @@ plugins {
     id 'java-library'
     id 'jacoco'
     id 'maven-publish'
-    id 'io.github.gradle-nexus.publish-plugin' version '1.0.0'
+    id 'io.github.gradle-nexus.publish-plugin' version '1.2.0'
     id 'signing'
 }
 
 apply from: 'gradle/publish.gradle'
 
 group = 'com.github.kuliginstepan'
-version = '3.1.0'
-sourceCompatibility = '1.8'
+version = '4.0.0'
+sourceCompatibility = JavaVersion.VERSION_17
 
 def nexusUsername = System.getenv("NEXUS_USERNAME") ?: (project.findProperty("NEXUS_USERNAME") ?: "")
 def nexusPassword = System.getenv("NEXUS_PASSWORD") ?: (project.findProperty("NEXUS_PASSWORD") ?: "")
@@ -60,16 +60,17 @@ configurations {
 }
 
 dependencies {
-    internal platform('org.springframework.boot:spring-boot-dependencies:2.7.6')
+    internal platform('org.springframework.boot:spring-boot-dependencies:3.0.4')
     implementation 'org.springframework.boot:spring-boot'
     implementation 'org.springframework.boot:spring-boot-autoconfigure'
     implementation 'org.springframework:spring-webflux'
     implementation 'io.projectreactor.netty:reactor-netty'
     implementation 'com.fasterxml.jackson.core:jackson-databind'
     implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310'
-    implementation 'com.google.code.findbugs:jsr305:3.0.2' // fixes javax.annotation.meta.When.MAYBE warning
     implementation 'org.slf4j:slf4j-api'
-    implementation 'javax.validation:validation-api'
+    implementation 'jakarta.validation:jakarta.validation-api'
+    implementation 'org.hibernate.validator:hibernate-validator'
+
     compileOnly 'org.projectlombok:lombok'
     testCompileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
@@ -84,8 +85,8 @@ test {
 
 jacocoTestReport {
     reports {
-        xml.enabled true
-        html.enabled false
+        xml.required = true
+        csv.required = false
     }
 }
 
