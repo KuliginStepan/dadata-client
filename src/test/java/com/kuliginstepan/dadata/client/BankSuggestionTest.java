@@ -45,11 +45,11 @@ public class BankSuggestionTest {
     @Test
     public void rangingSuggestBankTest() {
         List<Suggestion<Bank>> suggestions = TestUtils.CLIENT
-            .suggestBank(BankRequestBuilder.create("сбербанк").locationBoost("4402400100000").build()).collectList()
+            .suggestBank(BankRequestBuilder.create("сбербанк").locationBoost("3800000100000").build()).collectList()
             .block();
         assertNotNull(suggestions);
         assertFalse(suggestions.isEmpty());
-        assertTrue(suggestions.get(0).getData().getAddress().getData().getRegionKladrId().startsWith("44"));
+        assertTrue(suggestions.get(0).getData().getAddress().getData().getRegionKladrId().startsWith("38"));
     }
 
     @Test

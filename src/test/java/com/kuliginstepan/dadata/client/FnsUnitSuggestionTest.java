@@ -35,25 +35,25 @@ public class FnsUnitSuggestionTest {
         List<Suggestion<FnsUnit>> suggestions = TestUtils.CLIENT.suggestFnsUnit(
             FnsUnitRequest.builder()
                 .query("ленинск")
-                .regionCode("58")
+                .regionCode("66")
                 .build())
             .collectList().block();
 
         assertNotNull(suggestions);
         assertFalse(suggestions.isEmpty());
 
-        suggestions.forEach(suggestion -> assertTrue(suggestion.getData().getCode().startsWith("58")));
+        suggestions.forEach(suggestion -> assertTrue(suggestion.getData().getCode().startsWith("66")));
     }
 
     @Test
     public void findFnsUnitByIdTest() {
-        Suggestion<FnsUnit> suggestion = TestUtils.CLIENT.findFnsUnitById("5836").block();
+        Suggestion<FnsUnit> suggestion = TestUtils.CLIENT.findFnsUnitById("6671").block();
 
         assertNotNull(suggestion);
 
         FnsUnit fnsUnit = suggestion.getData();
-        assertEquals("5836", fnsUnit.getCode());
-        assertEquals("5836010018", fnsUnit.getInn());
+        assertEquals("6671", fnsUnit.getCode());
+        assertEquals("7727406020", fnsUnit.getInn());
     }
 
 

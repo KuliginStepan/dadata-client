@@ -50,7 +50,7 @@ public class OrganizationSuggestionTest {
             .collectList().block();
 
         assertThat(suggestions)
-            .hasSize(7)
+            .hasSize(8)
             .extracting(Suggestion::getValue)
             .contains("ИП Коварский Станислав Альбертович", "ООО \"ВЕГА\"");
     }
@@ -66,7 +66,7 @@ public class OrganizationSuggestionTest {
 
         assertNotNull(suggestions);
         assertFalse(suggestions.isEmpty());
-        assertEquals(4, suggestions.size());
+        assertEquals(5, suggestions.size());
         assertEquals(1, regionKladrIds.size());
         assertTrue(regionKladrIds.get(0).startsWith("77"));
     }

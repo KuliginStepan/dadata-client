@@ -15,7 +15,7 @@ public class IplocateRequestTest {
 
         assertThat(suggestion)
             .isNotNull()
-            .hasFieldOrPropertyWithValue("value", "г Краснодар");
+            .hasFieldOrPropertyWithValue("value", "г Москва");
     }
     @Test
     public void iplocateNullTest() {

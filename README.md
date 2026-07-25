@@ -13,6 +13,14 @@ Dadata API client based on non-blocking HTTP client of Spring WebClient. Support
 
 ## [Release notes](ReleaseNotes.md)
 
+## Compatibility
+
+| dadata-client | Spring Boot |
+|---------------|-------------|
+| 5.x           | 4.x         |
+| 4.x           | 3.x         |
+| 2.x / 3.x     | 2.x         |
+
 ## Add a dependency
 
 Gradle:
