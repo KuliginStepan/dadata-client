@@ -18,7 +18,7 @@ public class DeliverySuggestionTest {
         assertNotNull(suggestion);
 
         Delivery delivery = suggestion.getData();
-        assertEquals("01929", delivery.getBoxberryId());
+        assertEquals("7720193", delivery.getBoxberryId());
         assertEquals("344", delivery.getCdekId());
         assertEquals("196006461", delivery.getDpdId());
     }
